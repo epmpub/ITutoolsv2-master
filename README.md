@@ -21,9 +21,6 @@
 irm utools.run/win | iex
 ```
 
-![test](utools.png)
-
-
 TestCast /API/data:
 ### ToMongoDB
 
