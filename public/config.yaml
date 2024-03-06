@@ -1,0 +1,161 @@
+metainfo:
+  name: forTest
+  description: Distribute configure
+  date: 2023/12/28 21:00
+  md5: xxx-xxx-zzz=zzz-ppp
+  version: 0.1
+  author: andy.hu
+
+global:
+  fileStore: "c:\\fileStore"
+  log: ""
+
+users:
+  add:
+    - name: it1
+      password: "Password!"
+      description: for testing1
+      group: administrators
+    - name: it2
+      password: "Password!"
+      description: for testing2
+      group: administrators
+    - name: it3
+      password: "Password!"
+      description: for testing3
+      group: administrators
+  delete:
+    - name: it2
+    - name: it1
+    - name: it3
+  rename:
+    - name: administrator
+      newName: itsadmin
+
+# Add path to $PATH
+environments:
+  add:
+    - name: 'C:\Program Files\Vector\bin'
+    - name: 'C:\fileStore'
+    - name: "c:\\python311"
+    - name: "C:\\python311\\Scripts"
+  delete:
+    - name: 'BAZ'
+
+files:
+  - name: OpenSSH-Win64-v9.4.0.0.msi
+    uri: "http://192.168.3.100/download/OpenSSH-Win64-v9.4.0.0.msi"
+    setup: msiexec /i OpenSSH-Win64-v9.4.0.0.msi /quiet
+  - name: npp.8.6.Installer.x64.exe
+    uri: "http://192.168.3.100/download/npp.8.6.Installer.x64.exe"
+    setup: npp.8.6.Installer.x64.exe /S
+
+  - name: Everything-1.4.1.1024.x64-Setup.exe
+    uri: "http://192.168.3.100/download/Everything-1.4.1.1024.x64-Setup.exe"
+    setup: Everything-1.4.1.1024.x64-Setup.exe /S
+  - name: googlechromestandaloneenterprise64.msi
+    uri: "http://192.168.3.100/download/googlechromestandaloneenterprise64.msi"
+    setup: msiexec /i googlechromestandaloneenterprise64.msi /quiet
+  - name: 7z2301-x64.msi
+    uri: "http://192.168.3.100/software/7z2301-x64.msi"
+    setup: msiexec /i 7z2301-x64.msi /quiet
+  - name: python-3.11.6-amd64.exe
+    uri: "http://192.168.3.100/software/python-3.11.6-amd64.exe"
+    setup: python-3.11.6-amd64.exe /quiet TargetDir="c:\python311" InstallAllUsers=1 Include_lib=1 Include_pip=1 Include_pip=1
+
+registy:
+  - terminal encoding:
+    path: ""
+    method: ""
+    type: ""
+    value: ""
+  - powershell encoding:
+    path: ""
+    method: ""
+    type: ""
+    value: ""
+
+tasks:
+  - task1:
+    name: "inventory"
+    action: ""
+    trigger: ""
+    principal: ""
+    settings: ""
+  - task2:
+    name: "health"
+    action: ""
+    trigger: ""
+    principal: ""
+    settings: ""
+  - task3:
+    name: "remedy"
+    action: ""
+    trigger: ""
+    principal: ""
+    settings: ""
+
+services:
+  add:
+  - service:
+    name: "CheckStatus"
+    binaryPathName: ""
+    displayName: ""
+    description: ""
+    startupType: ""
+  - service:
+    name: "CheckHealth"
+    binaryPathName: ""
+    displayName: ""
+    description: ""
+    startupType: ""
+  - service:
+    name: "MonitorPerformance"
+    binaryPathName: ""
+    displayName: ""
+    description: ""
+    startupType: ""
+  delete:
+  - service:
+    name: "foo"
+  - service:
+    name: "bar"
+  - service:
+    name: "baz"  
+
+scripts:
+  powershell:
+  - script1:
+    name: test.ps1
+    uri: "https://it2u.oss-cn-shenzhen.aliyuncs.com/scripts/test.ps1"
+  bat:
+  - script1:
+    name: test.bat
+    uri: "https://it2u.oss-cn-shenzhen.aliyuncs.com/scripts/test.bat"
+  python:
+  - script1:
+    name: test.py
+    uri: "https://it2u.oss-cn-shenzhen.aliyuncs.com/scripts/test.py"  
+
+shell:
+  cmd:
+  - id1:
+    name: deploy flask
+    commandLine: C:\python311\Scripts\pip.exe install flask
+  - id2:
+    name: deploy gunicorn
+    commandLine: C:\python311\Scripts\pip.exe install gunicorn
+  - id3:
+    name: deploy waitress
+    commandLine: C:\python311\Scripts\pip.exe install waitress
+  - id4:
+    name: start waitress
+    commandLine: C:\python311\Scripts\waitress-serve.exe flaskApp:app
+
+  powershell:
+  - id1:
+    name: "Powershell command test 1"
+    commandLine: "Get-Process -Name System"
+  - id2:
+    name: "Powershell command test 2"
+    commandLine: "Get-Process -Name svchost | select -First 3"
