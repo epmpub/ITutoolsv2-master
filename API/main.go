@@ -2,9 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
-	"strconv"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -35,44 +33,7 @@ func main() {
 
 	// Home Page
 	app.Static("/", "../public")
-	app.Post("/log", func(c *fiber.Ctx) error {
-		i++
-		var fileName = "./data/" + "data" + strconv.FormatInt(i, 10) + ".json"
-		fmt.Println(fileName)
-		file, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, os.ModeAppend)
-
-		if err != nil {
-			log.Error("create file with err:", err.Error())
-		}
-		n, err := file.Write(c.BodyRaw())
-		if err != nil {
-			log.Error(err.Error())
-		}
-		log.Info("write counter :", n)
-
-		err = file.Close()
-		if err != nil {
-			return err
-		}
-
-		os.Remove(fileName)
-
-		//write log to mongoDB
-		var mglog MyLog
-		err = json.Unmarshal(c.BodyRaw(), &mglog)
-		if err != nil {
-			log.Info("err:", err)
-		}
-		log.Info(mglog.Timestamp)
-		log.Info(mglog.Level)
-		log.Info(mglog.HostName)
-		log.Info(mglog.Message)
-		insertMyLog(mglog)
-
-		return c.Send(c.BodyRaw())
-	})
-
-	app.Post("/data", func(c *fiber.Ctx) error {
+	app.Post("/mongodb", func(c *fiber.Ctx) error {
 		//insert data to mongodb
 		var data interface{}
 		err = json.Unmarshal(c.BodyRaw(), &data)
@@ -80,18 +41,6 @@ func main() {
 			log.Info("err:", err)
 		}
 		insertTimeSerial(data)
-
-		// TODO: write to MySQL and ClickHouse
-
-		//write log to clickhouse server
-		var cklog ToCKLog
-		err = json.Unmarshal(c.BodyRaw(), &cklog)
-		if err != nil {
-			log.Info("err:", err)
-		}
-		log.Info(cklog.Id)
-		log.Info(cklog.Message)
-		insertMyLog2ClickHouse(cklog)
 
 		return c.Send(c.BodyRaw())
 	})

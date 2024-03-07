@@ -15,7 +15,7 @@ Expand-Archive -Path C:\tools2\TCPView.zip -DestinationPath $targetDirectory -Fo
 $guid = $(New-Guid)
 $dt = Get-Date -f "o"
 
-foreach ($item in $(tcpvcon -c -n -nobanner))
+foreach ($item in $(c:\tools2\tcpvcon -c -n -nobanner))
 {
     $line = $item.Split(',')
     $info = [ordered]@{}
