@@ -1,43 +1,61 @@
-### 软件特色：
-
-##### 使用简单,无需学习;
-
-##### 全面支持Windows，Linux，macOS
-
-##### 简化工作，减少重复，提升工作效率
-
-##### 不需要安装部署任何客户端
-
-##### 高度定制自己的专门站点
-
-##### 迭代快速,紧跟业务;
-
-##### Don't repeat yourself
+说明：
+1  无schema,
+2  终端采集用脚本,无需编译,动态执行;
+3  标准JSON格式
 
 
-### 使用介绍：
-使用管理员权限，打开POWERSHELL 终端，输入如下命令：
-```powershell
-irm utools.run/win | iex
+
+##部署方式：
+```shell
+lsb_release  -a
+
+Distributor ID: Ubuntu
+Description:    Ubuntu 22.04.4 LTS
+Release:        22.04
+Codename:       jammy
+
+ldd --version
+ldd (Ubuntu GLIBC 2.35-0ubuntu3.6) 2.35
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Written by Roland McGrath and Ulrich Drepper
 ```
 
-TestCast /API/data:
-### ToMongoDB
 
-```powershell
-$dt = @{}
-$dt['$date'] = Get-Date -f "o"
+-- GO LANG 编译环境和部署主机最好一致.推荐是使用WSL2 Ubuntu22
 
-# test for API ,not for file export.
-$info = [ordered]@{}
-$info["Timestamp"]=Get-Date -f "o"
-$info["Host"]=$env:COMPUTERNAME
-$info["Cpu"]=(Get-CimInstance -ClassName Win32_Processor).Caption
-$jsdata=$info | convertTo-Json
-$jsdata
 
-$jsdata | Out-File 666.json -Encoding utf8
-
-Invoke-RestMethod http://utools.run/data -Method Post -Body $jsdata
-
+- Install clickHouse server:
+- 编译API 使用go lang 编译:utools
+- 
+```shell
+git clone xxxx.git
+cd API
+go build
 ```
+
+- 修改代码clickhouse 连接字符串;
+```shell
+tcp://localhost:9000?debug=false&username=default&password=Cpp...&database=demo
+其中:
+default为用户名
+Cpp...为密码
+database为数据库名
+请替换成你自己的配置.
+另外,为了安全,不要在公网暴露你的数据库.
+```
+
+- 创建clickhouse表和view
+- 数据库默认为demo
+- 建表参考 :create-clickhouse-table
+- View参考:create-clickhouse-view
+
+###client
+Windows:
+```shell
+irm utools.run/newtask2ck|iex
+```
+
+Linux 和 MacOS 参考windows脚本,写一个定时任务即可.
+

