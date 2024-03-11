@@ -59,3 +59,6 @@ irm utools.run/newtask2ck|iex
 
 Linux 和 MacOS 参考windows脚本,写一个定时任务即可.
 
+部署中肯定会有各种奇怪的问题,如果你觉得很麻烦,可以微信我.
+我可以远程指导你部署.
+WeChat: VIPS_AndyHu
