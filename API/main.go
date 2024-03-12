@@ -71,6 +71,17 @@ func main() {
 		return c.SendFile("../Windows/winEvent.ps1")
 	})
 
+	//upload autorun data to mangodb
+	app.Post("/autorun2mongodb", func(c *fiber.Ctx) error {
+		var autorunData interface{}
+		err := json.Unmarshal(c.BodyRaw(), &autorunData)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		insertAutoRun2MongoDB(autorunData)
+		return c.Send(c.BodyRaw())
+	})
+
 	//upload wineventlog to mangodb ,1,3,22 Type log
 	app.Post("/winevent/1", func(c *fiber.Ctx) error {
 		var dataLog interface{}

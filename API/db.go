@@ -23,7 +23,23 @@ func insertTimeSerial(info interface{}) {
 
 	collection := client.Database("demo").Collection("tcpvcon")
 	collection.InsertOne(context.TODO(), info)
+	client.Disconnect(ctx)
 	log.Println("mongodb insert done.")
+
+}
+
+func insertAutoRun2MongoDB(info interface{}) {
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	defer cancel()
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://172.17.0.209:27017"))
+	if err != nil {
+		fmt.Println("err:", err)
+	}
+
+	collection := client.Database("demo").Collection("autorun")
+	collection.InsertOne(context.TODO(), info)
+	client.Disconnect(ctx)
+	log.Println("autorun  insert  mongodb done.")
 
 }
 
@@ -49,7 +65,7 @@ func insertSysmonMonogo(info interface{}, id uint) {
 	}
 
 	log.Println("mongodb insert wineven done.")
-
+	client.Disconnect(ctx)
 }
 
 func insertMyLog2ClickHouse(logData ToCKLog) {
