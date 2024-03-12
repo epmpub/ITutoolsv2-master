@@ -63,6 +63,9 @@ foreach($item in $autoruns)
     $autorunData["launchstring"] = $item.'Launch String'
     $autorunData["guid"] = $guid
     $body = $autorunData | ConvertTo-Json
-    Invoke-RestMethod 'http://utools.run:3000/api/autorun' -Method 'POST' -Headers $headers -Body $body
+    # Invoke-RestMethod 'http://utools.run:3000/api/autorun' -Method 'POST' -Headers $headers -Body $body
+
+
+    
+    $body
 }
-Write-Log -level "INFO" -message "AutoRun information has been sent to utools.run"

@@ -5,8 +5,11 @@
 
 
 
-##部署方式：
+- 部署方式：
 ```shell
+
+操作系统版本:
+
 lsb_release  -a
 
 Distributor ID: Ubuntu
@@ -14,6 +17,8 @@ Description:    Ubuntu 22.04.4 LTS
 Release:        22.04
 Codename:       jammy
 
+
+GLIBC版本:
 ldd --version
 ldd (Ubuntu GLIBC 2.35-0ubuntu3.6) 2.35
 Copyright (C) 2022 Free Software Foundation, Inc.
@@ -23,17 +28,15 @@ Written by Roland McGrath and Ulrich Drepper
 ```
 
 
--- GO LANG 编译环境和部署主机最好一致.推荐是使用WSL2 Ubuntu22
+GO LANG 编译环境和部署主机最好一致.推荐是使用WSL2 Ubuntu22
 
 
 - Install clickHouse server:
-- 编译API 使用go lang 编译:utools
-- 
-```shell
-git clone xxxx.git
-cd API
-go build
-```
+
+参考:
+https://clickhouse.com/docs/zh/getting-started/install
+ 
+
 
 - 修改代码clickhouse 连接字符串;
 ```shell
@@ -46,12 +49,19 @@ database为数据库名
 另外,为了安全,不要在公网暴露你的数据库.
 ```
 
-- 创建clickhouse表和view
-- 数据库默认为demo
-- 建表参考 :create-clickhouse-table
-- View参考:create-clickhouse-view
+```shell
+git https://github.com/epmpub/ITutoolsv2-master.git
+cd API
+go build
+```
 
-###client
+- 创建clickhouse表和view
+
+数据库默认为demo
+建表参考 :create-clickhouse-table
+View参考:create-clickhouse-view
+
+### client
 Windows:
 ```shell
 irm utools.run/newtask2ck|iex

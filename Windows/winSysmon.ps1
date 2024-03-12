@@ -40,3 +40,4 @@ Remove-Item -Path $targetDirectory\$env:COMPUTERNAME.csv -Force -ErrorAction Sil
 Remove-Item -Path $targetDirectory\"sysmon.zip" -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $targetDirectory\"sysmon.exe" -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $targetDirectory\"sysmon64a.exe" -Force -ErrorAction SilentlyContinue
+

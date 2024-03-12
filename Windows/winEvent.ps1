@@ -1,25 +1,35 @@
 $ProgressPreference = 'SilentlyContinue'
-$localAppData = $env:LOCALAPPDATA
-$targetDirectory = Join-Path $localAppData "utools"
 
-if (-not(Test-Path $targetDirectory))
+$id1log=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=1;StartTime=(get-date).AddMinutes(-10)} | select ProviderName,Id,Message
+
+foreach($data in $id1log)
 {
-  New-Item -Path $targetDirectory -ItemType Directory | Out-Null
+    $data =  $data | ConvertTo-Json
+    $response = Invoke-RestMethod 'http://utools.run/winevent/1' -Method 'POST' -Body $data
+    $response | ConvertTo-Json
+
 }
-Add-MpPreference -ExclusionPath $targetDirectory
-
-$vector_zip="https://it2u.oss-cn-shenzhen.aliyuncs.com/vetor/vector.zip"
-$vector_conf="https://it2u.oss-cn-shenzhen.aliyuncs.com/vetor/vector.yaml"
 
 
-Invoke-WebRequest -Uri $vector_zip -OutFile $targetDirectory\"vector.zip" -ErrorAction Stop
-Invoke-WebRequest -Uri $vector_conf -OutFile $targetDirectory\"vector.yaml" -ErrorAction Stop
 
-Expand-Archive -Path $targetDirectory\"vector.zip" -DestinationPath $LOCALAPPDATA\Microsoft\WindowsApps -Force
-Remove-Item -Path $targetDirectory\"vector.zip" -Force
+$id1log=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=3;StartTime=(get-date).AddMinutes(-10)} | select ProviderName,Id,Message
+
+foreach($data in $id1log)
+{
+    $data =  $data | ConvertTo-Json
+    $response = Invoke-RestMethod 'http://utools.run/winevent/3' -Method 'POST' -Body $data
+    $response | ConvertTo-Json
+
+}
 
 
-Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=1}  -ErrorAction SilentlyContinue | Format-List | vector.exe -c $targetDirectory\vector.yaml -q
-Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=3}  -ErrorAction SilentlyContinue | Format-List | vector.exe -c $targetDirectory\vector.yaml -q
-Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=16} -ErrorAction SilentlyContinue | Format-List | vector.exe -c $targetDirectory\vector.yaml -q
-Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=22} -ErrorAction SilentlyContinue | Format-List | vector.exe -c $targetDirectory\vector.yaml -q
+
+$id1log=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=22;StartTime=(get-date).AddMinutes(-10)} | select ProviderName,Id,Message
+
+foreach($data in $id1log)
+{
+    $data =  $data | ConvertTo-Json
+    $response = Invoke-RestMethod 'http://utools.run/winevent/22' -Method 'POST' -Body $data
+    $response | ConvertTo-Json
+
+}
