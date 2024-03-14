@@ -1,35 +1,69 @@
 $ProgressPreference = 'SilentlyContinue'
 
-$id1log=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=1;StartTime=(get-date).AddMinutes(-10)} | select ProviderName,Id,Message
-
-foreach($data in $id1log)
+$id1logs=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=1;StartTime=(get-date).AddMinutes(-10)} | Select-Object ProviderName,Id,Message -Last 2
+foreach($my in $id1logs)
 {
-    $data =  $data | ConvertTo-Json
-    $response = Invoke-RestMethod 'http://utools.run/winevent/1' -Method 'POST' -Body $data
+    $newlog = $my.Message.Replace('Process Create:','')
+    $log = $newlog.Split("`r`n")
+
+    $js = [ordered]@{}
+
+    # $i == lines number
+    for ($i = 1; $i -lt $log.Count - 1; $i++)
+    { 
+        $k = $log[$i].Split([string[]] ": ",[System.StringSplitOptions]"None")[0]
+        $v = $log[$i].Split([string[]] ": ",[System.StringSplitOptions]"None")[1]
+        $js[$k] = $v
+    }
+    $json = $js | ConvertTo-Json
+    $response = Invoke-RestMethod 'http://utools.run/winevent/1' -Method 'POST' -Body $json
     $response | ConvertTo-Json
 
 }
 
 
 
-$id1log=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=3;StartTime=(get-date).AddMinutes(-10)} | select ProviderName,Id,Message
 
-foreach($data in $id1log)
+$id1logs=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=3;StartTime=(get-date).AddMinutes(-10)} | select ProviderName,Id,Message -Last 2
+foreach($my in $id1logs)
 {
-    $data =  $data | ConvertTo-Json
-    $response = Invoke-RestMethod 'http://utools.run/winevent/3' -Method 'POST' -Body $data
+    $newlog = $my.Message.Replace('Process Create:','')
+    $log = $newlog.Split("`r`n")
+
+    $js = [ordered]@{}
+
+    # $i == lines number
+    for ($i = 1; $i -lt $log.Count - 1; $i++)
+    { 
+        $k = $log[$i].Split([string[]] ": ",[System.StringSplitOptions]"None")[0]
+        $v = $log[$i].Split([string[]] ": ",[System.StringSplitOptions]"None")[1]
+        $js[$k] = $v
+    }
+    $json = $js | ConvertTo-Json
+    $response = Invoke-RestMethod 'http://utools.run/winevent/3' -Method 'POST' -Body $json
     $response | ConvertTo-Json
 
 }
 
 
 
-$id1log=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=22;StartTime=(get-date).AddMinutes(-10)} | select ProviderName,Id,Message
-
-foreach($data in $id1log)
+$id1logs=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational";id=22;StartTime=(get-date).AddMinutes(-10)} | select ProviderName,Id,Message -Last 2
+foreach($my in $id1logs)
 {
-    $data =  $data | ConvertTo-Json
-    $response = Invoke-RestMethod 'http://utools.run/winevent/22' -Method 'POST' -Body $data
+    $newlog = $my.Message.Replace('Process Create:','')
+    $log = $newlog.Split("`r`n")
+
+    $js = [ordered]@{}
+
+    # $i == lines number
+    for ($i = 1; $i -lt $log.Count - 1; $i++)
+    { 
+        $k = $log[$i].Split([string[]] ": ",[System.StringSplitOptions]"None")[0]
+        $v = $log[$i].Split([string[]] ": ",[System.StringSplitOptions]"None")[1]
+        $js[$k] = $v
+    }
+    $json = $js | ConvertTo-Json
+    $response = Invoke-RestMethod 'http://utools.run/winevent/22' -Method 'POST' -Body $json
     $response | ConvertTo-Json
 
 }

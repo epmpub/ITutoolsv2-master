@@ -27,7 +27,7 @@ function Write-Log
 
 
 if (Test-Path -Path "C:\tools\autorunsc64.exe") {
-    Write-Host "autorunsc64.exe exists"
+    Write-Host "Yes"
 } else {
     Write-Host "autorunsc64.exe not exists, download it"
     Invoke-WebRequest -Uri "https://download.sysinternals.com/files/Autoruns.zip" -OutFile "C:\tools\Autoruns.zip"
@@ -63,10 +63,6 @@ foreach($item in $autoruns)
     $autorunData["launchstring"] = $item.'Launch String'
     $autorunData["guid"] = $guid
     $body = $autorunData | ConvertTo-Json
-
     Invoke-RestMethod 'http://utools.run/autorun2mongodb' -Method 'POST' -Headers $headers -Body $body
-
-
     
-    $body
 }
