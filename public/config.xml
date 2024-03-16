@@ -1,0 +1,28 @@
+<Sysmon schemaversion="4.90">
+  <!-- Capture all hashes -->
+  <HashAlgorithms>*</HashAlgorithms>
+  <EventFiltering>
+    <!-- Do not log process termination -->
+    <ProcessTerminate onmatch="include" />
+
+    <NetworkConnect onmatch="exclude">
+      <Image condition="end with">iexplore.exe</Image>
+      <Image condition="end with">svchost.exe</Image>
+    </NetworkConnect>
+
+    <DnsQuery onmatch="exclude">
+      <Image condition="end with">Sysmon64.exe</Image>
+      <Image condition="end with">svchost.exe</Image>
+    </DnsQuery>
+	
+	<FileBlockExecutable onmatch="include">
+      <TargetFilename condition="contains all">C:\Users;Downloads</TargetFilename>
+    </FileBlockExecutable>
+	
+	<FileExecutableDetected onmatch="include">
+    <TargetFilename condition="begin with">C:\ProgramData\</TargetFilename>
+        <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+    </FileExecutableDetected>
+
+  </EventFiltering>
+</Sysmon>

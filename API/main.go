@@ -39,7 +39,7 @@ func main() {
 		return c.Send(c.BodyRaw())
 	})
 
-	// to ClickHouse
+	// tcpvcon to ClickHouse
 
 	app.Post("/ck", func(c *fiber.Ctx) error {
 		//write log to clickhouse server
@@ -50,7 +50,7 @@ func main() {
 		}
 		log.Info(cklog.Id)
 		log.Info(cklog.Message)
-		insertMyLog2ClickHouse(cklog)
+		insertTcpvcon2ClickHouse(cklog)
 
 		return c.Send(c.BodyRaw())
 	})
@@ -62,13 +62,58 @@ func main() {
 		return c.SendFile("../Windows/win.ps1")
 	})
 
-	//for sysmon log
 	app.Get("/installSysmon", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/winSysmon.ps1")
 	})
 
 	app.Get("/winevent", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/winEvent.ps1")
+	})
+
+	//for powershell call, sysmon log to clickhouse (id:1,3,22)
+
+	app.Get("/sysmon/1", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon2ckid1.ps1")
+	})
+
+	app.Get("/sysmon/3", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon2ckid3.ps1")
+	})
+
+	app.Get("/sysmon/22", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon2ckid22.ps1")
+	})
+
+	// for powershell script call API , sysmon type id=1,3,22 to ClickHouse
+
+	app.Post("/sysmon_id1", func(c *fiber.Ctx) error {
+		//write log to clickhouse server
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info(cklog.Id)
+		log.Info(cklog.Message)
+		insertWineventLog2ClickHouse(cklog, 1)
+
+		return c.Send(c.BodyRaw())
+	})
+
+	// winevent sysmon type id=3 to ClickHouse
+
+	app.Post("/sysmon_id3", func(c *fiber.Ctx) error {
+		//write log to clickhouse server
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info(cklog.Id)
+		log.Info(cklog.Message)
+		insertWineventLog2ClickHouse(cklog, 3)
+
+		return c.Send(c.BodyRaw())
 	})
 
 	//upload autorun data to mangodb
@@ -151,6 +196,11 @@ func main() {
 	// display Sunflower Remote Controller and TODESK website
 	app.Get("/help", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/winSupport.ps1")
+	})
+
+	// upload sysmon event log to clickhouse
+	app.Get("/sysmon2ck", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon2ck.ps1")
 	})
 
 	// clean event log
