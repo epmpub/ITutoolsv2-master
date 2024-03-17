@@ -12,7 +12,7 @@ $data = [ordered]@{}
 
 foreach ($log in $applicationLogs) {
 
-  $data["Message"] = $log.TimeCreated.ToString()+','+$hostname+',' + "Application" + ',' + $log.Id + ',' + $log.Message
+  $data["Message"] = $log.TimeCreated.ToString()+','+$hostname+',' + "application" + ',' + $log.Id + ',' + $log.Message
   $body = $data | ConvertTo-Json
   $response = Invoke-RestMethod 'http://utools.run/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
   $response | ConvertTo-Json

@@ -13,6 +13,46 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+func HardWareInventory2ClickHouse(logs ToCKLog) {
+	connect, err := sql.Open("clickhouse", "tcp://localhost:9000?debug=false&username=default&password=Cpp...&database=demo")
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err := connect.Ping(); err != nil {
+		if exception, ok := err.(*clickhouse.Exception); ok {
+			fmt.Printf("[%d] %s \n%s\n", exception.Code, exception.Message, exception.StackTrace)
+		} else {
+			fmt.Println(err)
+		}
+		// return
+	}
+	tx, err := connect.Begin()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	stmt, err := tx.Prepare("INSERT INTO hardware_inventory (Id,Message) VALUES (?, ?)")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if _, err := stmt.Exec(
+		logs.Id,
+		logs.Message,
+	); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := tx.Commit(); err != nil {
+		log.Fatal(err)
+	}
+
+	if err = connect.Close(); err != nil {
+		log.Fatal("close db err:", err)
+	}
+	log.Println("hardware inventory information insert clickhouse")
+}
+
 func insert_app_sys_sec2ClickHouse(logData interface{}) {
 	connect, err := sql.Open("clickhouse", "tcp://localhost:9000?debug=false&username=default&password=Cpp...&database=demo")
 	if err != nil {

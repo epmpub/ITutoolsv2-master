@@ -78,6 +78,26 @@ func main() {
 		return c.SendFile("../Windows/win.ps1")
 	})
 
+	//get hardware inventory information
+	app.Get("/hardware_inventory", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/hardware_inventory.ps1")
+	})
+
+	//post hardware inventory information to clickhouse
+	app.Post("/hardware_inventory", func(c *fiber.Ctx) error {
+		//write log to clickhouse server
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		// log.Info(cklog.Id)
+		// log.Info(cklog.Message)
+		HardWareInventory2ClickHouse(cklog)
+
+		return c.Send(c.BodyRaw())
+	})
+
 	app.Get("/app_sys_sec", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/app_sys_sec.ps1")
 	})
