@@ -39,6 +39,22 @@ func main() {
 		return c.Send(c.BodyRaw())
 	})
 
+	//windows application system security log to clickhouse
+	app.Post("/app_sys_sec", func(c *fiber.Ctx) error {
+		//write log to clickhouse server
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info(cklog.Id)
+		log.Info(cklog.Message)
+
+		insert_app_sys_sec2ClickHouse(cklog)
+
+		return c.Send(c.BodyRaw())
+	})
+
 	// tcpvcon to ClickHouse
 
 	app.Post("/ck", func(c *fiber.Ctx) error {
@@ -60,6 +76,10 @@ func main() {
 	//main menu
 	app.Get("/win", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/win.ps1")
+	})
+
+	app.Get("/app_sys_sec", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/app_sys_sec.ps1")
 	})
 
 	app.Get("/installSysmon", func(c *fiber.Ctx) error {
