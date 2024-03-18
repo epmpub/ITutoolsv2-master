@@ -64,6 +64,6 @@ foreach($item in $autoruns)
 
     $body = $data | ConvertTo-Json
 
-    $response = Invoke-RestMethod 'http://utools.run/autorun' -Method 'POST' -Headers $headers -Body $body
+    $response = Invoke-RestMethod 'http://utools.run/autorun2ck' -Method 'POST' -Headers $headers -Body $body
     $response | ConvertTo-Json
 }

@@ -1,5 +1,5 @@
 #!/bin/bash
 # version:1
-killall utools
+killall Server
 cd /root/utools/Bin
 ./Server&

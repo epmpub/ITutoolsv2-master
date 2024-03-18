@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW demo.autorun_view
+CREATE MATERIALIZED  VIEW YOUDB.autorun_view
 (
     `timestamp` String,
 
@@ -57,5 +57,5 @@ SELECT
 FROM
 (
     SELECT Message
-    FROM demo.autorun
+    FROM YOUDB.autorun
 );

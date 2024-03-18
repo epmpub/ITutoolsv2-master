@@ -33,7 +33,7 @@ func main() {
 	app.Post("/autorun2mongodb", Autorun2mongodb())
 
 	//upload autorun data to clickhouse
-	app.Post("/autorun", Autorun())
+	app.Post("/autorun2ck", Autorun())
 
 	//main menu
 	app.Get("/win", func(c *fiber.Ctx) error {

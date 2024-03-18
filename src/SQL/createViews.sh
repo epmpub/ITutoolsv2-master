@@ -1,0 +1,1 @@
+for i in `ls create-*.sql`;do clickhouse-client --password Cpp... <$i;done;

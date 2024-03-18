@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW demo.winevent_sysmon_id1
+CREATE MATERIALIZED  VIEW YOUDB.winevent_sysmon_id1
 (
     `timestamp` String,
 
@@ -12,7 +12,6 @@ CREATE MATERIALIZED VIEW demo.winevent_sysmon_id1
 )
 ENGINE = MergeTree
 ORDER BY timestamp
-SETTINGS index_granularity = 8192 AS
 SETTINGS index_granularity = 8192 AS
 WITH splitByChar(',',
  Message) AS split
@@ -29,5 +28,5 @@ SELECT
 FROM
 (
     SELECT Message
-    FROM demo.winevent1
+    FROM YOUDB.winevent1
 );
