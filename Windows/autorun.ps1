@@ -4,27 +4,6 @@
 # description: collect autorun information and send to utools.run
 
 $ProgressPreference = 'SilentlyContinue'
-function Write-Log
-{
-
- param(
-        [ValidateSet('INFO','ERR','FATAL')] $level,
-        [System.String] $Message
-    )
-
-    $timestamp = Get-Date -f 'o'
-    $hostname = $env:COMPUTERNAME
-    $logEntry = [ordered]@{}
-
-    $logEntry["timestamp"] = $timestamp
-    $logEntry["level"] = $level
-    $logEntry["hostname"] = $hostname
-    $logEntry["message"] = $message
-
-    $body = $logEntry | ConvertTo-Json
-    Invoke-RestMethod -Uri http://utools.run/log -ContentType "Application/json;charset=UTF-8" -Method Post -Body $body
-}
-
 
 if (Test-Path -Path "C:\tools\autorunsc64.exe") {
     Write-Host "Yes"
@@ -41,6 +20,7 @@ $autoruns = import-csv -Path C:\tools\autorun.log
 
 $guid = New-Guid
 $autorunData = [ordered]@{}
+$data = [ordered]@{}
 
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json;charset=UTF-8")
@@ -62,7 +42,28 @@ foreach($item in $autoruns)
     $autorunData["versioin"] = $item.Version
     $autorunData["launchstring"] = $item.'Launch String'
     $autorunData["guid"] = $guid
-    $body = $autorunData | ConvertTo-Json
-    Invoke-RestMethod 'http://utools.run/autorun2mongodb' -Method 'POST' -Headers $headers -Body $body
-    
+    # $body = $autorunData | ConvertTo-Json
+
+    # to mongodb
+    # Invoke-RestMethod 'http://utools.run/autorun2mongodb' -Method 'POST' -Headers $headers -Body $body
+
+    # to clickhouse
+    $data["Id"] = $guid
+    $data["Message"] = $autorunData["entrytime"]+','+
+    $env:COMPUTERNAME+','+
+    $autorunData["entrylocation"]+','+
+    $autorunData["entryname"]+','+
+    $autorunData["enabled"]+','+
+    $autorunData["category"]+','+
+    $autorunData["profile"]+','+
+    $autorunData["description"]+','+
+    $autorunData["company"]+','+
+    $autorunData["imagepath"]+','+
+    $autorunData["versioin"]+','+
+    $autorunData["launchstring"]
+
+    $body = $data | ConvertTo-Json
+
+    $response = Invoke-RestMethod 'http://utools.run/autorun' -Method 'POST' -Headers $headers -Body $body
+    $response | ConvertTo-Json
 }
