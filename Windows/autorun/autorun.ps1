@@ -25,6 +25,7 @@ $data = [ordered]@{}
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json;charset=UTF-8")
 
+$createTime = Get-Date -format "yyyy-MM-dd ss:mm:HH"
 
 foreach($item in $autoruns)
 {
@@ -49,7 +50,8 @@ foreach($item in $autoruns)
 
     # to clickhouse
     $data["Id"] = $guid
-    $data["Message"] = $autorunData["entrytime"]+','+
+    $data["Message"] = $createTime.toString()+','+
+    $autorunData["entrytime"]+','+
     $env:COMPUTERNAME+','+
     $autorunData["entrylocation"]+','+
     $autorunData["entryname"]+','+
@@ -64,6 +66,6 @@ foreach($item in $autoruns)
 
     $body = $data | ConvertTo-Json
 
-    $response = Invoke-RestMethod 'http://utools.run/autorun2ck' -Method 'POST' -Headers $headers -Body $body
+    $response = Invoke-RestMethod 'http://utools.run/autorun' -Method 'POST' -Headers $headers -Body $body
     $response | ConvertTo-Json
 }

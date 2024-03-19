@@ -83,11 +83,11 @@ func main() {
 	//-------------------------------------------------------
 
 	//upload autorun data to clickhouse
-	app.Post("/autorun2ck", Autorun())
+	app.Post("/autorun", Autorun())
 
 	// for autorun data
-	app.Get("/autorun2ck", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/autorun/autorun2ck.ps1")
+	app.Get("/autorun", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/autorun/autorun.ps1")
 	})
 
 	//-------------------------------------------------------

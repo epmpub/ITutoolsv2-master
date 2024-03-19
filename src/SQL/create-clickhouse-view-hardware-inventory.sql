@@ -1,6 +1,6 @@
-CREATE MATERIALIZED  VIEW YOUDB.hardware_inventory_view
+CREATE MATERIALIZED  VIEW demo.hardware_inventory_view
 (
-    `timestamp` String,
+    `timestamp` DateTime,
 
     `hostname` String,
 
@@ -33,5 +33,5 @@ SELECT
 FROM
 (
     SELECT Message
-    FROM YOUDB.hardware_inventory
+    FROM demo.hardware_inventory
 );

@@ -33,8 +33,8 @@ func AppSysSec() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Info("err:", err)
 		}
-		log.Info(cklog.Id)
-		log.Info(cklog.Message)
+		// log.Info(cklog.Id)
+		// log.Info(cklog.Message)
 
 		insert_app_sys_sec2ClickHouse(cklog)
 

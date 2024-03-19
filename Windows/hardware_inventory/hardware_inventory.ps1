@@ -18,7 +18,7 @@ $disks= get-wmiobject -class win32_logicaldisk | Where-Object{$_.DriveType -eq 3
 $disklist = [System.String]::Join("GB ",$disks)
 
 $ram = [System.Math]::Round( $info.CsPhyicallyInstalledMemory / 1024 / 1024)
-$timestamp = get-date -f 'o'
+$timestamp = Get-Date -format "yyyy-MM-dd ss:mm:HH"
 $hostname = $env:COMPUTERNAME
 $cpu = $info.CsProcessors.Name
 $ram = $ram.ToString()
