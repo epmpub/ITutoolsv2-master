@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW demo.app_sys_sec_view
+CREATE MATERIALIZED VIEW YOUDB.app_sys_sec_view
 (
     `timestamp` DateTime,
 
@@ -28,5 +28,5 @@ SELECT
 FROM
 (
     SELECT Message
-    FROM demo.app_sys_sec
+    FROM YOUDB.app_sys_sec
 );

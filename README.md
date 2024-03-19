@@ -30,7 +30,39 @@ Written by Roland McGrath and Ulrich Drepper
 Reference:
 
 https://clickhouse.com/docs/zh/getting-started/install
+
+or use follow code to install:
+
+```shell
+sudo apt-get install -y apt-transport-https ca-certificates dirmngr
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 8919F6BD2B48D754
+
+echo "deb https://packages.clickhouse.com/deb stable main" | sudo tee \
+    /etc/apt/sources.list.d/clickhouse.list
+sudo apt-get update
+
+sudo apt-get install -y clickhouse-server clickhouse-client
+
+sudo service clickhouse-server start
+clickhouse-client # or "clickhouse-client --password" if you've set up a password.
+
+```
  
+please setting the clickhouse *** password *** to 'Cpp...' ,it not need to update code.
+
+
+# Setup ClickHouse Database
+Create Tables and view
+create default database name is :demo
+please use follow command to create tables and Views:
+
+```shell
+cd src\SQL
+
+sed -i 's/YOUDB/demo/g' *.*
+
+./setupDB.sh
+```
 
 - Please change the clickhouse database connection strings
 ```shell
@@ -49,21 +81,22 @@ git https://github.com/epmpub/ITutoolsv2-master.git
 cd src
 go build
 ```
-- change API path in the powershell scripts:
+
+- change API path in the powershell scripts to your domain name or IP Address.  
 ```shell
-find . -type f -name *.ps1 -exec sed -i 's/utools.run/<YOUR Domain Name>/g'  {} \;
+cd Windows
+find . -type f -name *.ps1 -exec sed -i 's/utools.run/39.108.176.143/g'  {} \;
+```
+- test
+use the follow powershell command to testing api and database if work.
+
+```shell
+irm 39.108.176.143/app_sys_sec|iex
+
+# for testing collect log to server.
 
 ```
 
-
-# Setup ClickHouse Database
-Create Tables and view
-create default database name is :demo
-please use follow command to create tables and Views:
-
-```shell
-cd src\SQL
-./setupDB.sh
 ```
 
 # client deploy

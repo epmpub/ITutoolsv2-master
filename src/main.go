@@ -38,9 +38,9 @@ func main() {
 		return c.SendFile("../Windows/tcpvcon2ck/tcpvcon2ck.ps1")
 	})
 
-	// set tcpvcon scheduler
-	app.Get("/tcpvcon_task", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/tcpvcon2ck/set-scheduler.ps1")
+	// set collect log scheduler
+	app.Get("/setup_task", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/set-scheduler.ps1")
 	})
 
 	//-------------------------------------------------------

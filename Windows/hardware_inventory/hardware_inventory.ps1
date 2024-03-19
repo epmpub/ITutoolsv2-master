@@ -34,5 +34,5 @@ $data["Message"] = $timestamp + ',' + $hostname + ',' + $cpu + ',' + $ram + ',' 
 $body = $data | ConvertTo-Json
 $body
 
-$response = Invoke-RestMethod 'http://utools.run/hardware_inventory' -Method 'POST' -Headers $headers -Body $body
+$response = Invoke-RestMethod 'http://39.108.176.143/hardware_inventory' -Method 'POST' -Headers $headers -Body $body
 $response | ConvertTo-Json

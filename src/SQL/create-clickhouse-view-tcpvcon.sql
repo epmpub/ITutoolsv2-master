@@ -1,4 +1,4 @@
-CREATE MATERIALIZED  VIEW demo.tcpvcon2_view
+CREATE MATERIALIZED  VIEW YOUDB.tcpvcon2_view
 (
 
     `timestamp` DateTime,
@@ -43,5 +43,5 @@ SELECT
 FROM
 (
     SELECT Message
-    FROM demo.tcpvcon2
+    FROM YOUDB.tcpvcon2
 );

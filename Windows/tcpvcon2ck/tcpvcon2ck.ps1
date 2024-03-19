@@ -24,5 +24,5 @@ foreach ($item in $(c:\tools2\tcpvcon -c -n -nobanner))
 
     $jsdata=$info | convertTo-Json
     $jsdata
-    Invoke-RestMethod utools.run/tcpvcon2ck -Method Post -Body $jsdata
+    Invoke-RestMethod 39.108.176.143/tcpvcon2ck -Method Post -Body $jsdata
 }

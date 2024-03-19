@@ -10,5 +10,5 @@ function Write-Log ($level, $message)
     $logEntry["message"] = $message
 
     $body = $logEntry | ConvertTo-Json
-    Invoke-RestMethod -Uri http://utools.run/log -ContentType "Application/json;charset=UTF-8" -Method Post -Body $body
+    Invoke-RestMethod -Uri http://39.108.176.143/log -ContentType "Application/json;charset=UTF-8" -Method Post -Body $body
 }
