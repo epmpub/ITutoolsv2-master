@@ -11,17 +11,49 @@ func main() {
 	// Home Page
 	app.Static("/", "../public")
 
+	//-------------------------------------------------------
 	//post hardware inventory information to clickhouse
 	app.Post("/hardware_inventory", CreateHardwareInventory())
 
+	app.Get("/hardware_inventory", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/hardware_inventory/hardware_inventory.ps1")
+	})
+
+	//-------------------------------------------------------
 	//windows application system security log to clickhouse
+
 	app.Post("/app_sys_sec", AppSysSec())
 
+	app.Get("/app_sys_sec", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/app_sys_sec/app_sys_sec.ps1")
+	})
+
+	//-------------------------------------------------------
+
 	//post tcpvcon to clickhouse
-	app.Post("/tcpvcon", Tcpvcon())
+	app.Post("/tcpvcon2ck", Tcpvcon())
+
+	// tcpvcon to clickhouse
+	app.Get("/tcpvcon2ck", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tcpvcon2ck/tcpvcon2ck.ps1")
+	})
+
+	// set tcpvcon scheduler
+	app.Get("/tcpvcon_task", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tcpvcon2ck/set-scheduler.ps1")
+	})
+
+	//-------------------------------------------------------
 
 	// for powershell script call API , sysmon type id=1,3,22 to ClickHouse
 	//TODO ID=22
+
+	//-------------------------------------------------------
+
+	//deploy sysmon tools
+	app.Get("/sysmon", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/GetSysmon.ps1")
+	})
 
 	app.Post("/sysmon_id1", SysmonID1())
 
@@ -29,79 +61,50 @@ func main() {
 
 	app.Post("/sysmon_id3", SysmonID3())
 
+	//sysmon log to clickhouse (id:1,3,22)
+
+	app.Get("/sysmon/1", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/sysmon2ckid1.ps1")
+	})
+
+	app.Get("/sysmon/3", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/sysmon2ckid3.ps1")
+	})
+
+	app.Get("/sysmon/22", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/sysmon2ckid22.ps1")
+	})
+
+	//-------------------------------------------------------
+
 	//upload autorun data to mangodb
 	app.Post("/autorun2mongodb", Autorun2mongodb())
+
+	//-------------------------------------------------------
 
 	//upload autorun data to clickhouse
 	app.Post("/autorun2ck", Autorun())
 
+	// for autorun data
+	app.Get("/autorun2ck", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/autorun/autorun2ck.ps1")
+	})
+
+	//-------------------------------------------------------
+
 	//main menu
 	app.Get("/win", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/win.ps1")
-	})
-
-	//get hardware inventory information
-	app.Get("/hardware_inventory", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/hardware_inventory.ps1")
-	})
-
-	//application system security log
-	app.Get("/app_sys_sec", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/app_sys_sec.ps1")
-	})
-
-	//install sysmon tools
-	app.Get("/installSysmon", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/winSysmon.ps1")
-	})
-
-	//sysmon log to clickhouse (id:1,3,22)
-
-	app.Get("/sysmon/1", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/sysmon2ckid1.ps1")
-	})
-
-	app.Get("/sysmon/3", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/sysmon2ckid3.ps1")
-	})
-
-	app.Get("/sysmon/22", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/sysmon2ckid22.ps1")
-	})
-
-	// for autorun data
-	app.Get("/autorun", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/autorun.ps1")
+		return c.SendFile("../Windows/others/win.ps1")
 	})
 
 	//consolidate security for windows server
-	app.Get("/consolidate", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/winServerConsolidating.ps1")
-	})
-
-	// display Sunflower Remote Controller and TODESK website
-	app.Get("/help", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/winSupport.ps1")
+	app.Get("/harden", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/harden/WindowsHarden.ps1")
 	})
 
 	// clean event log
-	app.Get("/cleanlog", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/winCleanEventLog.ps1")
-	})
-
-	// tcpvcon to clickhouse
-	app.Get("/tcpvcon2ck", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/tcpvcon2ck.ps1")
-	})
-
-	// install task scheduler for mongodb
-	app.Get("/newtask", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/new-task.ps1")
-	})
-
-	// install task scheduler for clickhouse
-	app.Get("/newtask2ck", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/new-task2ck.ps1")
+	app.Get("/clearlog", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/winCleanEventLog.ps1")
 	})
 
 	// Linux OS
