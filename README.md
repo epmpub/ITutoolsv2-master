@@ -1,14 +1,12 @@
-说明：
-1  无schema,
-2  终端采集用脚本,无需编译,动态执行;
-3  标准JSON格式
 
+1  No schema,
+2  Use Powershell dynamic to execute.
+3  use JSON to transfer data 
 
-
-- 部署方式：
+# How to deploy?
 ```shell
 
-操作系统版本:
+OS Version:
 
 lsb_release  -a
 
@@ -18,7 +16,7 @@ Release:        22.04
 Codename:       jammy
 
 
-GLIBC版本:
+GLIBC Version:
 ldd --version
 ldd (Ubuntu GLIBC 2.35-0ubuntu3.6) 2.35
 Copyright (C) 2022 Free Software Foundation, Inc.
@@ -27,48 +25,53 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 Written by Roland McGrath and Ulrich Drepper
 ```
 
-
-GO LANG 编译环境和部署主机最好一致.推荐是使用WSL2 Ubuntu22
-
-
 - Install clickHouse server:
 
-参考:
+Reference:
+
 https://clickhouse.com/docs/zh/getting-started/install
  
 
-
-- 修改代码clickhouse 连接字符串;
+- Please change the clickhouse database connection strings
 ```shell
 tcp://localhost:9000?debug=false&username=default&password=Cpp...&database=demo
-其中:
-default为用户名
-Cpp...为密码
-database为数据库名
-请替换成你自己的配置.
-另外,为了安全,不要在公网暴露你的数据库.
+username: default
+password: Cpp...
+database: demo
+debug: false or true
 ```
+- compile your code ,recommand to use Windows 10 WSL2:
+- Setup WSL2 in windows https://learn.microsoft.com/en-us/windows/wsl/install
+- install Go Language https://golang.google.cn/learn/
 
 ```shell
 git https://github.com/epmpub/ITutoolsv2-master.git
-cd API
+cd src
 go build
 ```
+- change API path in the powershell scripts:
+```shell
+find . -type f -name *.ps1 -exec sed -i 's/utools.run/<YOUR Domain Name>/g'  {} \;
 
-- 创建clickhouse表和view
+```
 
-数据库默认为demo
-建表参考 :create-clickhouse-table
-View参考:create-clickhouse-view
 
-### client
-Windows:
+# Setup ClickHouse Database
+Create Tables and view
+create default database name is :demo
+please use follow command to create tables and Views:
+
+```shell
+cd src\SQL
+./setupDB.sh
+```
+
+# client deploy
+Windows platform please execute follow command,it will help to create a scheduler task:
+
 ```shell
 irm utools.run/newtask2ck|iex
 ```
 
-Linux 和 MacOS 参考windows脚本,写一个定时任务即可.
-
-部署中肯定会有各种奇怪的问题,如果你觉得很麻烦,可以微信我.
-我可以远程指导你部署.
+If you have any question ,please feel free to contact with me by email:andy.husheng@gmail.com
 WeChat: VIPS_AndyHu

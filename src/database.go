@@ -234,7 +234,7 @@ func insertAutorun2ClickHouse(logs ToCKLog) {
 }
 
 func insertWineventLog2ClickHouse(logData ToCKLog, id uint) {
-	connect, err := sql.Open("clickhouse", "tcp://localhost:9000?debug=true&username=default&password=Cpp...&database=demo")
+	connect, err := sql.Open("clickhouse", "tcp://localhost:9000?debug=false&username=default&password=Cpp...&database=demo")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -291,7 +291,6 @@ func insertWineventLog2ClickHouse(logData ToCKLog, id uint) {
 		if err = connect.Close(); err != nil {
 			log.Fatal("close db err:", err)
 		}
-		log.Println("winvent3 insert to clickhouse")
 	}
 
 }
