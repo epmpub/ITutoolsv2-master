@@ -1,4 +1,4 @@
-CREATE MATERIALIZED  VIEW YOUDB.autorun_view
+CREATE MATERIALIZED  VIEW demo.autorun_view
 (
     `createTime` DateTime,
 
@@ -61,5 +61,5 @@ SELECT
 FROM
 (
     SELECT Message
-    FROM YOUDB.autorun
+    FROM demo.autorun
 );

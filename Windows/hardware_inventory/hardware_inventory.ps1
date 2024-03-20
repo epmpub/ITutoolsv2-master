@@ -18,7 +18,7 @@ $disks= get-wmiobject -class win32_logicaldisk | Where-Object{$_.DriveType -eq 3
 $disklist = [System.String]::Join("GB ",$disks)
 
 $ram = [System.Math]::Round( $info.CsPhyicallyInstalledMemory / 1024 / 1024)
-$timestamp = Get-Date -format "yyyy-MM-dd ss:mm:HH"
+$timestamp = Get-Date -format "yyyy-MM-dd HH:mm:ss"
 $hostname = $env:COMPUTERNAME
 $cpu = $info.CsProcessors.Name
 $ram = $ram.ToString()
@@ -34,5 +34,5 @@ $data["Message"] = $timestamp + ',' + $hostname + ',' + $cpu + ',' + $ram + ',' 
 $body = $data | ConvertTo-Json
 $body
 
-$response = Invoke-RestMethod 'http://39.108.176.143/hardware_inventory' -Method 'POST' -Headers $headers -Body $body
+$response = Invoke-RestMethod 'http://it2u.cn/hardware_inventory' -Method 'POST' -Headers $headers -Body $body
 $response | ConvertTo-Json

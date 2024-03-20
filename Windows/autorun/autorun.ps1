@@ -1,7 +1,7 @@
 
 # author:andy.hu
 # date:2020-03-20 10:16AM
-# description: collect autorun information and send to 39.108.176.143
+# description: collect autorun information and send to it2u.cn
 
 $ProgressPreference = 'SilentlyContinue'
 
@@ -25,7 +25,7 @@ $data = [ordered]@{}
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json;charset=UTF-8")
 
-$createTime = Get-Date -format "yyyy-MM-dd ss:mm:HH"
+$createTime = Get-Date -format "yyyy-MM-dd HH:mm:ss"
 
 foreach($item in $autoruns)
 {
@@ -46,7 +46,7 @@ foreach($item in $autoruns)
     # $body = $autorunData | ConvertTo-Json
 
     # to mongodb
-    # Invoke-RestMethod 'http://39.108.176.143/autorun2mongodb' -Method 'POST' -Headers $headers -Body $body
+    # Invoke-RestMethod 'http://it2u.cn/autorun2mongodb' -Method 'POST' -Headers $headers -Body $body
 
     # to clickhouse
     $data["Id"] = $guid
@@ -66,6 +66,6 @@ foreach($item in $autoruns)
 
     $body = $data | ConvertTo-Json
 
-    $response = Invoke-RestMethod 'http://39.108.176.143/autorun' -Method 'POST' -Headers $headers -Body $body
+    $response = Invoke-RestMethod 'http://it2u.cn/autorun' -Method 'POST' -Headers $headers -Body $body
     $response | ConvertTo-Json
 }

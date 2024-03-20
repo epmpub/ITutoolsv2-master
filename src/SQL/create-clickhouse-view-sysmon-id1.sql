@@ -1,4 +1,4 @@
-CREATE MATERIALIZED  VIEW YOUDB.winevent_sysmon_id1
+CREATE MATERIALIZED  VIEW demo.winevent_sysmon_id1
 (
     `timestamp` DateTime64(3),
 
@@ -28,5 +28,5 @@ SELECT
 FROM
 (
     SELECT Message
-    FROM YOUDB.winevent1
+    FROM demo.winevent1
 );

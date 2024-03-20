@@ -16,7 +16,7 @@ foreach($my in $id1logs)
         $js[$k] = $v
     }
     $json = $js | ConvertTo-Json
-    $response = Invoke-RestMethod 'http://39.108.176.143/winevent/1' -Method 'POST' -Body $json
+    $response = Invoke-RestMethod 'http://it2u.cn/winevent/1' -Method 'POST' -Body $json
     $response | ConvertTo-Json
 
 }
@@ -40,7 +40,7 @@ foreach($my in $id1logs)
         $js[$k] = $v
     }
     $json = $js | ConvertTo-Json
-    $response = Invoke-RestMethod 'http://39.108.176.143/winevent/3' -Method 'POST' -Body $json
+    $response = Invoke-RestMethod 'http://it2u.cn/winevent/3' -Method 'POST' -Body $json
     $response | ConvertTo-Json
 
 }
@@ -63,7 +63,7 @@ foreach($my in $id1logs)
         $js[$k] = $v
     }
     $json = $js | ConvertTo-Json
-    $response = Invoke-RestMethod 'http://39.108.176.143/winevent/22' -Method 'POST' -Body $json
+    $response = Invoke-RestMethod 'http://it2u.cn/winevent/22' -Method 'POST' -Body $json
     $response | ConvertTo-Json
 
 }

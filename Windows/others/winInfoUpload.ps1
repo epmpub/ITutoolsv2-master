@@ -15,4 +15,4 @@ $BODY["TIMESTAMP"]=$now
 $BODY=$BODY | ConvertTo-Json
 
 
-Invoke-RestMethod -Method Post -Uri http://39.108.176.143/data -ContentType application/json -Body $BODY
+Invoke-RestMethod -Method Post -Uri http://it2u.cn/data -ContentType application/json -Body $BODY

@@ -48,7 +48,7 @@ function diskhandler {
 
 function Set-ConsoleWidth {
      param (
-          [string]$Title = '39.108.176.143'
+          [string]$Title = 'it2u.cn'
      )
      
      Clear-Host
@@ -118,19 +118,19 @@ function Show-MainMenu {
 
      switch ($selection) {
             '1' {
-               Invoke-RestMethod 39.108.176.143/sysmon | Invoke-Expression
+               Invoke-RestMethod it2u.cn/sysmon | Invoke-Expression
           } '2' {
-               Invoke-RestMethod 39.108.176.143/winServerConsolidating | Invoke-Expression
+               Invoke-RestMethod it2u.cn/winServerConsolidating | Invoke-Expression
           } '3' {
-               Invoke-RestMethod 39.108.176.143/autorun | Invoke-Expression
+               Invoke-RestMethod it2u.cn/autorun | Invoke-Expression
           }'4' {
                Invoke-RestMethod https://massgrave.dev/get | Invoke-Expression
           }'5' {
-               Invoke-RestMethod 39.108.176.143/agent | Invoke-Expression
+               Invoke-RestMethod it2u.cn/agent | Invoke-Expression
           }'6' {
-               Invoke-RestMethod 39.108.176.143/event | Invoke-Expression
+               Invoke-RestMethod it2u.cn/event | Invoke-Expression
           }'7' {
-               Invoke-RestMethod 39.108.176.143/console | Invoke-Expression
+               Invoke-RestMethod it2u.cn/console | Invoke-Expression
           }
 
           Default { 'Main Menu: Your chose error Opion' }

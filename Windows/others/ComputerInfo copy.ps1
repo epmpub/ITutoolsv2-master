@@ -31,7 +31,7 @@ foreach ($item in $proces)
     $data = $dict | ConvertTo-Json
 
     
-    $response = Invoke-RestMethod 'http://39.108.176.143:3000/api/process' -Method 'POST' -Headers $headers -Body $data
+    $response = Invoke-RestMethod 'http://it2u.cn:3000/api/process' -Method 'POST' -Headers $headers -Body $data
     $response | ConvertTo-Json
 
 }
@@ -69,7 +69,7 @@ foreach ($it in $adapters)
     
     $body 
 
-    $response = Invoke-RestMethod 'http://39.108.176.143:3000/api/adapters' -Method 'POST' -Headers $headers -Body $body 
+    $response = Invoke-RestMethod 'http://it2u.cn:3000/api/adapters' -Method 'POST' -Headers $headers -Body $body 
     #$response | ConvertTo-Json
 
 }
@@ -100,4 +100,4 @@ $body = $JSON | ConvertTo-Json
 $body
 
 
-$response = Invoke-RestMethod 'http://39.108.176.143:3000/api/hosts' -Method 'POST' -Headers $headers -Body $body
+$response = Invoke-RestMethod 'http://it2u.cn:3000/api/hosts' -Method 'POST' -Headers $headers -Body $body

@@ -31,11 +31,11 @@ func main() {
 	//-------------------------------------------------------
 
 	//post tcpvcon to clickhouse
-	app.Post("/tcpvcon2ck", Tcpvcon())
+	app.Post("/tcpvcon", Tcpvcon())
 
 	// tcpvcon to clickhouse
-	app.Get("/tcpvcon2ck", func(c *fiber.Ctx) error {
-		return c.SendFile("../Windows/tcpvcon2ck/tcpvcon2ck.ps1")
+	app.Get("/tcpvcon", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tcpvcon/tcpvcon.ps1")
 	})
 
 	// set collect log scheduler
@@ -100,6 +100,11 @@ func main() {
 	//consolidate security for windows server
 	app.Get("/harden", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/harden/WindowsHarden.ps1")
+	})
+
+	//setup task for collect log
+	app.Get("/new_task", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/new_task.ps1")
 	})
 
 	// clean event log

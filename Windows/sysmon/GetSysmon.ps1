@@ -16,7 +16,7 @@ if (Test-Path $savePathZip)
 }
 
 $sysmon_url="https://download.sysinternals.com/files/Sysmon.zip"
-$sysmon_config="http://39.108.176.143/config.xml"
+$sysmon_config="http://it2u.cn/config.xml"
 
 
 

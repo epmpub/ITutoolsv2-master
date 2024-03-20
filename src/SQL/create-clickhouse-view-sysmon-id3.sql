@@ -1,4 +1,4 @@
-CREATE MATERIALIZED  VIEW YOUDB.winevent_sysmon_id3
+CREATE MATERIALIZED  VIEW demo.winevent_sysmon_id3
 (
     `RuleName` String,
     `UtcTime` Datetime64,
@@ -53,5 +53,5 @@ SELECT
 FROM
 (
     SELECT Message
-    FROM YOUDB.winevent3
+    FROM demo.winevent3
 );
