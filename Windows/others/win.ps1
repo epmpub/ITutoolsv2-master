@@ -48,7 +48,7 @@ function diskhandler {
 
 function Set-ConsoleWidth {
      param (
-          [string]$Title = 'it2u.cn'
+          [string]$Title = 'utools.run'
      )
      
      Clear-Host
@@ -118,19 +118,19 @@ function Show-MainMenu {
 
      switch ($selection) {
             '1' {
-               Invoke-RestMethod it2u.cn/sysmon | Invoke-Expression
+               Invoke-RestMethod utools.run/sysmon | Invoke-Expression
           } '2' {
-               Invoke-RestMethod it2u.cn/winServerConsolidating | Invoke-Expression
+               Invoke-RestMethod utools.run/winServerConsolidating | Invoke-Expression
           } '3' {
-               Invoke-RestMethod it2u.cn/autorun | Invoke-Expression
+               Invoke-RestMethod utools.run/autorun | Invoke-Expression
           }'4' {
                Invoke-RestMethod https://massgrave.dev/get | Invoke-Expression
           }'5' {
-               Invoke-RestMethod it2u.cn/agent | Invoke-Expression
+               Invoke-RestMethod utools.run/agent | Invoke-Expression
           }'6' {
-               Invoke-RestMethod it2u.cn/event | Invoke-Expression
+               Invoke-RestMethod utools.run/event | Invoke-Expression
           }'7' {
-               Invoke-RestMethod it2u.cn/console | Invoke-Expression
+               Invoke-RestMethod utools.run/console | Invoke-Expression
           }
 
           Default { 'Main Menu: Your chose error Opion' }

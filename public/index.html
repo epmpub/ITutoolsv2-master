@@ -31,16 +31,16 @@
         blockquote {
             padding: 10px;
             box-shadow:
-                inset 0 -3em 3em rgba(0, 200, 0, 0.3),
-                0 0 0 2px tomato,
-                0.3em 0.3em 1em rgba(13, 0, 200, 0.733);
+                inset 0 -3em 3em rgba(20, 159, 20, 0.3),
+                0 0 0 2px rgb(5, 238, 71),
+                0.3em 0.3em 1em rgba(249, 249, 250, 0.733);
         }
 
         footer {
                 display: flex;
                 justify-content: center;
                 padding: 5px;
-                background-color: tomato;
+                background-color: rgb(80, 213, 14);
                 color: #fff;
                 text-align: left;
                 line-height: 50px;
@@ -86,129 +86,89 @@
     <div class="sunflower">
         <img src="image/contact2.jpg" class="wechat">
         <h4 class="center">扫码演示</h4>
-
     </div>
 
     <div class="container" style="background-color: #fff;">
-         <img src="image/logo.png" class="rounded">
-        <h2>UTOOLS</h2>
+        <div class="container" style="background-color: #fff;">
+            <div class="fw-lighter font-monospace">
+                <blockquote class="fw-light">
+                    <article>
 
-        <nav class="navbar navbar-fixed-top navbar-expand-sm ">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="#portfolio">Protfolio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            </ul>
-        </nav>
+                        <section>
+                            <h2 class="fw-light">Windows日志</h2>
+                            <p>
+                                Windows操作系统生成各种类型的日志，用于跟踪系统活动、故障排除和安全监控。日志主要包括系统日志、应用程序日志和安全日志。
+                                运维和开发人员可以通过日志了解服务器运行过程中发生的错误及错误产生的原因。
+                                定期分析日志可以了解服务器的运行情况、性能、安全性等。每台服务器或应用程序都会产生日志，
+                            </p>
+                            <p>
+                                <h2 class="fw-light">为什么不使用ELK?</h2>
+                                ELK常用于日志收集和分析。
+                                Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。<br>
+                                Logstash是一个完全开源的工具，他可以对你的日志进行收集、分析，并将其存储供以后使用。<br>
+                                kibana 也是一个开源和免费的工具，它可以为 Logstash 和 Elasticsearch 提供的日志分析友好的 Web 界面，可以汇总、分析和搜索重要数据日志。<br>
+                                
+                                <br>
+                                ElasticSearch 是一个非常强大的解决方案，但我认为它最强的方面仍然是超过 10+ 节点的支持，用于大型全文检索和 facets ，复杂的索引和分值计算-这是 ElasticSearch 的亮点。当我们提及时间序列和日志存储时，
+                                似乎有更好的解决方案，而 Clickhouse 就是其中之一。ElasticSearch API 的功能非常强大，但在很多情况下，如果不从文档中复制具体 HTTP 请求，就很难记住如何做一件事，它有更多的“企业化”和“ Java 风格”。
+Clickhouse 和 EasticSearch 都是占用内存很大的程序， Clickhouse 内存要求为4GB，而 ElasticSearch 的内存要求为 16GB 。
+
+我还认为 Elastic 团队关注的重点是他们新的机器学习功能，我的愚见是，尽管这些功能听起来非常新潮，但不论你拥有多少开发人员和金钱，这些庞大的功能集很难持续支持和改进。
+对我来说，ElasticSearch 在不断的进入“博而不精”的状态。
+ 
+Clickhouse 则与众不同。设置简单、SQL 也简单、控制台客户端也很棒。通过少量配置，就可以让一切简单有效的工作起来，但是当有需要时，也可以在 TB 级数据上使用丰富的特性、副本和分片能力.
+                                
+                                <br>
+                                <h2 class="fw-light">为什么使用ClickHouse?</h2>
+                                ClickHouse 是一个开源的分布式列式数据库管理系统，专门用于在线分析处理（OLAP）工作负载。它具有高性能、可伸缩性和低延迟的特点，适用于处理大规模数据集的实时分析查询。<br>
+                                以下是一些 ClickHouse 的特点：
+
+                                <li>列式存储：数据按列存储，有助于提高查询性能和压缩数据。</li>
+                                <li>分布式架构：支持水平扩展，可以轻松处理大规模数据量。 </li>
+                                <li>高性能：快速执行复杂的分析查询，适用于实时数据分析需求。</li>
+                                <li>SQL 兼容：支持标准 SQL 查询语言，易于使用和集成。</li>
+                                <li>实时数据插入：支持高吞吐量的实时数据插入，适用于大数据流处理。</li>
+                                <li>可靠性：具有数据冗余和容错机制，保证数据的安全性和可靠性。</li>
+                                <br>
+                                
+                                <h2 class="fw-light">如何使用?</h2>
+
+                                    <li >
+                                        部署简单,无需学习,使用一条命令,就可以接入系统;
+                                    </li>
+                                    <li >
+                                        全面支持Windows10系统
+                                    </li>
+                                    <li >
+                                        客户端资源占用极低,不需要安装专门的客户端,使用内置的PowerShell引擎就可以工作的很好;
+                                    </li>
+                                    <li >
+                                        云端部署,免运维,对企业来说,不需要额外的IT运维人员来维护系统,尤其适合学校,医院,工厂等没有IT人员的场景使用.
+                                    </li>
+                                    <li>
+                                        局域网和互联网(LAN/WAN)都可以采集数据,用户不需要担心网络问题;
+                                    </li>
+
+                                    <br>
+                                <h2 class="fw-light">演示系统</h2>
+                                    具体的使用信息请联系售前工程师,工程师将和您演示相关的系统和解答您的疑惑.
+
+                            </p>
+    
+                        </section>
+                    </article>
+    
+                </blockquote>
+            </div>
 
 
-        <div class="fw-lighter font-monospace">
-            <blockquote class="fw-light">
-                <article>
-                    <h4>
-                        utools工具介绍：
-                    </h4>
-                    <section>
-                        <ul>
-                            <li >
-                                使用简单,无需学习;
-                            </li>
-                            <li >
-                                全面支持Windows，Linux，macOS
-                            </li>
-                            <li >
-                                简化工作，减少重复，提升工作效率
-                            </li>
-                            <li >
-                                不需要安装部署任何客户端
-                            </li>
-                            <li >
-                                高度定制自己的专门站点
-                            </li>
-                            <li >
-                                迭代快速,紧跟业务;
-                            </li>
-                            <li >
-                                Don't repeat yourself
-                            </li>
-                        </ul>
-
-                    </section>
-                    <section>
-                        <video src="vedio/utools1.mp4" autoplay muted controls loop></video>
-                        <p style="text-align: center;">使用视频：</p>
-
-                    </section>
-                </article>
-
-            </blockquote>
-        </div>
-
-        <blockquote>
-            <article>
-                <section class="fw-medium">
-                    <h4>第1种方法</h4>
-                    <h4 class="fw-light">(1) 按住win键+X, 点击 ‘windows powershell管理员’</h4>
-                    <img src="image/adminRun.png" class="img-fluid rounded-top rounded-bottom center">
-                    <h4 class="fw-light">(2) 输入：<strong>irm utools.run/win | iex</strong> </h4>
-                    <img src="image/irmiex.png" class="img-fluid rounded-top rounded-bottom center">
-                    <img src="image/utools.png" class="img-fluid rounded-top rounded-bottom center">
-                </section>
-        
-                <section>
-        
-                    <h4>第2种方法</h4>
-                    <h4 class="fw-light">(1) ctrl + shift + esc 快捷键开启任务管理器选择/文件, 点击/运行新任务</h4>
-        
-                    <img src="image/adminRunPWSH.png" class="img-fluid rounded-top rounded-bottom center">
-                    <h4 class="fw-light">(2) 输入 powershell ,勾选 "以系统管理权限创建此任务",确定</h4>
-        
-                    <img src="image/adminRunPWSH2.png" class="img-fluid rounded-top rounded-bottom center">
-        
-                    <h4 class="fw-light">(3) 启动后的powershell,将 irm utools.run/win | iex 复制粘贴到poershell窗口后,按回车.</h4>
-                    <img src="image/pwsh2.png" class="img-fluid rounded-top rounded-bottom center">
-        
-        
-                    <h4 class="fw-light">(4) 如有杀毒软件,如360,腾讯管家,金山毒霸等,请点击 "允许" </h4>
-        
-                    <img src="image/kingsoft_av.png" class="img-fluid rounded-top rounded-bottom center">
-                </section>
-            </article>
-        </blockquote>
-
-        <blockquote>
-            <details>
-                <summary class="fw-light">对应平台使用命令</summary>
-                <p>
-                  请按照对应平台，将命令复制、粘贴到终端后，回车运行。
-                </p>
-              </details>
-
-            <div class="container">
-                <div class="input-group mb-3">
-                    <button class="btn btn-outline-secondary w-25" type="button" id="button-addon1">windows</button>
-                    <input type="text" class="form-control" placeholder="" value="irm utools.run/win | iex">
-                </div>
-
-                <div class="input-group mb-3">
-                    <button class="btn btn-outline-secondary w-25" type="button" id="button-addon1">linux</button>
-                    <input type="text" class="form-control" placeholder="" value="curl -s utools.run/linux | dash">
-                </div>
-
-                <div class="input-group mb-3">
-                    <button class="btn btn-outline-secondary w-25" type="button" id="button-addon1">macOS</button>
-                    <input type="text" class="form-control" placeholder="" value="curl -s utools.run/mac | bash">
-                </div>
-
-        </blockquote>
 
 
         <blockquote>
             <footer>
                 <p class="ms-0">
-                    © 2019-2023 广州市佳友终端科技有限公司 TEL: 17180661988 网站：http://utools.run 地址：广州市天河区荷光路137号103房B1-109号
+                    © 2019-2023 广州市佳友终端科技有限公司 TEL: 17180661988 网站：http://utools.run
+                        地址：广州市天河区荷光路137号103房B1-109号
                     <a class="hover" style="color: #fff;" href="https://beian.miit.gov.cn/">
                         粤ICP备2023128495号-2
                     </a>

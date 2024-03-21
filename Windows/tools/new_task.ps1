@@ -6,12 +6,12 @@ if (-not(Test-Path $targetDirectory))
   New-Item -Path $targetDirectory -ItemType Directory | Out-Null
 }
 
-'powershell -executionPolicy ByPass -Command "irm it2u.cn/app_sys_sec|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii
-'powershell -executionPolicy ByPass -Command "irm it2u.cn/tcpvcon|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm it2u.cn/autorun|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm it2u.cn/sysmon/1|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm it2u.cn/sysmon/3|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm it2u.cn/hardware_inventory|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/app_sys_sec|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii
+'powershell -executionPolicy ByPass -Command "irm utools.run/tcpvcon|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/autorun|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/1|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/3|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory|iex"' | out-file c:\tools2\collectLogs.bat -Encoding ascii -Append
 
 
 $TaskName = "collectLogs"
@@ -22,7 +22,7 @@ if ($? -eq $true)
     Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction SilentlyContinue
 }
 
-# $actions = New-ScheduledTaskAction -Execute 'powershell -executionPolicy ByPass -Command "irm it2u.cn/tcpvcon|iex"'
+# $actions = New-ScheduledTaskAction -Execute 'powershell -executionPolicy ByPass -Command "irm utools.run/tcpvcon|iex"'
 
 $actions = New-ScheduledTaskAction -Execute 'cmd /c c:\tools2\collectLogs.bat'
 

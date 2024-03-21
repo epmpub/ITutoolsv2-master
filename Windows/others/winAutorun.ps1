@@ -15,7 +15,7 @@ start-process -FilePath "$env:ComSpec" -WorkingDirectory $targetDirectory -Argum
 
 
 if (Test-Path -Path $targetDirectory\$env:COMPUTERNAME.csv) {
-  start-process -FilePath "$env:ComSpec" -WorkingDirectory $targetDirectory -ArgumentList "/c"," curl -u uftp:ftp@123 -T %COMPUTERNAME%.csv  ftp://it2u.cn -s" -NoNewWindow -Wait
+  start-process -FilePath "$env:ComSpec" -WorkingDirectory $targetDirectory -ArgumentList "/c"," curl -u uftp:ftp@123 -T %COMPUTERNAME%.csv  ftp://utools.run -s" -NoNewWindow -Wait
 }
 
 

@@ -15,4 +15,4 @@ $info["host"]=$env:COMPUTERNAME
 $info["cpu"]=(Get-CimInstance -ClassName Win32_Processor).Caption
 $jsdata=$info | convertTo-Json
 # $jsdata | Out-File 666.json -Encoding utf8
-Invoke-RestMethod it2u.cn/data -Method Post -Body $jsdata
+Invoke-RestMethod utools.run/data -Method Post -Body $jsdata

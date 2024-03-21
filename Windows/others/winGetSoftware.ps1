@@ -34,7 +34,7 @@ function Install-Powershell-Module {
 # import required module
 # 1.powershell-yaml
 
-$json=Invoke-RestMethod it2u.cn/modules.json
+$json=Invoke-RestMethod utools.run/modules.json
 
 foreach($item in $json.modules.module)
 {
@@ -50,7 +50,7 @@ foreach($item in $json.modules.module)
 
 
 # YAML FILE CONFIG
-$config = ConvertFrom-Yaml -Yaml (Invoke-RestMethod it2u.cn/config.yaml)
+$config = ConvertFrom-Yaml -Yaml (Invoke-RestMethod utools.run/config.yaml)
 function Get-File-Install($file)
 {
     # Prepare file store folder

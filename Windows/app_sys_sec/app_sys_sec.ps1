@@ -14,7 +14,7 @@ foreach ($log in $applicationLogs) {
 
   $data["Message"] = $log.TimeCreated.ToString()+','+$hostname+',' + "application" + ',' + $log.Id + ',' + $log.Message
   $body = $data | ConvertTo-Json
-  $response = Invoke-RestMethod 'http://it2u.cn/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
+  $response = Invoke-RestMethod 'http://utools.run/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
   $response | ConvertTo-Json
 }
 
@@ -34,7 +34,7 @@ $data = [ordered]@{}
 foreach ($log in $systemLogs) {
   $data["Message"] = $log.TimeCreated.ToString()+',' +$hostname + ',' + "system" +','+ $log.Id + ',' + $log.Message
   $body = $data | ConvertTo-Json
-  $response = Invoke-RestMethod 'http://it2u.cn/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
+  $response = Invoke-RestMethod 'http://utools.run/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
   $response | ConvertTo-Json
 }
 
@@ -51,6 +51,6 @@ $securityLogs = Get-WinEvent -FilterXml $security
 foreach ($log in $securityLogs) {
   $data["Message"] = $log.TimeCreated.ToString()+',' +$hostname + ',' + "security" +',' + $log.Id + ',' + $log.Message
   $body = $data | ConvertTo-Json
-  $response = Invoke-RestMethod 'http://it2u.cn/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
+  $response = Invoke-RestMethod 'http://utools.run/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
   $response | ConvertTo-Json
 }

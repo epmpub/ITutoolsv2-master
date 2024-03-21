@@ -37,5 +37,5 @@ foreach ($item in $(C:\tools2\tcpvcon -c -n -nobanner -accepteula))
     $jsdata
 
     # $jsdata | Out-File 666.json -Encoding utf8
-    Invoke-RestMethod it2u.cn/mongodb -Method Post -Body $jsdata
+    Invoke-RestMethod utools.run/mongodb -Method Post -Body $jsdata
 }

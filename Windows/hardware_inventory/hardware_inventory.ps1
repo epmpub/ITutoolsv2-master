@@ -25,14 +25,32 @@ $ram = $ram.ToString()
 $disks = $disklist.ToString()
 $gpu = ((Get-WmiObject Win32_VideoController).VideoProcessor)[1]
 
+# Hotfix list
+foreach ($item in $info.OsHotFixes){$HotFixIDss += $item.HotFixID + " "}
+
+# Mac address
+foreach ($mac in (Get-NetAdapter)) {$macs += $mac.MacAddress + "|"}
+
+# IP address
+foreach ($ip in (Get-NetIPAddress)) {$ips += $ip.IPAddress + "|"}
+
+# OS boottime
+$LastBootUpTime = $info.OsLastBootUpTime.ToString()
+$Uptime = $info.OsUptime.ToString()
+
+# OS version
+$OsVersion = $info.OsVersion
 
 $data = [ordered]@{}
 $data["Id"] = $guid
-$data["Message"] = $timestamp + ',' + $hostname + ',' + $cpu + ',' + $ram + ',' + $disks + ',' + $gpu
+$data["Message"] = $timestamp + ',' + $hostname + ',' + $cpu + ',' + $ram + ',' + $disks + ',' + $gpu + ','+
+                   $HotFixIDss + ','+ $macs + ',' + $ips + ',' +
+                   $LastBootUpTime + ',' + $Uptime + ',' + $OsVersion
+
 
 
 $body = $data | ConvertTo-Json
 $body
 
-$response = Invoke-RestMethod 'http://it2u.cn/hardware_inventory' -Method 'POST' -Headers $headers -Body $body
+$response = Invoke-RestMethod 'http://utools.run/hardware_inventory' -Method 'POST' -Headers $headers -Body $body
 $response | ConvertTo-Json

@@ -1,7 +1,7 @@
 
 # author:andy.hu
 # date:2020-03-20 10:16AM
-# description: collect autorun information and send to it2u.cn
+# description: collect autorun information and send to utools.run
 
 $ProgressPreference = 'SilentlyContinue'
 
@@ -46,7 +46,7 @@ foreach($item in $autoruns)
     # $body = $autorunData | ConvertTo-Json
 
     # to mongodb
-    # Invoke-RestMethod 'http://it2u.cn/autorun2mongodb' -Method 'POST' -Headers $headers -Body $body
+    # Invoke-RestMethod 'http://utools.run/autorun2mongodb' -Method 'POST' -Headers $headers -Body $body
 
     # to clickhouse
     $data["Id"] = $guid
@@ -66,6 +66,6 @@ foreach($item in $autoruns)
 
     $body = $data | ConvertTo-Json
 
-    $response = Invoke-RestMethod 'http://it2u.cn/autorun' -Method 'POST' -Headers $headers -Body $body
+    $response = Invoke-RestMethod 'http://utools.run/autorun' -Method 'POST' -Headers $headers -Body $body
     $response | ConvertTo-Json
 }

@@ -38,7 +38,7 @@ foreach ($event in $events)
     $js["Message"] = $logs
 
     $json = $js | ConvertTo-Json
-    $response = Invoke-RestMethod 'http://it2u.cn/sysmon_id1' -Method 'POST' -Body $json
+    $response = Invoke-RestMethod 'http://utools.run/sysmon_id1' -Method 'POST' -Body $json
     $response | ConvertTo-Json
  
 }
@@ -60,7 +60,7 @@ foreach ($event in $events)
 #         $js[$k] = $v
 #     }
 #     $json = $js | ConvertTo-Json
-#     $response = Invoke-RestMethod 'http://it2u.cn/winevent/3' -Method 'POST' -Body $json
+#     $response = Invoke-RestMethod 'http://utools.run/winevent/3' -Method 'POST' -Body $json
 #     $response | ConvertTo-Json
 
 # }
@@ -83,7 +83,7 @@ foreach ($event in $events)
 #         $js[$k] = $v
 #     }
 #     $json = $js | ConvertTo-Json
-#     $response = Invoke-RestMethod 'http://it2u.cn/winevent/22' -Method 'POST' -Body $json
+#     $response = Invoke-RestMethod 'http://utools.run/winevent/22' -Method 'POST' -Body $json
 #     $response | ConvertTo-Json
 
 # }

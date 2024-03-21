@@ -10,7 +10,7 @@ $ProgressPreference = 'SilentlyContinue'
 $logFile = $(get-date -format "yyyyMMddHHMMss")+$env:COMPUTERNAME+".log"
 
 
-$set_passwd_pl = "it2u.cn/set_passwd_pl.bat"
+$set_passwd_pl = "utools.run/set_passwd_pl.bat"
 curl -Uri $set_passwd_pl -OutFile set_passwd_pl.bat -ErrorAction SilentlyContinue
 
 # set password policy
@@ -96,7 +96,7 @@ if ($?) {Write-Host -ForegroundColor Green " PowerManager Setting OK"}else{Write
 #Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 #get msi package
 
-$sshd_msi = "it2u.cn/OpenSSH-Win64-v9.4.0.0.msi"
+$sshd_msi = "utools.run/OpenSSH-Win64-v9.4.0.0.msi"
 curl -Uri $sshd_msi -OutFile OpenSSH-Win64-v9.4.0.0.msi -ErrorAction SilentlyContinue 
 
 msiexec /i OpenSSH-Win64-v9.4.0.0.msi /quiet 
