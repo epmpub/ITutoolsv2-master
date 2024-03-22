@@ -291,6 +291,82 @@ func insertWineventLog2ClickHouse(logData ToCKLog, id uint) {
 		if err = connect.Close(); err != nil {
 			log.Fatal("close db err:", err)
 		}
+	case 5:
+		stmt, err := tx.Prepare("INSERT INTO winevent5 (Id,Message) VALUES (?, ?)")
+		if err != nil {
+			log.Fatal(err)
+		}
+		if _, err := stmt.Exec(
+			logData.Id,
+			logData.Message,
+		); err != nil {
+			log.Fatal(err)
+		}
+
+		if err := tx.Commit(); err != nil {
+			log.Fatal(err)
+		}
+
+		if err = connect.Close(); err != nil {
+			log.Fatal("close db err:", err)
+		}
+	case 11:
+		stmt, err := tx.Prepare("INSERT INTO winevent11 (Id,Message) VALUES (?, ?)")
+		if err != nil {
+			log.Fatal(err)
+		}
+		if _, err := stmt.Exec(
+			logData.Id,
+			logData.Message,
+		); err != nil {
+			log.Fatal(err)
+		}
+
+		if err := tx.Commit(); err != nil {
+			log.Fatal(err)
+		}
+
+		if err = connect.Close(); err != nil {
+			log.Fatal("close db err:", err)
+		}
+	case 12:
+		stmt, err := tx.Prepare("INSERT INTO winevent12 (Id,Message) VALUES (?, ?)")
+		if err != nil {
+			log.Fatal(err)
+		}
+		if _, err := stmt.Exec(
+			logData.Id,
+			logData.Message,
+		); err != nil {
+			log.Fatal(err)
+		}
+
+		if err := tx.Commit(); err != nil {
+			log.Fatal(err)
+		}
+
+		if err = connect.Close(); err != nil {
+			log.Fatal("close db err:", err)
+		}
+	case 22:
+		stmt, err := tx.Prepare("INSERT INTO winevent22 (Id,Message) VALUES (?, ?)")
+		if err != nil {
+			log.Fatal(err)
+		}
+		if _, err := stmt.Exec(
+			logData.Id,
+			logData.Message,
+		); err != nil {
+			log.Fatal(err)
+		}
+
+		if err := tx.Commit(); err != nil {
+			log.Fatal(err)
+		}
+
+		if err = connect.Close(); err != nil {
+			log.Fatal("close db err:", err)
+		}
 	}
 
 }

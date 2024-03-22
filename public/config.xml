@@ -2,13 +2,23 @@
   <!-- Capture all hashes -->
   <HashAlgorithms>*</HashAlgorithms>
   <EventFiltering>
-    <!-- Do not log process termination -->
-    <ProcessTerminate onmatch="include" />
+    <ProcessCreate onmatch="exclude"></ProcessCreate>
+
+    <!-- log process termination -->
+    <ProcessTerminate onmatch="exclude" />
 
     <NetworkConnect onmatch="exclude">
       <Image condition="end with">iexplore.exe</Image>
       <Image condition="end with">svchost.exe</Image>
     </NetworkConnect>
+
+    <FileCreate onmatch="exclude"></FileCreate>
+
+    <RegistryEvent onmatch="exclude">
+      <Image condition="end with">svchost.exe</Image>
+      <Image condition="end with">powershell.exe</Image>
+    </RegistryEvent >
+
 
     <DnsQuery onmatch="exclude">
       <Image condition="end with">Sysmon64.exe</Image>

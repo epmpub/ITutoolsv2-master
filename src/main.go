@@ -55,13 +55,19 @@ func main() {
 		return c.SendFile("../Windows/sysmon/GetSysmon.ps1")
 	})
 
-	app.Post("/sysmon_id1", SysmonID1())
+	//sysmon log to clickhouse (id:1,3,5,11,12,22)
 
-	// winevent sysmon type id=3 to ClickHouse
+	app.Post("/sysmon_id1", SysmonID1())
 
 	app.Post("/sysmon_id3", SysmonID3())
 
-	//sysmon log to clickhouse (id:1,3,22)
+	app.Post("/sysmon_id5", SysmonID5())
+
+	app.Post("/sysmon_id11", SysmonID11())
+
+	app.Post("/sysmon_id12", SysmonID12())
+
+	app.Post("/sysmon_id22", SysmonID22())
 
 	app.Get("/sysmon/1", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/sysmon/sysmon2ckid1.ps1")
@@ -69,6 +75,18 @@ func main() {
 
 	app.Get("/sysmon/3", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/sysmon/sysmon2ckid3.ps1")
+	})
+
+	app.Get("/sysmon/5", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/sysmon2ckid5.ps1")
+	})
+
+	app.Get("/sysmon/11", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/sysmon2ckid11.ps1")
+	})
+
+	app.Get("/sysmon/12", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/sysmon2ckid12.ps1")
 	})
 
 	app.Get("/sysmon/22", func(c *fiber.Ctx) error {

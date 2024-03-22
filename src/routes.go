@@ -70,6 +70,62 @@ func SysmonID3() func(c *fiber.Ctx) error {
 	}
 }
 
+func SysmonID5() func(c *fiber.Ctx) error {
+
+	return func(c *fiber.Ctx) error {
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info("sysmon_id_5->:" + cklog.Message)
+		insertWineventLog2ClickHouse(cklog, 5)
+		return c.Send(c.BodyRaw())
+	}
+}
+
+func SysmonID11() func(c *fiber.Ctx) error {
+
+	return func(c *fiber.Ctx) error {
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info("sysmon_id_11->:" + cklog.Message)
+		insertWineventLog2ClickHouse(cklog, 11)
+		return c.Send(c.BodyRaw())
+	}
+}
+
+func SysmonID12() func(c *fiber.Ctx) error {
+
+	return func(c *fiber.Ctx) error {
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info("sysmon_id_12->:" + cklog.Message)
+		insertWineventLog2ClickHouse(cklog, 12)
+		return c.Send(c.BodyRaw())
+	}
+}
+
+func SysmonID22() func(c *fiber.Ctx) error {
+
+	return func(c *fiber.Ctx) error {
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info("sysmon_id_22->:" + cklog.Message)
+		insertWineventLog2ClickHouse(cklog, 22)
+		return c.Send(c.BodyRaw())
+	}
+}
+
 func Autorun2mongodb() func(c *fiber.Ctx) error {
 
 	return func(c *fiber.Ctx) error {
