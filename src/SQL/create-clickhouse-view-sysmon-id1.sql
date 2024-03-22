@@ -1,8 +1,8 @@
-CREATE MATERIALIZED  VIEW demo.winevent_sysmon_id1
+CREATE MATERIALIZED  VIEW demo.winevent1_view
 (
     `timestamp` DateTime64(3),
 
-    `host` String,
+    `hostname` String,
 
     `Image` String,
 
@@ -18,7 +18,7 @@ WITH splitByChar(',',
 SELECT
     split[1] AS timestamp,
 
-    split[2] AS host,
+    split[2] AS hostname,
 
     split[3] AS Image,
 

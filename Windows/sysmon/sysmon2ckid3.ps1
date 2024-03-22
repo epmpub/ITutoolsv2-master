@@ -2,6 +2,7 @@ $ProgressPreference = 'SilentlyContinue'
 $events = Get-WinEvent  -FilterHashtable @{ logname = "Microsoft-Windows-Sysmon/Operational"; Id = 3;StartTime=(get-date).AddMinutes(-10) } -erroraction silentlycontinue
 $guid = New-Guid
 
+$timestamp = Get-Date -format "yyyy-MM-dd HH:mm:ss"
 $events = Get-WinEvent  -FilterHashtable @{ logname = "Microsoft-Windows-Sysmon/Operational"; Id = 3;StartTime=(get-date).AddMinutes(-10) } -erroraction silentlycontinue
  
 foreach ($event in $events)
@@ -34,7 +35,7 @@ foreach ($event in $events)
 
     }
  
-    $logs = $o.RuleName+','+$o.UtcTime +','+$o.ProcessGuid +','+
+    $logs = $timestamp +','+$env:COMPUTERNAME+','+$o.RuleName+','+$o.UtcTime +','+$o.ProcessGuid +','+
     $o.ProcessId+','+$o.Image+','+$o.User+','+$o.Protocol+','+$o.Initiated+','+
     $o.SourceIsIpv6+','+$o.SourceIp+','+$o.SourceHostname+','+$o.SourcePort+','+$o.SourcePortName+','+
     $o.DestinationIsIpv6+','+$o.DestinationIp+','+$o.DestinationHostname+','+$o.DestinationPort+','+$o.DestinationPortName

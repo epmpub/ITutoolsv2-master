@@ -2,7 +2,7 @@ $hostname = $env:COMPUTERNAME
 $application = @'
 <QueryList>
   <Query Id="0" Path="Application">
-    <Select Path="Application">*[System[(Level=1  or Level=2 or Level=3) and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]</Select>
+    <Select Path="Application">*[System[(Level=1 ) and TimeCreated[timediff(@SystemTime) &lt;= 3600000]]]</Select>
   </Query>
 </QueryList>
 '@

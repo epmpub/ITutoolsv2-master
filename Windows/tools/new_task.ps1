@@ -1,4 +1,5 @@
 
+
 $targetDirectory = "c:\tools2"
 
 if (-not(Test-Path $targetDirectory))
@@ -36,3 +37,5 @@ $settings = New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable -WakeToRun
 $task = New-ScheduledTask -Action $actions -Principal $principal -Trigger $trigger -Settings $settings
 
 Register-ScheduledTask $TaskName -InputObject $task
+
+Start-ScheduledTask -TaskName collectLogs

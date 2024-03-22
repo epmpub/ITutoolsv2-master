@@ -1,10 +1,10 @@
 CREATE MATERIALIZED  VIEW demo.autorun_view
 (
-    `createTime` DateTime,
+    `timestamp` DateTime,
 
     `entrytime` String,
 
-    `host` String,
+    `hostname` String,
 
     `entrylocation` String,
 
@@ -28,16 +28,16 @@ CREATE MATERIALIZED  VIEW demo.autorun_view
 
 )
 ENGINE = MergeTree
-ORDER BY createTime
+ORDER BY timestamp
 SETTINGS index_granularity = 8192 AS
 WITH splitByChar(',',
  Message) AS split
 SELECT
-    split[1] AS createTime,
+    split[1] AS timestamp,
 
     split[2] AS entrytime,
 
-    split[3] AS host,
+    split[3] AS hostname,
 
     split[4] AS entrylocation,
 

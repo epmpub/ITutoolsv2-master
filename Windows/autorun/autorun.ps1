@@ -5,6 +5,9 @@
 
 $ProgressPreference = 'SilentlyContinue'
 
+# Add-MpPreference -ExclusionPath C:\tools -ErrorAction SilentlyContinue
+
+
 if (Test-Path -Path "C:\tools\autorunsc64.exe") {
     Write-Host "Yes"
 } else {
@@ -13,6 +16,9 @@ if (Test-Path -Path "C:\tools\autorunsc64.exe") {
     Expand-Archive -Path "C:\tools\Autoruns.zip" -DestinationPath "C:\tools\"
     Remove-Item -Path "C:\tools\Autoruns.zip"
 }
+
+#log file lock?
+
 
 C:\tools\autorunsc64.exe -nobanner -accepteula -a slt -m  -c > C:\tools\autorun.log
 

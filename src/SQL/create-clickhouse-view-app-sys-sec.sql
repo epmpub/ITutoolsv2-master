@@ -2,7 +2,7 @@ CREATE MATERIALIZED VIEW demo.app_sys_sec_view
 (
     `timestamp` String,
 
-    `host` String,
+    `hostname` String,
 
     `catalog` String,
 
@@ -18,7 +18,7 @@ WITH splitByChar(',',
 SELECT
     split[1] AS timestamp,
 
-    split[2] AS host,
+    split[2] AS hostname,
 
     split[3] AS catalog,
 

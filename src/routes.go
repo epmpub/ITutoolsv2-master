@@ -93,7 +93,7 @@ func Autorun() func(c *fiber.Ctx) error {
 		}
 		log.Info("autorun->:" + autorunData.Message)
 		insertAutorun2ClickHouse(autorunData)
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 

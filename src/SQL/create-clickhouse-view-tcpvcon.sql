@@ -1,9 +1,9 @@
-CREATE MATERIALIZED  VIEW demo.tcpvcon2_view
+CREATE MATERIALIZED  VIEW demo.tcpvcon_view
 (
 
     `timestamp` DateTime,
 
-    `host` String,
+    `hostname` String,
 
     `protocol` String,
 
@@ -26,7 +26,7 @@ WITH splitByChar(',',
 SELECT
     split[1] AS timestamp,
 
-    split[2] AS host,
+    split[2] AS hostname,
 
     split[3] AS protocol,
 

@@ -1,5 +1,7 @@
-CREATE MATERIALIZED  VIEW demo.winevent_sysmon_id3
+CREATE MATERIALIZED  VIEW demo.winevent3_view
 (
+    `timestamp` DateTime,
+    `hostname` String,
     `RuleName` String,
     `UtcTime` Datetime64,
     `ProcessGuid` String,
@@ -29,27 +31,29 @@ SETTINGS index_granularity = 8192 AS
 WITH splitByChar(',',
  Message) AS split
 SELECT
-    split[1] AS RuleName,
-    split[2] AS UtcTime,
-    split[3] AS ProcessGuid,
+    split[1] AS timestamp,
+    split[2] AS hostname,
+    split[3] AS RuleName,
+    split[4] AS UtcTime,
+    split[5] AS ProcessGuid,
 
-    split[4] AS ProcessId,
-    split[5] AS Image,
-    split[6] AS User,
-    split[7] AS Protocol,
-    split[8] AS Initiated,
+    split[6] AS ProcessId,
+    split[7] AS Image,
+    split[8] AS User,
+    split[9] AS Protocol,
+    split[10] AS Initiated,
 
-    split[9] AS SourceIsIpv6,
-    split[10] AS SourceIp,
-    split[11] AS SourceHostname,
-    split[12] AS SourcePort,
-    split[13] AS SourcePortName,
+    split[11] AS SourceIsIpv6,
+    split[12] AS SourceIp,
+    split[13] AS SourceHostname,
+    split[14] AS SourcePort,
+    split[15] AS SourcePortName,
 
-    split[14] AS DestinationIsIpv6,
-    split[15] AS DestinationIp,
-    split[16] AS DestinationHostname,
-    split[17] AS DestinationPort,
-    split[18] AS DestinationPortName
+    split[16] AS DestinationIsIpv6,
+    split[17] AS DestinationIp,
+    split[18] AS DestinationHostname,
+    split[19] AS DestinationPort,
+    split[20] AS DestinationPortName
 FROM
 (
     SELECT Message

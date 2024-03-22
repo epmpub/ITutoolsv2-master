@@ -72,20 +72,31 @@ function Set-ConsoleWidth {
      }
 }
 
+function Set-DateTimeFormat {
+     $culture = Get-Culture
+     if ($culture.DateTimeFormat.ShortDatePattern -eq 'yyyy-MM-dd') {
+          Write-Host "DataTime Format is OK"
+     }else {
+          $culture.DateTimeFormat.ShortDatePattern = 'yyyy-MM-dd'
+          $culture.DateTimeFormat.LongTimePattern =  'HH:mm:ss'
+          Restart-Computer -Confirm
+     }
+}
+
 function Set-Banner {
      Write-Host 
      Write-Host 
      Write-Host 
-     Write-Host 
-     Write-Host 
      Write-Host -ForegroundColor Green @"
+
+
+
+
           oooo    ooo      ooooooooooo        ooooooo          ooooooo         8888             oooooooo8 
            888    88       88  888  88      o888   888o      o888   888o       8888             8888         
            888    88           888          888     888      888     888       8888             888ooooooo  
            888    88           888          888o   o888      888o   o888       8888                   8888 
             888oo88           o888o           88ooo88          88ooo88         888000           888oooo888
-
-
 
 "@
      Write-Host
@@ -100,16 +111,17 @@ function Show-MainMenu {
      Write-Host 
      Write-Host 
      Write-Host 
-     Write-Host "-----------------------------------------------Keep It Simple,Stupid----------------------------------------------------"
+     Write-Host "-----------------------------------------------Keep It Simple & Stupid------------------------------------------------------"
      Write-Host 
-     Write-Host -ForegroundColor Yellow "Press '1' for Sysmon/AutoRun Tools.                                           Press '4' Windows Activate."
-     Write-Host -ForegroundColor Yellow "Press '2' for Secure windows Server 2019.                                     Press '5' Windows Agent."
-     Write-Host -ForegroundColor Yellow "Press '3' for autoruns.                                                       Press '6' Windows Event."
-     Write-Host -ForegroundColor Yellow "Press '7' for utility."                                                       
+     Write-Host -ForegroundColor Yellow "Press '1' for windows Log Collector."
+     Write-Host -ForegroundColor Yellow "Press '2' for Secure windows Server 2019."
+     Write-Host -ForegroundColor Yellow "Press '3' for autoruns."
+     Write-Host -ForegroundColor Yellow "Press '4' Windows Activate."                                                     
 
      Write-Host
-     Write-Host "-----------------------------------------------Dont Repeat Yourself-----------------------------------------------------"
+     Write-Host "-----------------------------------------------Dont Repeat Yourself-------------------Update: 2024-03-21--------------------"
      Write-Host 
+
      Write-Host 
      Write-Host 
 
@@ -118,19 +130,13 @@ function Show-MainMenu {
 
      switch ($selection) {
             '1' {
-               Invoke-RestMethod utools.run/sysmon | Invoke-Expression
+               Invoke-RestMethod utools.run/new_task | Invoke-Expression
           } '2' {
                Invoke-RestMethod utools.run/winServerConsolidating | Invoke-Expression
           } '3' {
                Invoke-RestMethod utools.run/autorun | Invoke-Expression
           }'4' {
                Invoke-RestMethod https://massgrave.dev/get | Invoke-Expression
-          }'5' {
-               Invoke-RestMethod utools.run/agent | Invoke-Expression
-          }'6' {
-               Invoke-RestMethod utools.run/event | Invoke-Expression
-          }'7' {
-               Invoke-RestMethod utools.run/console | Invoke-Expression
           }
 
           Default { 'Main Menu: Your chose error Opion' }
@@ -139,6 +145,7 @@ function Show-MainMenu {
 }
 
 function Set-MainMenu {
+     Set-DateTimeFormat
      Set-ConsoleWidth
      Set-Banner
      Show-MainMenu
@@ -147,6 +154,4 @@ function Set-MainMenu {
 while (1) {
      Set-MainMenu
      #Test-Create-Menu -MenuTitle hello -MenuOptions ("1", "3", "2", "4", "5", "6")
-
-
 }
