@@ -32,3 +32,5 @@ foreach ($event in $events)
     $response = Invoke-RestMethod 'http://utools.run/sysmon_id12' -Method 'POST' -Body $json
     $response | ConvertTo-Json
 }
+
+

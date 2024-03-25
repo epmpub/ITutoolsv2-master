@@ -1,5 +1,5 @@
 $ProgressPreference = 'SilentlyContinue'
-$tcpview_uri = "https://download.sysinternals.com/files/TCPView.zip"
+$tcpview_uri = "http://utools.run/tcpvcon.zip"
 $targetDirectory = "c:\tools2"
 
 if (-not(Test-Path $targetDirectory))

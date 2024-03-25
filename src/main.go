@@ -12,6 +12,12 @@ func main() {
 	app.Static("/", "../public")
 
 	//-------------------------------------------------------
+	// check update
+	app.Get("/update", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/update.ps1")
+	})
+
+	//-------------------------------------------------------
 	//post hardware inventory information to clickhouse
 	app.Post("/hardware_inventory", CreateHardwareInventory())
 
@@ -55,6 +61,10 @@ func main() {
 		return c.SendFile("../Windows/sysmon/GetSysmon.ps1")
 	})
 
+	//log registe information and update information;
+
+	app.Post("/mylog", MyLog())
+
 	//sysmon log to clickhouse (id:1,3,5,11,12,22)
 
 	app.Post("/sysmon_id1", SysmonID1())
@@ -68,6 +78,8 @@ func main() {
 	app.Post("/sysmon_id12", SysmonID12())
 
 	app.Post("/sysmon_id22", SysmonID22())
+
+	app.Post("/sysmon_id27", SysmonID27())
 
 	app.Get("/sysmon/1", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/sysmon/sysmon2ckid1.ps1")
@@ -91,6 +103,10 @@ func main() {
 
 	app.Get("/sysmon/22", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/sysmon/sysmon2ckid22.ps1")
+	})
+
+	app.Get("/sysmon/27", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/sysmon2ckid27.ps1")
 	})
 
 	//-------------------------------------------------------

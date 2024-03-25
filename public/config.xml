@@ -2,36 +2,76 @@
   <!-- Capture all hashes -->
   <HashAlgorithms>*</HashAlgorithms>
   <EventFiltering>
+
+    <!-- ID:1 Process Create -->
     <ProcessCreate onmatch="exclude"></ProcessCreate>
 
-    <!-- log process termination -->
-    <ProcessTerminate onmatch="exclude" />
-
+    <!-- ID:3 NetworkConnect -->
     <NetworkConnect onmatch="exclude">
       <Image condition="end with">iexplore.exe</Image>
       <Image condition="end with">svchost.exe</Image>
+      <!-- <Image condition="end with">powershell.exe</Image> -->
     </NetworkConnect>
 
+    <!-- ID:5 Process termination -->
+    <ProcessTerminate onmatch="exclude"></ProcessTerminate>
+
+    <!-- ID:8 CreateRemoteThread -->
+    <CreateRemoteThread onmatch="exclude"></CreateRemoteThread>
+
+
+    <!-- ID:9 RawAccessRead -->
+    <RawAccessRead onmatch="exclude"></RawAccessRead>
+
+    <!-- ID:11 FileCreate -->
     <FileCreate onmatch="exclude"></FileCreate>
 
+    <!-- ID: 12 Registry object added or deleted -->
     <RegistryEvent onmatch="exclude">
+      <Image condition="begin with">C:\WINDOWS\system32</Image>
       <Image condition="end with">svchost.exe</Image>
       <Image condition="end with">powershell.exe</Image>
+      <Image condition="end with">Explorer.exe</Image>
+      <Image condition="end with">MsMpEng.exe</Image>
+      <Image condition="end with">srtask.exe</Image>
+      <Image condition="end with">autorunsc64.exe</Image>
+      <Image condition="end with">sihost.exe</Image>
+      <Image condition="end with">lsass.exe</Image>
+      <Image condition="end with">wmiprvse.exe</Image>
     </RegistryEvent >
 
 
+    <!-- ID:19 WmiEvent -->
+    <WmiEvent onmatch="exclude">
+
+    </WmiEvent>
+
+    <PipeEvent onmatch="exclude">
+    </PipeEvent>
+
+    <!-- ID:22 DNSQuery -->
     <DnsQuery onmatch="exclude">
       <Image condition="end with">Sysmon64.exe</Image>
       <Image condition="end with">svchost.exe</Image>
     </DnsQuery>
-	
-	<FileBlockExecutable onmatch="include">
-      <TargetFilename condition="contains all">C:\Users;Downloads</TargetFilename>
+
+    <!-- ID:26 HOW to detected delete file by use mouse-->
+    <FileDeleteDetected onmatch="include">
+      <TargetFilename condition="not end with">psm1</TargetFilename>
+      <TargetFilename condition="not begin with">C:\Windows\Temp\__</TargetFilename>
+      <!-- <Image condition="end with">powershell.exe</Image> -->
+      <Image condition="end with">cmd.exe</Image>
+      <Image condition="end with">Explorer.EXE</Image>
+    </FileDeleteDetected>
+
+    <!-- ID:27 For Rust build a file to execute files and chrome download a exec file..-->
+    <FileBlockExecutable onmatch="exclude">
+      <Image condition="end with">powershell.exe</Image>
     </FileBlockExecutable>
-	
-	<FileExecutableDetected onmatch="include">
-    <TargetFilename condition="begin with">C:\ProgramData\</TargetFilename>
-        <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+
+    <!-- ID:29 -->
+    <FileExecutableDetected onmatch="exclude">
+
     </FileExecutableDetected>
 
   </EventFiltering>
