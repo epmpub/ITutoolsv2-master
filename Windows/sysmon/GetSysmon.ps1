@@ -1,7 +1,7 @@
 
 $ProgressPreference = 'SilentlyContinue'
 $localAppData = $env:LOCALAPPDATA
-$targetDirectory = Join-Path $localAppData "utools"
+$targetDirectory = "c:\utools"
 $config_file = "C:\Windows\config.xml"
 if (-not(Test-Path $targetDirectory))
 {
@@ -28,16 +28,9 @@ Expand-Archive -Path $savePathZip -DestinationPath $targetDirectory -Force
 if ((Get-Service -Name Sysmon64 -ErrorAction SilentlyContinue).Status -eq "Running")
 {
     " Sysmon Service already installed"
-    Sysmon64.exe -c c:\Windows\config.xml
+    Sysmon64.exe -c c:\Windows\config.xml | Out-Null
 
 
 } else {
-    start-process -FilePath "$env:ComSpec" -WorkingDirectory $targetDirectory -ArgumentList "/c","sysmon64.exe -nobanner -i c:\Windows\config.xml -accepteula > sysmon.log 2>&1" -NoNewWindow -Wait
+    start-process -FilePath "$env:ComSpec" -WorkingDirectory $targetDirectory -ArgumentList "/c","sysmon64.exe -nobanner -i c:\Windows\config.xml -accepteula > sysmon.log 2>&1" -NoNewWindow -Wait | Out-Null
 }
-
-
-Remove-Item -Path $targetDirectory\$env:COMPUTERNAME.csv -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $targetDirectory\"sysmon.zip" -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $targetDirectory\"sysmon.exe" -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $targetDirectory\"sysmon64a.exe" -Force -ErrorAction SilentlyContinue
-

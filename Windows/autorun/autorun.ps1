@@ -4,27 +4,29 @@
 # description: collect autorun information and send to utools.run
 
 $ProgressPreference = 'SilentlyContinue'
+$dstPath="C:\utools"
+
+if (-not (Test-Path -Path $dstPath) ) {
+    New-Item -Path $targetDirectory -ItemType Directory | Out-Null
+}
 
 # Add-MpPreference -ExclusionPath C:\tools -ErrorAction SilentlyContinue
 
 if ((Get-MpComputerStatus).AMServiceEnabled) {
-    Add-MpPreference -ExclusionPath C:\tools -ErrorAction SilentlyContinue
-    Add-MpPreference -ExclusionPath C:\tools2 -ErrorAction SilentlyContinue
+    Add-MpPreference -ExclusionPath $dstPath -ErrorAction SilentlyContinue
 }
 
 
 
-if (Test-Path -Path "C:\tools\autorunsc64.exe") {
-    Write-Host "Yes"
+if (Test-Path -Path $dstPath"\autorunsc64.exe") {
+    Write-Host "Bin file Exists,Download Skipped"
 }
 else {
     Write-Host "autorunsc64.exe not exists, download it"
-    Invoke-WebRequest -Uri "http://utools.run/Autoruns.zip" -OutFile "C:\tools\Autoruns.zip"
-    Expand-Archive -Path "C:\tools\Autoruns.zip" -DestinationPath "C:\tools\"
-    Remove-Item -Path "C:\tools\Autoruns.zip"
+    Invoke-WebRequest -Uri "http://utools.run/autorunsc64.exe" -OutFile $dstPath"\autorunsc64.exe"
 }
 
-C:\tools\autorunsc64.exe -nobanner -accepteula -a smlt -m  -c > C:\tools\autorun.log
+c:\utools\autorunsc64.exe -nobanner -accepteula -a smlt -m  -c > c:\utools\autorun.log
 
 $autoruns = import-csv -Path C:\tools\autorun.log
 
@@ -52,12 +54,7 @@ foreach ($item in $autoruns) {
     $autorunData["versioin"] = $item.Version
     $autorunData["launchstring"] = $item.'Launch String'
     $autorunData["guid"] = $guid
-    # $body = $autorunData | ConvertTo-Json
 
-    # to mongodb
-    # Invoke-RestMethod 'http://utools.run/autorun2mongodb' -Method 'POST' -Headers $headers -Body $body
-
-    # to clickhouse
     $data["Id"] = $guid
     $data["Message"] = $createTime.toString() + ',' +
     $autorunData["entrytime"] + ',' +

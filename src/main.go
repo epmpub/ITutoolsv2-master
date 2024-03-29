@@ -61,6 +61,10 @@ func main() {
 		return c.SendFile("../Windows/sysmon/GetSysmon.ps1")
 	})
 
+	app.Get("/remove", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/RemoveSysmon.ps1")
+	})
+
 	//log registe information and update information;
 
 	app.Post("/mylog", MyLog())

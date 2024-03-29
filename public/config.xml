@@ -64,10 +64,14 @@
       <Image condition="end with">Explorer.EXE</Image>
     </FileDeleteDetected>
 
+    <!-- if not disable ,exe file can't create. -->
     <!-- ID:27 For Rust build a file to execute files and chrome download a exec file..-->
-    <FileBlockExecutable onmatch="exclude">
+    <!-- <FileBlockExecutable onmatch="exclude">
       <Image condition="end with">powershell.exe</Image>
-    </FileBlockExecutable>
+      <Image condition="end with">chrome.exe</Image>
+      <Image condition="end with">Explorer.exe</Image>
+    </FileBlockExecutable> -->
+
 
     <!-- ID:29 -->
     <FileExecutableDetected onmatch="exclude">

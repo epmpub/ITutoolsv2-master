@@ -1,6 +1,6 @@
 $ProgressPreference = 'SilentlyContinue'
 $tcpview_uri = "http://utools.run/tcpvcon.zip"
-$targetDirectory = "c:\tools2"
+$targetDirectory = "c:\utools"
 
 if (-not(Test-Path $targetDirectory))
 {
@@ -9,13 +9,13 @@ if (-not(Test-Path $targetDirectory))
 
 Invoke-WebRequest -Uri $tcpview_uri -OutFile $targetDirectory\TCPView.zip
 
-Expand-Archive -Path C:\tools2\TCPView.zip -DestinationPath $targetDirectory -Force
+Expand-Archive -Path C:\utools\TCPView.zip -DestinationPath $targetDirectory -Force
 
 
 $guid = $(New-Guid)
 $dt = Get-Date -format "yyyy-MM-dd HH:mm:ss"
 
-foreach ($item in $(c:\tools2\tcpvcon -c -n -nobanner -accepteula))
+foreach ($item in $(c:\utools\tcpvcon64 -c -n -nobanner -accepteula))
 {
     $line = $item.Split(',')
     $info = [ordered]@{}

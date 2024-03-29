@@ -46,7 +46,7 @@ $CurrentWindowsPrincipal = New-Object System.Security.Principal.WindowsPrincipal
 
 if ($CurrentWindowsPrincipal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) 
 {
-    # For Security Filter
+# For Security Filter
 $security = @'
 <QueryList>
   <Query Id="0" Path="Security">
@@ -54,15 +54,19 @@ $security = @'
   </Query>
 </QueryList>
 '@
-      $data = [ordered]@{}
-      $securityLogs = Get-WinEvent -FilterXml $security -ErrorAction SilentlyContinue
-      foreach ($log in $securityLogs) {
-        $data["Message"] = $log.TimeCreated.ToString() + ',' + $hostname + ',' + "security" + ',' + $log.Id + ',' + $log.Message
-        $body = $data | ConvertTo-Json
-        $response = Invoke-RestMethod 'http://utools.run/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
-        $response | ConvertTo-Json
-      }
-    } 
+    $data = [ordered]@{}
+    $securityLogs = Get-WinEvent -FilterXml $security -ErrorAction SilentlyContinue
+    foreach ($log in $securityLogs) {
+      $location = $log.Message.IndexOf("This event is")
+      $Message = $log.Message.Remove($location,$log.Message.Length-$location)
+      
+      $data["Message"] = $log.TimeCreated.ToString() + ',' + $hostname + ',' + "security" + ',' + $log.Id + ',' + $Message
+      $body = $data | ConvertTo-Json
+      $body
+      $response = Invoke-RestMethod 'http://utools.run/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
+      $response | ConvertTo-Json
+    }
+} 
 else {
   Write-Warning "Insufficient permissions to run this script"
 }
