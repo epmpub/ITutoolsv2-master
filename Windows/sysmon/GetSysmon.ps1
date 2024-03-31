@@ -29,8 +29,7 @@ if ((Get-Service -Name Sysmon64 -ErrorAction SilentlyContinue).Status -eq "Runni
 {
     " Sysmon Service already installed"
     Sysmon64.exe -c c:\Windows\config.xml | Out-Null
-
-
+    " Sysmon Configuaration File has been Updated"
 } else {
     start-process -FilePath "$env:ComSpec" -WorkingDirectory $targetDirectory -ArgumentList "/c","sysmon64.exe -nobanner -i c:\Windows\config.xml -accepteula > sysmon.log 2>&1" -NoNewWindow -Wait | Out-Null
 }
