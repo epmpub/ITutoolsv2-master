@@ -23,6 +23,22 @@ func CreateHardwareInventory() func(c *fiber.Ctx) error {
 	}
 }
 
+func CreateSoftwareInventory() func(c *fiber.Ctx) error {
+
+	return func(c *fiber.Ctx) error {
+		//write log to clickhouse server
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Info("err:", err)
+		}
+		log.Info("Software-inventory->:" + cklog.Message)
+		SoftWareInventory2ClickHouse(cklog)
+
+		return c.Send(c.BodyRaw())
+	}
+}
+
 func AppSysSec() func(c *fiber.Ctx) error {
 
 	return func(c *fiber.Ctx) error {

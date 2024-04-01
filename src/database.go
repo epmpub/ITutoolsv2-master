@@ -53,6 +53,46 @@ func HardWareInventory2ClickHouse(logs ToCKLog) {
 	log.Println("hardware inventory information insert clickhouse")
 }
 
+func SoftWareInventory2ClickHouse(logs ToCKLog) {
+	connect, err := sql.Open("clickhouse", "tcp://localhost:9000?debug=false&username=default&password=Cpp...&database=demo")
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err := connect.Ping(); err != nil {
+		if exception, ok := err.(*clickhouse.Exception); ok {
+			fmt.Printf("[%d] %s \n%s\n", exception.Code, exception.Message, exception.StackTrace)
+		} else {
+			fmt.Println(err)
+		}
+		// return
+	}
+	tx, err := connect.Begin()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	stmt, err := tx.Prepare("INSERT INTO software_inventory (Id,Message) VALUES (?, ?)")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if _, err := stmt.Exec(
+		logs.Id,
+		logs.Message,
+	); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := tx.Commit(); err != nil {
+		log.Fatal(err)
+	}
+
+	if err = connect.Close(); err != nil {
+		log.Fatal("close db err:", err)
+	}
+	log.Println("software inventory information insert clickhouse")
+}
+
 func mylog2ck(logData interface{}) {
 	connect, err := sql.Open("clickhouse", "tcp://localhost:9000?debug=false&username=default&password=Cpp...&database=demo")
 	if err != nil {

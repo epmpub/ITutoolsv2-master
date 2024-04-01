@@ -135,6 +135,11 @@
 		<RuleGroup name="RawAccessRead" groupRelation="or">
 			<!-- ID:9 RawAccessRead -->
 			<RawAccessRead onmatch="exclude">
+				<Image condition='is'>System</Image>
+				<Image condition='is'>C:\Windows\System32\wbem\WmiPrvSE.exe</Image>
+				<Image condition='is'>C:\Windows\System32\svchost.exe</Image>
+				<Image condition='is'>C:\Windows\System32\backgroundTaskHost.exe</Image>
+				<Image condition='is'>C:\Windows\sysmon64.exe</Image>
 			</RawAccessRead>
 		</RuleGroup>
 
@@ -153,6 +158,8 @@
 				<SourceImage condition='is'>C:\Windows\system32\lsass.exe</SourceImage>
 				<SourceImage condition='is'>C:\Windows\System32\svchost.exe</SourceImage>
 				<SourceImage condition='is'>C:\Windows\system32\csrss.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\taskmgr.exe</SourceImage>
+
 				<SourceImage condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</SourceImage>
 				<SourceImage condition='is'>C:\Windows\system32\conhost.exe</SourceImage>
 				<SourceImage condition='is'>C:\Windows\system32\cmd.exe</SourceImage>
@@ -175,24 +182,77 @@
 		</RuleGroup>
 
 		<!-- ID:11 FileCreate -->
-		<RuleGroup name="FileCreation" groupRelation="or">
-			<FileCreate onmatch="exclude">
+		<RuleGroup name="FileCreate" groupRelation="or">
+			<FileCreate onmatch="include">
+				<TargetFilename name="" condition="end with">.exe</TargetFilename>
+				<TargetFilename name="" condition="end with">.dll</TargetFilename>
+				<TargetFilename name="" condition="end with">.com</TargetFilename>
+				<TargetFilename name="" condition="end with">.ocx</TargetFilename>
+				<TargetFilename name="" condition="end with">.hta</TargetFilename>
+				<TargetFilename name="" condition="end with">.cmd</TargetFilename>
+				<TargetFilename name="" condition="end with">.chm</TargetFilename>
+				<TargetFilename name="" condition="end with">.ps1</TargetFilename>
+				<TargetFilename name="" condition="end with">.ps2</TargetFilename>
+				<TargetFilename name="" condition="end with">.psm1</TargetFilename>
+				<TargetFilename name="" condition="end with">.jse</TargetFilename>
+				<TargetFilename name="" condition="end with">.vb</TargetFilename>
+				<TargetFilename name="" condition="end with">.vbs</TargetFilename>
+				<TargetFilename name="" condition="end with">.vbe</TargetFilename>
+				<TargetFilename name="" condition="end with">.iso</TargetFilename>
+				<TargetFilename name="" condition="end with">.vhd</TargetFilename>
+				<TargetFilename name="" condition="end with">.vhdx</TargetFilename>
 			</FileCreate>
+
+			<FileCreate onmatch="exclude">
+				<Image name="" condition="end with">chrome.exe</Image>
+				<Image name="" condition="end with">msedge.exe</Image>
+			</FileCreate>
+
 		</RuleGroup>
 
-    	<!-- ID:12 Registry object added or deleted -->
+		<!-- ID:12 Registry object added or deleted -->
 		<RuleGroup name="registryEvent" groupRelation="or">
+
+			<!-- <RegistryEvent onmatch="include">
+
+			</RegistryEvent> -->
+
 			<RegistryEvent onmatch="exclude">
-				<Image condition="begin with">C:\WINDOWS\system32</Image>
-				<Image condition="end with">svchost.exe</Image>
-				<Image condition="end with">powershell.exe</Image>
-				<Image condition="end with">Explorer.exe</Image>
-				<Image condition="end with">MsMpEng.exe</Image>
-				<Image condition="end with">srtask.exe</Image>
-				<Image condition="end with">autorunsc64.exe</Image>
-				<Image condition="end with">sihost.exe</Image>
-				<Image condition="end with">lsass.exe</Image>
-				<Image condition="end with">wmiprvse.exe</Image>
+				<Image condition="end with">chrome.exe</Image>
+				<Image condition="end with">OfficeClickToRun.exe</Image>
+				<Image condition="end with">Code.exe</Image>
+				<Image condition="end with">SearchApp.exe</Image>
+
+
+				<Image condition='is'>C:\Windows\Explorer.EXE</Image>
+				<Image condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Image>
+				<Image condition='is'>C:\Windows\sysmon64.exe</Image>
+				<Image condition='is'>C:\Windows\System32\svchost.exe</Image>
+				<Image condition='is'>C:\Windows\System32\ctfmon.exe</Image>
+				<Image condition='is'>C:\Windows\System32\sihost.exe</Image>
+
+				<Image condition="end with">TiWorker.exe</Image>
+				<Image condition="end with">TextInputHost.exe</Image>
+				<Image condition='is'>C:\Windows\servicing\TrustedInstaller.exe</Image>
+
+				<Image condition='is'>C:\utools\autorunsc64.exe</Image>
+				<Image condition='is'>C:\ProgramData\Microsoft\Windows Defender\platform\4.18.24020.7-0\MsMpEng.exe</Image>
+				<Image condition='is'>C:\Windows\system32\wbem\wmiprvse.exe</Image>
+				<Image condition='is'>C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe</Image>
+				<Image condition='is'>C:\Windows\System32\Speech_OneCore\Common\SpeechRuntime.exe</Image>
+				<Image condition='is'>C:\Windows\system32\SearchIndexer.exe</Image>
+				<Image condition='is'>C:\Windows\System32\RuntimeBroker.exe</Image>
+				<Image condition='is'>C:\Program Files\WindowsApps\Microsoft.549981C3F5F10_1.1911.21713.0_x64__8wekyb3d8bbwe\Cortana.exe</Image>
+				<Image condition='is'>C:\Windows\system32\backgroundTaskHost.exe</Image>
+				<Image condition='is'>C:\Windows\system32\BackgroundTaskHost.exe</Image>
+				<Image condition='is'>System</Image>
+				<Image condition="contains all">C:\Program Files\WindowsApps\Microsoft;Win32Bridge.Server.exe</Image>
+				<Image condition='is'>C:\Windows\system32\ApplicationFrameHost.exe</Image>
+				<Image condition='is'>C:\Windows\system32\SecurityHealthService.exe</Image>
+				<Image condition='is'>C:\Windows\System32\smartscreen.exe</Image>
+				<Image condition='is'>C:\Windows\System32\mousocoreworker.exe</Image>
+				<Image condition='is'>C:\Windows\system32\sppsvc.exe</Image>
+				<Image condition="contains all">C:\Program Files\WindowsApps\Microsoft.SkypeApp;SkypeBridge.exe</Image>
 			</RegistryEvent>
 		</RuleGroup>
 
@@ -211,7 +271,7 @@
 
 		<!-- ID:22 DNSQuery -->
 		<RuleGroup name="DNS_QUERY" groupRelation="or">
-			
+
 			<DnsQuery onmatch="exclude">
 				<Image condition="end with">Sysmon64.exe</Image>
 				<Image condition="end with">svchost.exe</Image>
@@ -220,7 +280,14 @@
 
 		<!-- ID:26 HOW to detected delete file by use mouse-->
 		<RuleGroup name="File_DELETED_DETECTED" groupRelation="or">
-			
+
+			<FileDeleteDetected onmatch="exclude">
+				<Image condition="contains">AppData\Local\Programs</Image>
+				<Image condition="end with">svchost.exe</Image>
+				<Image condition="end with">powershell.exe</Image>
+			</FileDeleteDetected>
+
+
 			<FileDeleteDetected onmatch="include">
 				<TargetFilename condition="not end with">psm1</TargetFilename>
 				<TargetFilename condition="not begin with">C:\Windows\Temp\__</TargetFilename>
@@ -231,17 +298,23 @@
 
 		</RuleGroup>
 
-		<!-- if not disable ,exe file can't create. -->
+		<!-- WARNING : if not disable ,exe file can't create. -->
 		<!-- ID:27 For Rust build a file to execute files and chrome download a exec file..-->
-		<!-- <FileBlockExecutable onmatch="exclude">
-			<Image condition="end with">powershell.exe</Image>
-			<Image condition="end with">chrome.exe</Image>
-			<Image condition="end with">Explorer.exe</Image>
-		</FileBlockExecutable> -->
+		<RuleGroup name="" groupRelation="or">
+			<FileBlockExecutable onmatch="include">
+				<Image name="" condition="image">excle.exe</Image>
+				<Image name="" condition="image">winword.exe</Image>
+				<Image name="" condition="image">powerpoint.exe</Image>
+				<Image name="" condition="image">outlook.exe</Image>
+				<Image name="" condition="image">onenote.exe</Image>
+				<Image name="" condition="image">mshta.exe</Image>
+			</FileBlockExecutable>
+		</RuleGroup>
 
 		<!-- ID:29 -->
 		<RuleGroup name="File_EXCUTEABLE_DETECTED" groupRelation="and">
 			<FileExecutableDetected onmatch="exclude">
+				<Image condition="end with">powershell.exe</Image>
 			</FileExecutableDetected>
 		</RuleGroup>
 	</EventFiltering>

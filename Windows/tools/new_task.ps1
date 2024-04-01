@@ -30,6 +30,7 @@ if (-not(Test-Path $targetDirectory))
 
 'powershell -executionPolicy ByPass -Command "irm utools.run/update|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii 
 'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/software_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/tcpvcon|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/autorun|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/1|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append

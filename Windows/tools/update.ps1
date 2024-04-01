@@ -1,7 +1,7 @@
 
 # please change the version string  and new_task.ps1 script for do updating
 
-$lastestVersion = '2.0'
+$lastestVersion = '2.1'
 
 function mylog {
     param (

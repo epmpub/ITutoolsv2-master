@@ -1,23 +1,23 @@
 $hostname = $env:COMPUTERNAME
 
-$application = @'
-<QueryList>
-  <Query Id="0" Path="Application">
-    <Select Path="Application">*[System[(Level=1 ) and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]</Select>
-  </Query>
-</QueryList>
-'@
+# $application = @'
+# <QueryList>
+#   <Query Id="0" Path="Application">
+#     <Select Path="Application">*[System[(Level=1 ) and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]</Select>
+#   </Query>
+# </QueryList>
+# '@
 
-$applicationLogs = Get-WinEvent -FilterXml $application -ErrorAction SilentlyContinue
-$data = [ordered]@{}
+# $applicationLogs = Get-WinEvent -FilterXml $application -ErrorAction SilentlyContinue
+# $data = [ordered]@{}
 
-foreach ($log in $applicationLogs) {
+# foreach ($log in $applicationLogs) {
 
-  $data["Message"] = $log.TimeCreated.ToString() + ',' + $hostname + ',' + "application" + ',' + $log.Id + ',' + $log.Message
-  $body = $data | ConvertTo-Json
-  $response = Invoke-RestMethod 'http://utools.run/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
-  $response | ConvertTo-Json
-}
+#   $data["Message"] = $log.TimeCreated.ToString() + ',' + $hostname + ',' + "application" + ',' + $log.Id + ',' + $log.Message
+#   $body = $data | ConvertTo-Json
+#   $response = Invoke-RestMethod 'http://utools.run/app_sys_sec' -Method 'POST' -Headers $headers -Body $body
+#   $response | ConvertTo-Json
+# }
 
 
 $system = @'

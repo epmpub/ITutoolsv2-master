@@ -25,6 +25,16 @@ func main() {
 		return c.SendFile("../Windows/hardware_inventory/hardware_inventory.ps1")
 	})
 
+
+	//-------------------------------------------------------
+	//post software inventory information to clickhouse
+	app.Post("/software_inventory", CreateSoftwareInventory())
+
+	app.Get("/software_inventory", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/software_inventory/software_inventory.ps1")
+	})
+
+
 	//-------------------------------------------------------
 	//windows application system security log to clickhouse
 
