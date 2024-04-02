@@ -23,7 +23,7 @@ $hostname = $env:COMPUTERNAME
 $cpu = $info.CsProcessors.Name
 $ram = $ram.ToString()
 $disks = $disklist.ToString()
-$gpu = ((Get-WmiObject Win32_VideoController).VideoProcessor)[1]
+$gpu = (Get-WmiObject Win32_VideoController).VideoProcessor
 
 # Hotfix list
 foreach ($item in $info.OsHotFixes){$HotFixIDss += $item.HotFixID + " "}
@@ -32,7 +32,15 @@ foreach ($item in $info.OsHotFixes){$HotFixIDss += $item.HotFixID + " "}
 foreach ($mac in (Get-NetAdapter)) {$macs += $mac.MacAddress + "|"}
 
 # IP address
-foreach ($ip in (Get-NetIPAddress)) {$ips += $ip.IPAddress + "|"}
+$list = [System.Collections.ArrayList]::new()
+foreach ($ip in (Get-NetIPAddress))
+{
+    if(($ip.AddressFamily -eq 'IPv4') -and ($ip.IPAddress -notmatch ‘169’) -and ($ip.IPAddress -notmatch ‘127’))
+    {
+        $null = $list.Add($ip.IPAddress)
+    }
+}
+$ips = $list  -join "|"
 
 # OS boottime
 $LastBootUpTime = $info.OsLastBootUpTime.ToString()
@@ -47,7 +55,9 @@ $data["Message"] = $timestamp + ',' + $hostname + ',' + $cpu + ',' + $ram + ',' 
                    $HotFixIDss + ','+ $macs + ',' + $ips + ',' +
                    $LastBootUpTime + ',' + $Uptime + ',' + $OsVersion
 
+#free macs variable.
 
+$macs = $null
 
 $body = $data | ConvertTo-Json
 $body

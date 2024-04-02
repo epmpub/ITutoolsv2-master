@@ -1,5 +1,5 @@
 $ProgressPreference = 'SilentlyContinue'
-$tcpview_uri = "http://utools.run/tcpvcon.zip"
+$tcpview_uri = "http://utools.run/tcpvcon64.exe"
 $targetDirectory = "c:\utools"
 
 if (-not(Test-Path $targetDirectory))
@@ -7,10 +7,7 @@ if (-not(Test-Path $targetDirectory))
   New-Item -Path $targetDirectory -ItemType Directory | Out-Null
 }
 
-Invoke-WebRequest -Uri $tcpview_uri -OutFile $targetDirectory\TCPView.zip
-
-Expand-Archive -Path C:\utools\TCPView.zip -DestinationPath $targetDirectory -Force
-
+Invoke-WebRequest -Uri $tcpview_uri -OutFile $targetDirectory\tcpvcon64.exe
 
 $guid = $(New-Guid)
 $dt = Get-Date -format "yyyy-MM-dd HH:mm:ss"

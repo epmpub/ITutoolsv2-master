@@ -1,5 +1,5 @@
 $ProgressPreference = 'SilentlyContinue'
-$events = Get-WinEvent  -FilterHashtable @{ logname = "Microsoft-Windows-Sysmon/Operational"; Id = 22;StartTime=(get-date).AddMinutes(-10) } -erroraction silentlycontinue
+$events = Get-WinEvent  -FilterHashtable @{ logname = "Microsoft-Windows-Sysmon/Operational"; Id = 22;StartTime=(get-date).AddMinutes(-1) } -erroraction silentlycontinue
 $guid = New-Guid
 
 $timestamp = Get-Date -format "yyyy-MM-dd HH:mm:ss"

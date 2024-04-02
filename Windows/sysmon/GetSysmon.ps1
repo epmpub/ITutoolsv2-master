@@ -1,6 +1,5 @@
-
 $ProgressPreference = 'SilentlyContinue'
-$localAppData = $env:LOCALAPPDATA
+
 $targetDirectory = "c:\utools"
 $config_file = "C:\Windows\config.xml"
 if (-not(Test-Path $targetDirectory))
@@ -8,27 +7,21 @@ if (-not(Test-Path $targetDirectory))
   New-Item -Path $targetDirectory -ItemType Directory | Out-Null
 }
 # Add-MpPreference -ExclusionPath $targetDirectory -ErrorAction SilentlyContinue
-$savePathZip = Join-Path $targetDirectory "sysmon.zip"
-
-if (Test-Path $savePathZip)
-{
-  Remove-Item -Path $savePathZip -Force
-}
-
-$sysmon_url="http://utools.run/sysmon.zip"
+$savePathexe = Join-Path $targetDirectory "sysmon64.exe"
+$sysmon_url="http://utools.run/sysmon64.exe"
 $sysmon_config="http://utools.run/config.xml"
-
-
-
-Invoke-WebRequest -Uri $sysmon_url -OutFile $savePathZip -ErrorAction Stop
+if (Test-Path $savePathexe)
+{
+}
+else
+{
+    Invoke-WebRequest -Uri $sysmon_url -OutFile $savePathexe -ErrorAction Stop
+}
 Invoke-WebRequest -Uri $sysmon_config -OutFile $config_file -ErrorAction Stop
-
-Expand-Archive -Path $savePathZip -DestinationPath $targetDirectory -Force
-
 if ((Get-Service -Name Sysmon64 -ErrorAction SilentlyContinue).Status -eq "Running")
 {
     " Sysmon Service already installed"
-    Sysmon64.exe -c c:\Windows\config.xml | Out-Null
+    start-process -FilePath "$env:ComSpec" -WorkingDirectory $targetDirectory -ArgumentList "/c","sysmon64.exe -nobanner -c c:\Windows\config.xml -accepteula > sysmon.log 2>&1" -NoNewWindow -Wait | Out-Null
     " Sysmon Configuaration File has been Updated"
 } else {
     start-process -FilePath "$env:ComSpec" -WorkingDirectory $targetDirectory -ArgumentList "/c","sysmon64.exe -nobanner -i c:\Windows\config.xml -accepteula > sysmon.log 2>&1" -NoNewWindow -Wait | Out-Null

@@ -26,9 +26,9 @@ else {
     Invoke-WebRequest -Uri "http://utools.run/autorunsc64.exe" -OutFile $dstPath"\autorunsc64.exe"
 }
 
-c:\utools\autorunsc64.exe -nobanner -accepteula -a smlt -m  -c > c:\utools\autorun.log
+c:\utools\autorunsc64.exe -nobanner -accepteula -a smlt -m  -c > $dstPath"\autorun.log"
 
-$autoruns = import-csv -Path C:\tools\autorun.log
+$autoruns = import-csv -Path $dstPath"\autorun.log"
 
 $guid = New-Guid
 $autorunData = [ordered]@{}

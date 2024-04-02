@@ -38,7 +38,7 @@ if (-not(Test-Path $targetDirectory))
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/5|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/11|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 
-# 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/12|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/12|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/22|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/27|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
@@ -57,7 +57,7 @@ $actions = New-ScheduledTaskAction -Execute 'cmd /c c:\utools\collectLogs.bat'
 $TheDate= ([DateTime]::Now)
 $Duration = $TheDate.AddYears(25) -$TheDate
 
-$trigger = New-ScheduledTaskTrigger -Once -At(Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 10) -RepetitionDuration $Duration
+$trigger = New-ScheduledTaskTrigger -Once -At(Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 5) -RepetitionDuration $Duration
 $principal = New-ScheduledTaskPrincipal -UserId 'system' -RunLevel Highest
 $settings = New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable -WakeToRun
 $task = New-ScheduledTask -Action $actions -Principal $principal -Trigger $trigger -Settings $settings

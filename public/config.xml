@@ -206,6 +206,11 @@
 			<FileCreate onmatch="exclude">
 				<Image name="" condition="end with">chrome.exe</Image>
 				<Image name="" condition="end with">msedge.exe</Image>
+				<Image condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Image>
+				<Image condition='is'>C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe</Image>
+				<Image condition='is'>C:\Windows\Explorer.EXE</Image>
+				<Image condition='is'>C:\Windows\system32\svchost.exe</Image>
+				<Image condition='is'>C:\Windows\system32\cleanmgr.exe</Image>
 			</FileCreate>
 
 		</RuleGroup>
@@ -223,6 +228,8 @@
 				<Image condition="end with">Code.exe</Image>
 				<Image condition="end with">SearchApp.exe</Image>
 
+				<Image name="system files" condition="begin with">C:\Windows\system32</Image>
+				<Image name="utools files" condition="begin with">C:\utools</Image>
 
 				<Image condition='is'>C:\Windows\Explorer.EXE</Image>
 				<Image condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Image>
@@ -275,6 +282,8 @@
 			<DnsQuery onmatch="exclude">
 				<Image condition="end with">Sysmon64.exe</Image>
 				<Image condition="end with">svchost.exe</Image>
+				<Image condition="end with">powershell.exe</Image>
+
 			</DnsQuery>
 		</RuleGroup>
 
@@ -301,14 +310,22 @@
 		<!-- WARNING : if not disable ,exe file can't create. -->
 		<!-- ID:27 For Rust build a file to execute files and chrome download a exec file..-->
 		<RuleGroup name="" groupRelation="or">
-			<FileBlockExecutable onmatch="include">
+			<!-- <FileBlockExecutable onmatch="include">
 				<Image name="" condition="image">excle.exe</Image>
 				<Image name="" condition="image">winword.exe</Image>
 				<Image name="" condition="image">powerpoint.exe</Image>
 				<Image name="" condition="image">outlook.exe</Image>
 				<Image name="" condition="image">onenote.exe</Image>
 				<Image name="" condition="image">mshta.exe</Image>
+			</FileBlockExecutable> -->
+
+			<!--For Demo Purppose,production env should be disable.-->
+			<FileBlockExecutable onmatch="exclude">
+			  	<Image condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Image>
+				<Image condition='is'>C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe</Image>
+				<Image condition="begin with">C:\Windows\system32</Image>
 			</FileBlockExecutable>
+
 		</RuleGroup>
 
 		<!-- ID:29 -->
