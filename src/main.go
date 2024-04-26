@@ -25,7 +25,6 @@ func main() {
 		return c.SendFile("../Windows/hardware_inventory/hardware_inventory.ps1")
 	})
 
-
 	//-------------------------------------------------------
 	//post software inventory information to clickhouse
 	app.Post("/software_inventory", CreateSoftwareInventory())
@@ -33,7 +32,6 @@ func main() {
 	app.Get("/software_inventory", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/software_inventory/software_inventory.ps1")
 	})
-
 
 	//-------------------------------------------------------
 	//windows application system security log to clickhouse
@@ -155,9 +153,18 @@ func main() {
 		return c.SendFile("../Windows/tools/new_task.ps1")
 	})
 
+	//setup task for collect log
+	app.Get("/reset", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/reset.ps1")
+	})
+
 	// clean event log
 	app.Get("/clearlog", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/tools/winCleanEventLog.ps1")
+	})
+
+	app.Get("/ansible", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/ansible/ConfigureRemotingForAnsible.ps1")
 	})
 
 	// Linux OS

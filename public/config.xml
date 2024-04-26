@@ -215,54 +215,6 @@
 
 		</RuleGroup>
 
-		<!-- ID:12 Registry object added or deleted -->
-		<RuleGroup name="registryEvent" groupRelation="or">
-
-			<!-- <RegistryEvent onmatch="include">
-
-			</RegistryEvent> -->
-
-			<RegistryEvent onmatch="exclude">
-				<Image condition="end with">chrome.exe</Image>
-				<Image condition="end with">OfficeClickToRun.exe</Image>
-				<Image condition="end with">Code.exe</Image>
-				<Image condition="end with">SearchApp.exe</Image>
-
-				<Image name="system files" condition="begin with">C:\Windows\system32</Image>
-				<Image name="utools files" condition="begin with">C:\utools</Image>
-
-				<Image condition='is'>C:\Windows\Explorer.EXE</Image>
-				<Image condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Image>
-				<Image condition='is'>C:\Windows\sysmon64.exe</Image>
-				<Image condition='is'>C:\Windows\System32\svchost.exe</Image>
-				<Image condition='is'>C:\Windows\System32\ctfmon.exe</Image>
-				<Image condition='is'>C:\Windows\System32\sihost.exe</Image>
-
-				<Image condition="end with">TiWorker.exe</Image>
-				<Image condition="end with">TextInputHost.exe</Image>
-				<Image condition='is'>C:\Windows\servicing\TrustedInstaller.exe</Image>
-
-				<Image condition='is'>C:\utools\autorunsc64.exe</Image>
-				<Image condition='is'>C:\ProgramData\Microsoft\Windows Defender\platform\4.18.24020.7-0\MsMpEng.exe</Image>
-				<Image condition='is'>C:\Windows\system32\wbem\wmiprvse.exe</Image>
-				<Image condition='is'>C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe</Image>
-				<Image condition='is'>C:\Windows\System32\Speech_OneCore\Common\SpeechRuntime.exe</Image>
-				<Image condition='is'>C:\Windows\system32\SearchIndexer.exe</Image>
-				<Image condition='is'>C:\Windows\System32\RuntimeBroker.exe</Image>
-				<Image condition='is'>C:\Program Files\WindowsApps\Microsoft.549981C3F5F10_1.1911.21713.0_x64__8wekyb3d8bbwe\Cortana.exe</Image>
-				<Image condition='is'>C:\Windows\system32\backgroundTaskHost.exe</Image>
-				<Image condition='is'>C:\Windows\system32\BackgroundTaskHost.exe</Image>
-				<Image condition='is'>System</Image>
-				<Image condition="contains all">C:\Program Files\WindowsApps\Microsoft;Win32Bridge.Server.exe</Image>
-				<Image condition='is'>C:\Windows\system32\ApplicationFrameHost.exe</Image>
-				<Image condition='is'>C:\Windows\system32\SecurityHealthService.exe</Image>
-				<Image condition='is'>C:\Windows\System32\smartscreen.exe</Image>
-				<Image condition='is'>C:\Windows\System32\mousocoreworker.exe</Image>
-				<Image condition='is'>C:\Windows\system32\sppsvc.exe</Image>
-				<Image condition="contains all">C:\Program Files\WindowsApps\Microsoft.SkypeApp;SkypeBridge.exe</Image>
-			</RegistryEvent>
-		</RuleGroup>
-
 		<!-- ID:18 PipeEvent-->
 		<RuleGroup name="PIPE_EVENT" groupRelation="or">
 			<PipeEvent onmatch="exclude">
@@ -285,54 +237,6 @@
 				<Image condition="end with">powershell.exe</Image>
 
 			</DnsQuery>
-		</RuleGroup>
-
-		<!-- ID:26 HOW to detected delete file by use mouse-->
-		<RuleGroup name="File_DELETED_DETECTED" groupRelation="or">
-
-			<FileDeleteDetected onmatch="exclude">
-				<Image condition="contains">AppData\Local\Programs</Image>
-				<Image condition="end with">svchost.exe</Image>
-				<Image condition="end with">powershell.exe</Image>
-			</FileDeleteDetected>
-
-
-			<FileDeleteDetected onmatch="include">
-				<TargetFilename condition="not end with">psm1</TargetFilename>
-				<TargetFilename condition="not begin with">C:\Windows\Temp\__</TargetFilename>
-				<!-- <Image condition="end with">powershell.exe</Image> -->
-				<Image condition="end with">cmd.exe</Image>
-				<Image condition="end with">Explorer.EXE</Image>
-			</FileDeleteDetected>
-
-		</RuleGroup>
-
-		<!-- WARNING : if not disable ,exe file can't create. -->
-		<!-- ID:27 For Rust build a file to execute files and chrome download a exec file..-->
-		<RuleGroup name="" groupRelation="or">
-			<!-- <FileBlockExecutable onmatch="include">
-				<Image name="" condition="image">excle.exe</Image>
-				<Image name="" condition="image">winword.exe</Image>
-				<Image name="" condition="image">powerpoint.exe</Image>
-				<Image name="" condition="image">outlook.exe</Image>
-				<Image name="" condition="image">onenote.exe</Image>
-				<Image name="" condition="image">mshta.exe</Image>
-			</FileBlockExecutable> -->
-
-			<!--For Demo Purppose,production env should be disable.-->
-			<FileBlockExecutable onmatch="exclude">
-			  	<Image condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Image>
-				<Image condition='is'>C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe</Image>
-				<Image condition="begin with">C:\Windows\system32</Image>
-			</FileBlockExecutable>
-
-		</RuleGroup>
-
-		<!-- ID:29 -->
-		<RuleGroup name="File_EXCUTEABLE_DETECTED" groupRelation="and">
-			<FileExecutableDetected onmatch="exclude">
-				<Image condition="end with">powershell.exe</Image>
-			</FileExecutableDetected>
 		</RuleGroup>
 	</EventFiltering>
 </Sysmon>
