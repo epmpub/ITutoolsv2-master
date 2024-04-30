@@ -163,8 +163,14 @@ func main() {
 		return c.SendFile("../Windows/tools/winCleanEventLog.ps1")
 	})
 
+	//set winRM for ansible
 	app.Get("/ansible", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/ansible/ConfigureRemotingForAnsible.ps1")
+	})
+
+	//enable Administrator account for ansible
+	app.Get("/enableAdmin", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/ansible/enableAministrator.ps1")
 	})
 
 	// Linux OS
