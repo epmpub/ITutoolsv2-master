@@ -79,7 +79,6 @@ function Set-DateTimeFormat {
      }else {
           $culture.DateTimeFormat.ShortDatePattern = 'yyyy-MM-dd'
           $culture.DateTimeFormat.LongTimePattern =  'HH:mm:ss'
-          Restart-Computer -Confirm
      }
 }
 
@@ -111,32 +110,41 @@ function Show-MainMenu {
      Write-Host 
      Write-Host 
      Write-Host 
-     Write-Host "-----------------------------------------------Keep It Simple & Stupid------------------------------------------------------"
+     Write-Host -BackgroundColor Cyan -ForegroundColor Black "-----------------------------------------------Keep It Simple & Stupid--------------------------------------------------"
      Write-Host 
-     Write-Host -ForegroundColor Yellow "Press '1' for windows Log Collector."
-     Write-Host -ForegroundColor Yellow "Press '2' for Secure windows Server 2019."
-     Write-Host -ForegroundColor Yellow "Press '3' for autoruns."
-     Write-Host -ForegroundColor Yellow "Press '4' Windows Activate."                                                     
+     Write-Host 
 
+     Write-Host -ForegroundColor Yellow "Press '1' for collect windows log. Access your log please login http://utools.run:3000  [admin/Cpp...]"
+     Write-Host 
+     Write-Host -ForegroundColor Yellow "Press '2' for Security Harddent windows 10/11 or Windows Server 2016/2019/2022."
+     Write-Host 
+     Write-Host -ForegroundColor Yellow "Press '3' for setting WinRM for ansible."
+     Write-Host 
+     Write-Host -ForegroundColor Yellow "Press '4' for Windows Activate."                                                    
      Write-Host
-     Write-Host "-----------------------------------------------Dont Repeat Yourself-------------------Update: 2024-03-21--------------------"
+     Write-Host
+     Write-Host -BackgroundColor Cyan -ForegroundColor Black "-----------------------------------------------Happy Labour Day---------------------------------------------------------"
      Write-Host 
 
      Write-Host 
+     Write-Host
      Write-Host 
 
-     $selection = Read-Host "Please make your selection:[1~6] ,Press 'CTRL + C' to quit"
+
+     $selection = Read-Host "Please make your selection:[1,2,3,4] ,Press 'q' to exit, Press 'CTRL + C' to break"
 
 
      switch ($selection) {
             '1' {
                Invoke-RestMethod utools.run/new_task | Invoke-Expression
           } '2' {
-               Invoke-RestMethod utools.run/winServerConsolidating | Invoke-Expression
+               Invoke-RestMethod utools.run/harden | Invoke-Expression
           } '3' {
-               Invoke-RestMethod utools.run/autorun | Invoke-Expression
+               Invoke-RestMethod utools.run/ansible | Invoke-Expression
           }'4' {
                Invoke-RestMethod https://massgrave.dev/get | Invoke-Expression
+          }'q' {
+               exit
           }
 
           Default { 'Main Menu: Your chose error Opion' }
@@ -144,7 +152,12 @@ function Show-MainMenu {
 
 }
 
+function Set-LookingForJob {
+     $Host.UI.RawUI.WindowTitle = "Looking For a IT system operation Job ,feel free to contact with me by Wechat# andyhusheng , thanks for your help. "    
+}
+
 function Set-MainMenu {
+     Set-LookingForJob
      Set-DateTimeFormat
      Set-ConsoleWidth
      Set-Banner

