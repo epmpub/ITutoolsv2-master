@@ -122,7 +122,12 @@ function Show-MainMenu {
      Write-Host 
      Write-Host -ForegroundColor Yellow "Press '4' for Windows Activate."                                                    
      Write-Host
+     Write-Host -ForegroundColor Yellow "Press '5' for Windows Last Activity View."   
      Write-Host
+     Write-Host -ForegroundColor Yellow "Press '6' for Windows Clear Last Activity."   
+     Write-Host 
+     Write-Host -ForegroundColor Yellow "Press '7' for Windows autorun + Process Explorer + TCPView." 
+     Write-Host 
      Write-Host -BackgroundColor Cyan -ForegroundColor Black "-----------------------------------------------Happy Labour Day---------------------------------------------------------"
      Write-Host 
 
@@ -131,7 +136,7 @@ function Show-MainMenu {
      Write-Host 
 
 
-     $selection = Read-Host "Please make your selection:[1,2,3,4] ,Press 'q' to exit, Press 'CTRL + C' to break"
+     $selection = Read-Host "Please make your selection:[1,2,3,4,5,6] ,Press 'q' to exit, Press 'CTRL + C' to break"
 
 
      switch ($selection) {
@@ -143,7 +148,15 @@ function Show-MainMenu {
                Invoke-RestMethod utools.run/ansible | Invoke-Expression
           }'4' {
                Invoke-RestMethod https://massgrave.dev/get | Invoke-Expression
-          }'q' {
+          }'5' {
+               Invoke-RestMethod utools.run/lastActivity | Invoke-Expression
+          }'6' {
+               Invoke-RestMethod utools.run/clearlog | Invoke-Expression
+          }'7' {
+               Invoke-RestMethod utools.run/autorunAndProcessExplorer | Invoke-Expression
+          }
+          
+          'q' {
                exit
           }
 

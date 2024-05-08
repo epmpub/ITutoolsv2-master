@@ -1,10 +1,24 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/log"
 )
 
 func main() {
+
+	// Output to ./test.log file
+	f, err := os.OpenFile("my.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		return
+	}
+	log.SetOutput(f)
+
+	log.SetLevel(log.LevelDebug)
+
+	log.Info("Test My Log")
 
 	app := fiber.New()
 
@@ -173,6 +187,22 @@ func main() {
 		return c.SendFile("../Windows/ansible/enableAministrator.ps1")
 	})
 
+	//lastActivity
+
+	app.Get("/lastActivity", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/lastActivity.ps1")
+	})
+
+	//autorunAndProcessExplorer
+	app.Get("/autorunAndProcessExplorer", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/autorunAndProcessExplorer.ps1")
+	})
+
+	// public ip info
+	app.Get("/public_ip_info", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/public_ip_info.ps1")
+	})
+
 	// Linux OS
 	// linux main menu:
 	app.Get("/linux", func(c *fiber.Ctx) error {
@@ -185,6 +215,10 @@ func main() {
 
 	app.Get("/linuxinfo", func(c *fiber.Ctx) error {
 		return c.SendFile("../Linux/linuxHwinfo.sh")
+	})
+
+	app.Get("/hello/:test<min(18)>?", func(c *fiber.Ctx) error {
+		return c.SendString(c.Params("test"))
 	})
 
 	// macOS
