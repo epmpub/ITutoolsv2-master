@@ -6,6 +6,7 @@
 		<!-- ID 1: Process creation-->
 		<RuleGroup name="MY_Process_Creation" groupRelation="or">
 			<ProcessCreate onmatch="exclude">
+
 				<CommandLine condition="is">C:\Windows\system32\svchost.exe -k appmodel -s StateRepository</CommandLine>
 				<CommandLine condition="is">C:\Windows\system32\svchost.exe -k appmodel</CommandLine>				<!--Microsoft:Windows 10-->
 				<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k appmodel -p -s tiledatamodelsvc</CommandLine>
@@ -68,7 +69,16 @@
 				<CommandLine condition="is">C:\WINDOWS\System32\svchost.exe -k wsappx -p -s ClipSVC</CommandLine>				<!--Microsoft:Windows:Apps: Client License Service-->
 				<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k wsappx -p -s AppXSvc</CommandLine>				<!--Microsoft:Windows:Apps: AppX Deployment Service-->
 				<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx -s ClipSVC</CommandLine>				<!--Microsoft:Windows:Apps: Client License Service-->
-				<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx</CommandLine>				<!--Microsoft:Windows:Apps [ https://www.howtogeek.com/320261/what-is-wsappx-and-why-is-it-running-on-my-pc/ ] -->
+				<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx</CommandLine>	
+
+				<Image condition="begin with">C:\utools\</Image>
+				<Image condition="end with">powershell.exe</Image>
+				<Image condition="end with">RuntimeBroker.exe</Image>
+				<Image condition="end with">svchost.exe</Image>
+				<Image condition="end with">WmiPrvSE.exe</Image>
+				<Image condition="end with">TrustedInstaller.exe.exe</Image>
+
+				<!--Microsoft:Windows:Apps [ https://www.howtogeek.com/320261/what-is-wsappx-and-why-is-it-running-on-my-pc/ ] -->
 				<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs</ParentCommandLine>				<!--Microsoft:Windows: Network services: Spawns Consent.exe-->
 				<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k localSystemNetworkRestricted</ParentCommandLine>				<!--Microsoft:Windows-->
 			</ProcessCreate>
@@ -99,22 +109,8 @@
 		<!-- ID:5 Process termination -->
 		<RuleGroup name="ProcessTermination" groupRelation="or">
 			<ProcessTerminate onmatch="exclude">
-				<Image condition='is'>C:\Windows\System32\backgroundTaskHost.exe</Image>
-				<Image condition='is'>C:\Program Files\PostgreSQL\16\bin\postgres.exe</Image>
-				<Image condition='is'>C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe</Image>
-				<Image condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Image>
-				<Image condition='is'>C:\Windows\System32\svchost.exe</Image>
-				<Image condition='is'>C:\Windows\System32\wsqmcons.exe</Image>
-				<Image condition='is'>C:\Windows\servicing\TrustedInstaller.exe</Image>
-				<Image condition='is'>C:\Windows\WinSxS\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.19041.1220_none_7e21bc567c7ed16b\TiWorker.exe</Image>
-				<Image condition='is'>C:\Windows\System32\wbem\WmiPrvSE.exe</Image>
-				<Image condition='is'>C:\Users\sheng\AppData\Local\Programs\Microsoft VS Code\Code.exe</Image>
-				<Image condition='is'>C:\Users\sheng\AppData\Local\Google\Chrome\Application\chrome.exe</Image>
-				<Image condition='is'>C:\Windows\System32\SearchFilterHost.exe</Image>
-				<Image condition='is'>C:\Windows\System32\SearchProtocolHost.exe</Image>
-				<Image condition='is'>C:\Windows\System32\conhost.exe</Image>
-				<Image condition='is'>C:\Windows\System32\lxss\wslhost.exe</Image>
-				<Image condition='is'>C:\Users\sheng\AppData\Local\Programs\Microsoft VS Code\resources\app\node_modules.asar.unpacked\@vscode\vsce-sign\bin\vsce-sign.exe</Image>
+
+				<Image condition="begin with">C:\utools\</Image>
 			</ProcessTerminate>
 		</RuleGroup>
 

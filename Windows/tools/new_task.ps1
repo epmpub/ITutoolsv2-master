@@ -37,12 +37,9 @@ if (-not(Test-Path $targetDirectory))
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/3|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/5|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/11|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/12|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/22|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/27|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/app_sys_sec|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 
 $TaskName = "collectLogs"
 Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue | Out-Null
