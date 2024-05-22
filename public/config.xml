@@ -75,8 +75,14 @@
 				<Image condition="end with">powershell.exe</Image>
 				<Image condition="end with">RuntimeBroker.exe</Image>
 				<Image condition="end with">svchost.exe</Image>
+				<Image condition="end with">conhost.exe</Image>
+
 				<Image condition="end with">WmiPrvSE.exe</Image>
-				<Image condition="end with">TrustedInstaller.exe.exe</Image>
+				<Image condition="end with">TrustedInstaller.exe</Image>
+				<Image condition="end with">SearchFilterHost.exe</Image>
+				<Image condition="end with">backgroundTaskHost.exe</Image>
+
+
 
 				<!--Microsoft:Windows:Apps [ https://www.howtogeek.com/320261/what-is-wsappx-and-why-is-it-running-on-my-pc/ ] -->
 				<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs</ParentCommandLine>				<!--Microsoft:Windows: Network services: Spawns Consent.exe-->
@@ -109,8 +115,10 @@
 		<!-- ID:5 Process termination -->
 		<RuleGroup name="ProcessTermination" groupRelation="or">
 			<ProcessTerminate onmatch="exclude">
-
 				<Image condition="begin with">C:\utools\</Image>
+				<Image condition="begin with">C:\Windows\System32</Image>
+				<Image condition="begin with">C:\Windows\WinSxS</Image>
+				<Image condition="begin with">C:\Windows\servicing</Image>
 			</ProcessTerminate>
 		</RuleGroup>
 
