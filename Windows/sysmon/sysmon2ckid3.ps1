@@ -2,7 +2,7 @@ $ProgressPreference = 'SilentlyContinue'
 $guid = New-Guid
 
 $timestamp = Get-Date -format "yyyy-MM-dd HH:mm:ss"
-$events = Get-WinEvent  -FilterHashtable @{ logname = "Microsoft-Windows-Sysmon/Operational"; Id = 3;StartTime=(get-date).AddMinutes(-1) } -erroraction silentlycontinue
+$events = Get-WinEvent  -FilterHashtable @{ logname = "Microsoft-Windows-Sysmon/Operational"; Id = 3;StartTime=(get-date).AddMinutes(-15) } -erroraction silentlycontinue
  
 foreach ($event in $events)
 {

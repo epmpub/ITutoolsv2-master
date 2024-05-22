@@ -1,24 +1,21 @@
 package main
 
 import (
-	"os"
-
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/log"
 )
 
 func main() {
 
 	// Output to ./test.log file
-	f, err := os.OpenFile("my.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-	if err != nil {
-		return
-	}
-	log.SetOutput(f)
+	// f, err := os.OpenFile("my.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	// if err != nil {
+	// 	return
+	// }
+	// log.SetOutput(f)
 
-	log.SetLevel(log.LevelDebug)
+	// log.SetLevel(log.LevelDebug)
 
-	log.Info("Test My Log")
+	// log.Info("Test My Log")
 
 	app := fiber.New()
 

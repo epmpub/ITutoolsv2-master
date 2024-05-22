@@ -50,7 +50,7 @@ func HardWareInventory2ClickHouse(logs ToCKLog) {
 	if err = connect.Close(); err != nil {
 		log.Info("close db err:", err)
 	}
-	log.Debug("hardware inventory information insert clickhouse")
+	//log.Debug("hardware inventory information insert clickhouse")
 }
 
 func SoftWareInventory2ClickHouse(logs ToCKLog) {
@@ -90,7 +90,7 @@ func SoftWareInventory2ClickHouse(logs ToCKLog) {
 	if err = connect.Close(); err != nil {
 		log.Info("close db err:", err)
 	}
-	log.Debug("software inventory information insert clickhouse")
+	// //log.Debug("software inventory information insert clickhouse")
 }
 
 func mylog2ck(logData interface{}) {
@@ -118,7 +118,7 @@ func mylog2ck(logData interface{}) {
 
 	logs := logData.(ToCKLog)
 
-	// log.Debug("++++++++++++++++++++++++++" + logs.Message)
+	// //log.Debug("++++++++++++++++++++++++++" + logs.Message)
 
 	if _, err := stmt.Exec(
 		logs.Id,
@@ -134,7 +134,7 @@ func mylog2ck(logData interface{}) {
 	if err = connect.Close(); err != nil {
 		log.Info("close db err:", err)
 	}
-	log.Debug("My Log insert clickhouse")
+	//log.Debug("My Log insert clickhouse")
 }
 
 func insert_app_sys_sec2ClickHouse(logData interface{}) {
@@ -175,7 +175,7 @@ func insert_app_sys_sec2ClickHouse(logData interface{}) {
 	if err = connect.Close(); err != nil {
 		log.Info("close db err:", err)
 	}
-	log.Debug("app_sys_sec insert clickhouse")
+	//log.Debug("app_sys_sec insert clickhouse")
 }
 
 // func insertTimeSerial(info interface{}) {
@@ -189,7 +189,7 @@ func insert_app_sys_sec2ClickHouse(logData interface{}) {
 // 	collection := client.Database("demo").Collection("tcpvcon")
 // 	collection.InsertOne(context.TODO(), info)
 // 	client.Disconnect(ctx)
-// 	log.Debug("mongodb insert done.")
+// 	//log.Debug("mongodb insert done.")
 
 // }
 
@@ -204,7 +204,7 @@ func insertAutoRun2MongoDB(info interface{}) {
 	collection := client.Database("demo").Collection("autorun")
 	collection.InsertOne(context.TODO(), info)
 	client.Disconnect(ctx)
-	log.Debug("autorun  insert  mongodb done.")
+	//log.Debug("autorun  insert  mongodb done.")
 
 }
 
@@ -229,7 +229,7 @@ func insertAutoRun2MongoDB(info interface{}) {
 // 		collection.InsertOne(context.TODO(), info)
 // 	}
 
-// 	log.Debug("mongodb insert wineven done.")
+// 	//log.Debug("mongodb insert wineven done.")
 // 	client.Disconnect(ctx)
 // }
 
@@ -356,7 +356,7 @@ func insertWineventLog2ClickHouse(logData ToCKLog, id uint) {
 		if err = connect.Close(); err != nil {
 			log.Info("close db err:", err)
 		}
-		log.Debug("winvent1 insert to clickhouse")
+		//log.Debug("winvent1 insert to clickhouse")
 	case 3:
 		stmt, err := tx.Prepare("INSERT INTO winevent3 (Id,Message) VALUES (?, ?)")
 		if err != nil {
