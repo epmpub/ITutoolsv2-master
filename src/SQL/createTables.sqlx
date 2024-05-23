@@ -6,3 +6,9 @@ CREATE TABLE IF NOT EXISTS demo.hardware_inventory AS demo.template
 CREATE TABLE IF NOT EXISTS demo.tcpvcon2 AS demo.template
 CREATE TABLE IF NOT EXISTS demo.winevent1 AS demo.template
 CREATE TABLE IF NOT EXISTS demo.winevent3 AS demo.template
+CREATE TABLE IF NOT EXISTS demo.winevent5 AS demo.template
+CREATE TABLE IF NOT EXISTS demo.winevent11 AS demo.template
+CREATE TABLE IF NOT EXISTS demo.winevent12 AS demo.template
+CREATE TABLE IF NOT EXISTS demo.winevent22 AS demo.template
+CREATE TABLE IF NOT EXISTS demo.winevent27 AS demo.template
+CREATE TABLE IF NOT EXISTS demo.software_inventory AS demo.template

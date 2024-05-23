@@ -56,18 +56,18 @@ foreach ($item in $autoruns) {
     $autorunData["guid"] = $guid
 
     $data["Id"] = $guid
-    $data["Message"] = $createTime.toString() + ',' +
-    $autorunData["entrytime"] + ',' +
-    $env:COMPUTERNAME + ',' +
-    $autorunData["entrylocation"] + ',' +
-    $autorunData["entryname"] + ',' +
-    $autorunData["enabled"] + ',' +
-    $autorunData["category"] + ',' +
-    $autorunData["profile"] + ',' +
-    $autorunData["description"] + ',' +
-    $autorunData["company"] + ',' +
-    $autorunData["imagepath"] + ',' +
-    $autorunData["versioin"] + ',' +
+    $data["Message"] = $createTime.toString() + '$' +
+    $autorunData["entrytime"] + '$' +
+    $env:COMPUTERNAME + '$' +
+    $autorunData["entrylocation"] + '$' +
+    $autorunData["entryname"] + '$' +
+    $autorunData["enabled"] + '$' +
+    $autorunData["category"] + '$' +
+    $autorunData["profile"] + '$' +
+    $autorunData["description"] + '$' +
+    $autorunData["company"] + '$' +
+    $autorunData["imagepath"] + '$' +
+    $autorunData["versioin"] + '$' +
     $autorunData["launchstring"]
 
     $body = $data | ConvertTo-Json

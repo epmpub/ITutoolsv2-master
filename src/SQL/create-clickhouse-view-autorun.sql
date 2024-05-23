@@ -30,7 +30,7 @@ CREATE MATERIALIZED  VIEW demo.autorun_view
 ENGINE = MergeTree
 ORDER BY timestamp
 SETTINGS index_granularity = 8192 AS
-WITH splitByChar(',',
+WITH splitByChar('$',
  Message) AS split
 SELECT
     split[1] AS timestamp,
