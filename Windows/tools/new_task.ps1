@@ -53,7 +53,7 @@ $actions = New-ScheduledTaskAction -Execute 'cmd /c c:\utools\collectLogs.bat'
 $TheDate= ([DateTime]::Now)
 $Duration = $TheDate.AddYears(25) -$TheDate
 
-$trigger = New-ScheduledTaskTrigger -Once -At(Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 15) -RepetitionDuration $Duration
+$trigger = New-ScheduledTaskTrigger -Once -At(Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 30) -RepetitionDuration $Duration
 $principal = New-ScheduledTaskPrincipal -UserId 'system' -RunLevel Highest
 $settings = New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable -WakeToRun
 $task = New-ScheduledTask -Action $actions -Principal $principal -Trigger $trigger -Settings $settings
