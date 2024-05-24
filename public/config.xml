@@ -69,7 +69,11 @@
 				<CommandLine condition="is">C:\WINDOWS\System32\svchost.exe -k wsappx -p -s ClipSVC</CommandLine>				<!--Microsoft:Windows:Apps: Client License Service-->
 				<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k wsappx -p -s AppXSvc</CommandLine>				<!--Microsoft:Windows:Apps: AppX Deployment Service-->
 				<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx -s ClipSVC</CommandLine>				<!--Microsoft:Windows:Apps: Client License Service-->
-				<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx</CommandLine>	
+				<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx</CommandLine>
+
+				<CommandLine condition="is">cmd /c c:\utools\collectLogs.bat</CommandLine>
+				<CommandLine condition="is">C:\WINDOWS\SYSTEM32\cmd.exe /c "cmd /c c:\utools\collectLogs.bat"</CommandLine>
+
 
 				<Image condition="begin with">C:\utools\</Image>
 				<Image condition="end with">powershell.exe</Image>
@@ -80,6 +84,7 @@
 				<Image condition="end with">WmiPrvSE.exe</Image>
 				<Image condition="end with">TrustedInstaller.exe</Image>
 				<Image condition="end with">SearchFilterHost.exe</Image>
+				<Image condition="end with">SearchProtocolHost.exe</Image>
 				<Image condition="end with">backgroundTaskHost.exe</Image>
 
 
@@ -119,6 +124,8 @@
 				<Image condition="begin with">C:\Windows\System32</Image>
 				<Image condition="begin with">C:\Windows\WinSxS</Image>
 				<Image condition="begin with">C:\Windows\servicing</Image>
+				<User condition="is">"NT AUTHORITY\SYSTEM"</User>
+				<User condition="is">"NT AUTHORITY\NETWORK SERVICE"</User>
 			</ProcessTerminate>
 		</RuleGroup>
 
@@ -208,15 +215,15 @@
 			</FileCreate>
 
 			<FileCreate onmatch="exclude">
-				<Image name="" condition="end with">chrome.exe</Image>
-				<Image name="" condition="end with">msedge.exe</Image>
 				<Image condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Image>
 				<Image condition='is'>C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe</Image>
-				<Image condition='is'>C:\Windows\Explorer.EXE</Image>
 				<Image condition='is'>C:\Windows\system32\svchost.exe</Image>
 				<Image condition='is'>C:\Windows\system32\cleanmgr.exe</Image>
+				<TargetFilename condition="end with">dll</TargetFilename>
+				<TargetFilename condition="end with">psm1</TargetFilename>
+				<TargetFilename condition="end with">ps1</TargetFilename>
+				<TargetFilename condition="end with">exe</TargetFilename>
 			</FileCreate>
-
 		</RuleGroup>
 
 		<!-- ID:18 PipeEvent-->
@@ -239,7 +246,7 @@
 				<Image condition="end with">Sysmon64.exe</Image>
 				<Image condition="end with">svchost.exe</Image>
 				<Image condition="end with">powershell.exe</Image>
-
+				<QueryName condition="is">utools.run</QueryName>
 			</DnsQuery>
 		</RuleGroup>
 	</EventFiltering>
