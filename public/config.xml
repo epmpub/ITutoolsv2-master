@@ -111,6 +111,7 @@
 				<Image condition="end with">svchost.exe</Image>
 				<!-- <Image condition="end with">powershell.exe</Image> -->
 			</NetworkConnect>
+
 			<NetworkConnect onmatch="include">
 				<DestinationPort name="To_WEBSITE" condition="contains any">80;443;53;123</DestinationPort>
 			</NetworkConnect>
@@ -123,13 +124,21 @@
 				<Image condition="begin with">C:\Windows\System32</Image>
 				<Image condition="begin with">C:\Windows\WinSxS</Image>
 				<Image condition="begin with">C:\Windows\servicing</Image>
-				<User condition="is">"NT AUTHORITY\SYSTEM"</User>
-				<User condition="is">"NT AUTHORITY\NETWORK SERVICE"</User>
+				<User condition="is">NT AUTHORITY\SYSTEM</User>
+				<User condition="is">NT AUTHORITY\NETWORK SERVICE</User>
 			</ProcessTerminate>
 		</RuleGroup>
 
 		<!-- ID:11 FileCreate -->
-		<RuleGroup name="FileCreate" groupRelation="or">
+		
+		<RuleGroup name="FileCreate-2" groupRelation="or">
+			<FileCreate onmatch="exclude">
+			  <TargetFilename name="" condition="begin with">C:\Windows\Temp</TargetFilename>
+			  <TargetFilename name="" condition="begin with">C:\utools</TargetFilename>
+			</FileCreate>
+		</RuleGroup>
+
+		<RuleGroup name="FileCreate-1" groupRelation="or">
 			<FileCreate onmatch="include">
 				<TargetFilename name="" condition="end with">.doc</TargetFilename>
 				<TargetFilename name="" condition="end with">.docx</TargetFilename>
@@ -159,6 +168,7 @@
 
 			</FileCreate>
 		</RuleGroup>
+
 
 		<!-- ID:22 DNSQuery -->
 		<RuleGroup name="DNS_QUERY" groupRelation="or">

