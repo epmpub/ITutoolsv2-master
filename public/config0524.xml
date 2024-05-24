@@ -88,6 +88,7 @@
 				<Image condition="end with">backgroundTaskHost.exe</Image>
 
 
+
 				<!--Microsoft:Windows:Apps [ https://www.howtogeek.com/320261/what-is-wsappx-and-why-is-it-running-on-my-pc/ ] -->
 				<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs</ParentCommandLine>				<!--Microsoft:Windows: Network services: Spawns Consent.exe-->
 				<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k localSystemNetworkRestricted</ParentCommandLine>				<!--Microsoft:Windows-->
@@ -128,40 +129,119 @@
 			</ProcessTerminate>
 		</RuleGroup>
 
+		<!--ID:6 DriverLoad-->
+		<RuleGroup name="DriverLoad" groupRelation="or">
+			<DriverLoad onmatch="exclude">
+
+			</DriverLoad>
+		</RuleGroup>
+
+		<!-- ID:8 CreateRemoteThread -->
+		<RuleGroup name="CreateRemoteThread" groupRelation="or">
+			<CreateRemoteThread onmatch="exclude">
+			</CreateRemoteThread>
+		</RuleGroup>
+
+		<!--Event ID 9: RawAccessRead-->
+		<RuleGroup name="RawAccessRead" groupRelation="or">
+			<!-- ID:9 RawAccessRead -->
+			<RawAccessRead onmatch="exclude">
+				<Image condition='is'>System</Image>
+				<Image condition='is'>C:\Windows\System32\wbem\WmiPrvSE.exe</Image>
+				<Image condition='is'>C:\Windows\System32\svchost.exe</Image>
+				<Image condition='is'>C:\Windows\System32\backgroundTaskHost.exe</Image>
+				<Image condition='is'>C:\Windows\sysmon64.exe</Image>
+			</RawAccessRead>
+		</RuleGroup>
+
+
+		<!--ID:10 ProcessAccess-->
+		<RuleGroup name="ProcessAccess" groupRelation="or">
+			<ProcessAccess onmatch="exclude">
+				<SourceImage condition='is'>C:\Users\sheng\AppData\Local\Programs\Microsoft VS Code\Code.exe</SourceImage>
+				<SourceImage condition='is'>C:\ProgramData\Microsoft\Windows Defender\platform\4.18.24020.7-0\MsMpEng.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\svchost.exe</SourceImage>
+				<SourceImage condition='contains all'>C:\Program Files\WindowsApps\Microsoft.SkypeApp_14.53.77.0_x64__;SkypeBridge\SkypeBridge.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\sihost.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\System32\RuntimeBroker.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\SearchIndexer.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\Explorer.EXE</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\lsass.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\System32\svchost.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\csrss.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\taskmgr.exe</SourceImage>
+
+				<SourceImage condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\conhost.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\cmd.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\ctfmon.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\SYSTEM32\cmd.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_362f239e9bd019fc\Display.NvContainer\NVDisplay.Container.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\ApplicationFrameHost.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\AUDIODG.EXE</SourceImage>
+				<SourceImage condition='is'>C:\Users\sheng\AppData\Local\Google\Chrome\Application\chrome.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\sysmon64.exe</SourceImage>
+				<SourceImage condition='is'>C:\Program Files (x86)\Microsoft Office\root\Office16\ONENOTE.EXE</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\services.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\System32\smartscreen.exe</SourceImage>
+				<SourceImage condition='contains all'>C:\Program Files\WindowsApps\45479liulios;\Snipaste.exe</SourceImage>
+				<SourceImage condition='is'>C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\servicing\TrustedInstaller.exe</SourceImage>
+				<SourceImage condition='is'>C:\Windows\system32\sppsvc.exe</SourceImage>
+				<SourceImage condition='contains all'>C:\Windows\winsxs\amd64_microsoft-windows-servicingstack;TiWorker.exe</SourceImage>
+			</ProcessAccess>
+		</RuleGroup>
+
 		<!-- ID:11 FileCreate -->
 		<RuleGroup name="FileCreate" groupRelation="or">
 			<FileCreate onmatch="include">
-				<TargetFilename name="" condition="end with">.doc</TargetFilename>
-				<TargetFilename name="" condition="end with">.docx</TargetFilename>
-				<TargetFilename name="" condition="end with">.xlsx</TargetFilename>
-				<TargetFilename name="" condition="end with">.xls</TargetFilename>
-				<TargetFilename name="" condition="end with">.ppt</TargetFilename>
-				<TargetFilename name="" condition="end with">.pptx</TargetFilename>
-
+				<TargetFilename name="" condition="end with">.exe</TargetFilename>
+				<TargetFilename name="" condition="end with">.dll</TargetFilename>
+				<TargetFilename name="" condition="end with">.com</TargetFilename>
+				<TargetFilename name="" condition="end with">.ocx</TargetFilename>
+				<TargetFilename name="" condition="end with">.hta</TargetFilename>
+				<TargetFilename name="" condition="end with">.cmd</TargetFilename>
+				<TargetFilename name="" condition="end with">.chm</TargetFilename>
 				<TargetFilename name="" condition="end with">.ps1</TargetFilename>
 				<TargetFilename name="" condition="end with">.ps2</TargetFilename>
 				<TargetFilename name="" condition="end with">.psm1</TargetFilename>
-
-				<TargetFilename name="" condition="end with">.bat</TargetFilename>
+				<TargetFilename name="" condition="end with">.jse</TargetFilename>
 				<TargetFilename name="" condition="end with">.vb</TargetFilename>
 				<TargetFilename name="" condition="end with">.vbs</TargetFilename>
-				<TargetFilename name="" condition="end with">.exe</TargetFilename>
-				<TargetFilename name="" condition="end with">.cmd</TargetFilename>
+				<TargetFilename name="" condition="end with">.vbe</TargetFilename>
+				<TargetFilename name="" condition="end with">.iso</TargetFilename>
+				<TargetFilename name="" condition="end with">.vhd</TargetFilename>
+				<TargetFilename name="" condition="end with">.vhdx</TargetFilename>
+			</FileCreate>
 
-				<TargetFilename name="" condition="end with">.mp3</TargetFilename>
-				<TargetFilename name="" condition="end with">.mp4</TargetFilename>
-				<TargetFilename name="" condition="end with">.mkv</TargetFilename>
-				<TargetFilename name="" condition="end with">.mpeg</TargetFilename>
-
-				<TargetFilename name="" condition="end with">.jpg</TargetFilename>
-				<TargetFilename name="" condition="end with">.jpeg</TargetFilename>
-				<TargetFilename name="" condition="end with">.bmp</TargetFilename>
-
+			<FileCreate onmatch="exclude">
+				<Image condition='is'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Image>
+				<Image condition='is'>C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe</Image>
+				<Image condition='is'>C:\Windows\system32\svchost.exe</Image>
+				<Image condition='is'>C:\Windows\system32\cleanmgr.exe</Image>
+				<TargetFilename condition="end with">dll</TargetFilename>
+				<TargetFilename condition="end with">psm1</TargetFilename>
+				<TargetFilename condition="end with">ps1</TargetFilename>
+				<TargetFilename condition="end with">exe</TargetFilename>
 			</FileCreate>
 		</RuleGroup>
 
+		<!-- ID:18 PipeEvent-->
+		<RuleGroup name="PIPE_EVENT" groupRelation="or">
+			<PipeEvent onmatch="exclude">
+			</PipeEvent>
+		</RuleGroup>
+
+		<!-- ID:19 WmiEvent -->
+		<RuleGroup name="WMIEVENT" groupRelation="or">
+			<WmiEvent onmatch="exclude">
+			</WmiEvent>
+		</RuleGroup>
+
+
 		<!-- ID:22 DNSQuery -->
 		<RuleGroup name="DNS_QUERY" groupRelation="or">
+
 			<DnsQuery onmatch="exclude">
 				<Image condition="end with">Sysmon64.exe</Image>
 				<Image condition="end with">svchost.exe</Image>
