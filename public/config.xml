@@ -135,6 +135,7 @@
 			<FileCreate onmatch="exclude">
 			  <TargetFilename name="" condition="begin with">C:\Windows\Temp</TargetFilename>
 			  <TargetFilename name="" condition="begin with">C:\utools</TargetFilename>
+			  <TargetFilename name="" condition="end with">.dll</TargetFilename>
 			</FileCreate>
 		</RuleGroup>
 
@@ -147,14 +148,9 @@
 				<TargetFilename name="" condition="end with">.ppt</TargetFilename>
 				<TargetFilename name="" condition="end with">.pptx</TargetFilename>
 
-				<TargetFilename name="" condition="end with">.ps1</TargetFilename>
-				<TargetFilename name="" condition="end with">.ps2</TargetFilename>
-				<TargetFilename name="" condition="end with">.psm1</TargetFilename>
-
 				<TargetFilename name="" condition="end with">.bat</TargetFilename>
 				<TargetFilename name="" condition="end with">.vb</TargetFilename>
 				<TargetFilename name="" condition="end with">.vbs</TargetFilename>
-				<TargetFilename name="" condition="end with">.exe</TargetFilename>
 				<TargetFilename name="" condition="end with">.cmd</TargetFilename>
 
 				<TargetFilename name="" condition="end with">.mp3</TargetFilename>

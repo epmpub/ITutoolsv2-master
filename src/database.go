@@ -118,8 +118,6 @@ func mylog2ck(logData interface{}) {
 
 	logs := logData.(ToCKLog)
 
-	// //log.Debug("++++++++++++++++++++++++++" + logs.Message)
-
 	if _, err := stmt.Exec(
 		logs.Id,
 		logs.Message,
