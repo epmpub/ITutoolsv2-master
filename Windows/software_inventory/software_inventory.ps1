@@ -17,7 +17,7 @@ $data = [ordered]@{}
 $InstalledSoftware = Get-ChildItem "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall"
 foreach($obj in $InstalledSoftware)
 {
-    if ($obj.GetValue('DisplayName') -eq $null)
+    if ($null -eq $obj.GetValue('DisplayName'))
     {
     
     }else
@@ -39,7 +39,7 @@ foreach($obj in $InstalledSoftware)
 $InstalledSoftware = Get-ChildItem "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall"
 foreach($obj in $InstalledSoftware)
 {
-    if ($obj.GetValue('DisplayName') -eq $null)
+    if ($null -eq $obj.GetValue('DisplayName'))
     {
     
     }else
@@ -59,7 +59,7 @@ foreach($obj in $InstalledSoftware)
 
 }
 
-$InstalledAppx = Get-AppxPackage  | Select Name,Version,InstallLocation,PackageFullName
+$InstalledAppx = Get-AppxPackage  | Select-Object Name,Version,InstallLocation,PackageFullName
 foreach($obj in $InstalledAppx)
 {
     $softList["Name"] = $obj.Name
