@@ -28,7 +28,7 @@ else {
 
 c:\utools\autorunsc64.exe -nobanner -accepteula -a smlt -m  -c > $dstPath"\autorun.log"
 
-$autoruns = import-csv -Path $dstPath"\autorun.log"
+$autoruns = import-csv -Path $dstPath"\autorun.log" -Encoding unicode
 
 $guid = New-Guid
 $autorunData = [ordered]@{}
@@ -72,6 +72,6 @@ foreach ($item in $autoruns) {
 
     $body = $data | ConvertTo-Json
 
-    $response = Invoke-RestMethod 'http://utools.run/autorun' -Method 'POST' -Headers $headers -Body $body
+    $response = Invoke-RestMethod 'http://utools.run/autorun' -Method 'POST' -Headers $headers -Body $body -ContentType "application/json;charset=UTF-8"
     $response | ConvertTo-Json
 }

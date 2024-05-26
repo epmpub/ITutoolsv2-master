@@ -21,5 +21,5 @@ foreach ($item in $(c:\utools\tcpvcon64 -c -n -nobanner -accepteula))
 
     $jsdata=$info | convertTo-Json
     $jsdata
-    Invoke-RestMethod utools.run/tcpvcon -Method Post -Body $jsdata
+    Invoke-RestMethod utools.run/tcpvcon -Method Post -Body $jsdata -ContentType "application/json;charset=UTF-8"
 }

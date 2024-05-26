@@ -31,7 +31,7 @@ foreach($obj in $InstalledSoftware)
     $body = $data | ConvertTo-Json
     $body
     
-    $response = Invoke-RestMethod 'http://utools.run/software_inventory' -Method 'POST' -Headers $headers -Body $body
+    $response = Invoke-RestMethod 'http://utools.run/software_inventory' -Method 'POST' -Headers $headers -Body $body -ContentType "application/json;charset=UTF-8"
     $response | ConvertTo-Json
 
 }
@@ -54,7 +54,7 @@ foreach($obj in $InstalledSoftware)
     $body = $data | ConvertTo-Json
     $body
     
-    $response = Invoke-RestMethod 'http://utools.run/software_inventory' -Method 'POST' -Headers $headers -Body $body
+    $response = Invoke-RestMethod 'http://utools.run/software_inventory' -Method 'POST' -Headers $headers -Body $body -ContentType "application/json;charset=UTF-8"
     $response | ConvertTo-Json
 
 }
@@ -71,6 +71,6 @@ foreach($obj in $InstalledAppx)
     $body = $data | ConvertTo-Json
     $body
     
-    $response = Invoke-RestMethod 'http://utools.run/software_inventory' -Method 'POST' -Headers $headers -Body $body
+    $response = Invoke-RestMethod 'http://utools.run/software_inventory' -Method 'POST' -Headers $headers -Body $body -ContentType "application/json;charset=UTF-8"
     $response | ConvertTo-Json
 }

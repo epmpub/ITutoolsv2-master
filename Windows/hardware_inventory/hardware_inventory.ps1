@@ -62,5 +62,5 @@ $macs = $null
 $body = $data | ConvertTo-Json
 $body
 
-$response = Invoke-RestMethod 'http://utools.run/hardware_inventory' -Method 'POST' -Headers $headers -Body $body
+$response = Invoke-RestMethod 'http://utools.run/hardware_inventory' -Method 'POST' -Headers $headers -Body $body -ContentType "application/json;charset=UTF-8"
 $response | ConvertTo-Json

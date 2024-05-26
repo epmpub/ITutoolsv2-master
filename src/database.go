@@ -293,6 +293,7 @@ func insertAutorun2ClickHouse(logs ToCKLog) {
 	}
 
 	stmt, err := tx.Prepare("INSERT INTO autorun (Id,Message) VALUES (?, ?)")
+
 	if err != nil {
 		log.Info(err)
 	}

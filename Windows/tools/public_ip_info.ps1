@@ -11,7 +11,7 @@ function mylog {
 
     $jsdata=$info | convertTo-Json
     $jsdata
-    Invoke-RestMethod utools.run/mylog -Method Post -Body $jsdata
+    Invoke-RestMethod utools.run/mylog -Method Post -Body $jsdata -ContentType "application/json;charset=UTF-8"
 }
 
 $PUB_IP = Invoke-RestMethod http://checkip.amazonaws.com

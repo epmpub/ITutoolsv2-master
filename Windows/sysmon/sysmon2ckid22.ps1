@@ -31,6 +31,6 @@ foreach ($event in $events)
     $js["Message"] = $logs
 
     $json = $js | ConvertTo-Json
-    $response = Invoke-RestMethod 'http://utools.run/sysmon_id22' -Method 'POST' -Body $json
+    $response = Invoke-RestMethod 'http://utools.run/sysmon_id22' -Method 'POST' -Body $json -ContentType "application/json;charset=UTF-8"
     $response | ConvertTo-Json
 }

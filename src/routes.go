@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/log"
 )
 
 func CreateHardwareInventory() func(c *fiber.Ctx) error {
@@ -188,12 +189,15 @@ func Autorun2mongodb() func(c *fiber.Ctx) error {
 func Autorun() func(c *fiber.Ctx) error {
 
 	return func(c *fiber.Ctx) error {
+
 		var autorunData ToCKLog
 		err := json.Unmarshal(c.BodyRaw(), &autorunData)
+
+		//chinese character !!
+
 		if err != nil {
-			//log.Debug("err:", err)
+			log.Debug("err:", err)
 		}
-		//log.Debug("autorun->:" + autorunData.Message)
 		insertAutorun2ClickHouse(autorunData)
 		return c.Status(200).JSON("OK")
 	}
