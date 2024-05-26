@@ -2,7 +2,7 @@ $ProgressPreference = 'SilentlyContinue'
 $guid = New-Guid
 
 $timestamp = Get-Date -format "yyyy-MM-dd HH:mm:ss"
-$events = Get-WinEvent  -FilterHashtable @{ logname = "Microsoft-Windows-Sysmon/Operational"; Id = 3;StartTime=(get-date).AddMinutes(-30) } -erroraction silentlycontinue
+$events = Get-WinEvent  -FilterHashtable @{ logname = "Microsoft-Windows-Sysmon/Operational"; Id = 3;StartTime=(get-date).AddMinutes(-20) } -erroraction silentlycontinue
  
 foreach ($event in $events)
 {
@@ -44,7 +44,7 @@ foreach ($event in $events)
     $js["Message"] = $logs
 
     $json = $js | ConvertTo-Json
-    $response = Invoke-RestMethod 'http://utools.run/sysmon_id3' -Method 'POST' -Body $json
+    $response = Invoke-RestMethod 'http://utools.run/sysmon_id3' -Method 'POST' -Body $json -ContentType "application/json;charset=UTF-8"
     $response | ConvertTo-Json
  
 }

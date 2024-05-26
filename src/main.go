@@ -132,6 +132,10 @@ func main() {
 		return c.SendFile("../Windows/sysmon/sysmon2ckid27.ps1")
 	})
 
+	app.Get("/sysmon/clear", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/sysmon/sysmonClear.ps1")
+	})
+
 	//-------------------------------------------------------
 
 	//upload autorun data to mangodb
