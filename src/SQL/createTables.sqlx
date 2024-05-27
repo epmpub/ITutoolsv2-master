@@ -12,3 +12,4 @@ CREATE TABLE IF NOT EXISTS demo.winevent12 AS demo.template
 CREATE TABLE IF NOT EXISTS demo.winevent22 AS demo.template
 CREATE TABLE IF NOT EXISTS demo.winevent27 AS demo.template
 CREATE TABLE IF NOT EXISTS demo.software_inventory AS demo.template
+CREATE TABLE IF NOT EXISTS demo.mylog AS demo.template

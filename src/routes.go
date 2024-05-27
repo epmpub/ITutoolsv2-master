@@ -16,7 +16,6 @@ func CreateHardwareInventory() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		log.Error("Hardware-inventory->:" + cklog.Message)
 		HardWareInventory2ClickHouse(cklog)
 
 		return c.Send(c.BodyRaw())
@@ -32,7 +31,6 @@ func CreateSoftwareInventory() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		// log.Error("Software-inventory->:" + cklog.Message)
 		SoftWareInventory2ClickHouse(cklog)
 
 		return c.Send(c.BodyRaw())
@@ -80,7 +78,6 @@ func SysmonID1() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		log.Error("sysmon_id_1->:" + cklog.Message)
 		insertWineventLog2ClickHouse(cklog, 1)
 
 		return c.Status(200).JSON("OK")
@@ -95,7 +92,6 @@ func SysmonID3() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		log.Error("sysmon_id_3->:" + cklog.Message)
 		insertWineventLog2ClickHouse(cklog, 3)
 		return c.Send(c.BodyRaw())
 	}
@@ -109,7 +105,6 @@ func SysmonID5() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		log.Error("sysmon_id_5->:" + cklog.Message)
 		insertWineventLog2ClickHouse(cklog, 5)
 		return c.Send(c.BodyRaw())
 	}
@@ -123,7 +118,6 @@ func SysmonID11() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		log.Error("sysmon_id_11->:" + cklog.Message)
 		insertWineventLog2ClickHouse(cklog, 11)
 		return c.Send(c.BodyRaw())
 	}
@@ -137,7 +131,6 @@ func SysmonID12() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		log.Error("sysmon_id_12->:" + cklog.Message)
 		insertWineventLog2ClickHouse(cklog, 12)
 		return c.Send(c.BodyRaw())
 	}
@@ -151,7 +144,6 @@ func SysmonID22() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		log.Error("sysmon_id_22->:" + cklog.Message)
 		insertWineventLog2ClickHouse(cklog, 22)
 		return c.Send(c.BodyRaw())
 	}
@@ -165,7 +157,6 @@ func SysmonID27() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		log.Error("sysmon_id_22->:" + cklog.Message)
 		insertWineventLog2ClickHouse(cklog, 27)
 		return c.Send(c.BodyRaw())
 	}
@@ -210,7 +201,6 @@ func Tcpvcon() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-		log.Error("Tcpvcon->:" + cklog.Message)
 		insertTcpvcon2ClickHouse(cklog)
 
 		return c.Send(c.BodyRaw())

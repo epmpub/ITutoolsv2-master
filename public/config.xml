@@ -133,9 +133,13 @@
 		
 		<RuleGroup name="FileCreate-2" groupRelation="or">
 			<FileCreate onmatch="exclude">
-			  <TargetFilename name="" condition="begin with">C:\Windows\Temp</TargetFilename>
-			  <TargetFilename name="" condition="begin with">C:\utools</TargetFilename>
-			  <TargetFilename name="" condition="end with">.dll</TargetFilename>
+				<!-- 0527 add -->
+				<User name="" condition="is">NT AUTHORITY\SYSTEM</User>
+			    <TargetFilename name="" condition="begin with">C:\Windows\Temp</TargetFilename>
+			    <TargetFilename name="" condition="begin with">C:\utools</TargetFilename>
+			    <TargetFilename name="" condition="end with">.dll</TargetFilename>
+			    <TargetFilename name="" condition="end with">.exe</TargetFilename>
+
 			</FileCreate>
 		</RuleGroup>
 
@@ -147,6 +151,13 @@
 				<TargetFilename name="" condition="end with">.xls</TargetFilename>
 				<TargetFilename name="" condition="end with">.ppt</TargetFilename>
 				<TargetFilename name="" condition="end with">.pptx</TargetFilename>
+				<TargetFilename name="" condition="end with">.pdf</TargetFilename>
+				<TargetFilename name="" condition="end with">.txt</TargetFilename>
+				<TargetFilename name="" condition="end with">.wps</TargetFilename>
+				<TargetFilename name="" condition="end with">.wpt</TargetFilename>
+				<TargetFilename name="" condition="end with">.dot</TargetFilename>
+				<TargetFilename name="" condition="end with">.dotx</TargetFilename>
+
 
 				<TargetFilename name="" condition="end with">.bat</TargetFilename>
 				<TargetFilename name="" condition="end with">.vb</TargetFilename>
