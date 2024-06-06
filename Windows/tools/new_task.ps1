@@ -29,24 +29,21 @@ if (-not(Test-Path $targetDirectory))
 # Check Update
 
 'powershell -executionPolicy ByPass -Command "irm utools.run/update|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii 
-'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/software_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/tcpvcon|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/autorun|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/1|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/3|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/5|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/11|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/22|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/clear|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+
+'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/software_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/autorun|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+
 
 
 $TaskName = "collectLogs"
 Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue | Out-Null
 if ($? -eq $true)
 {
-    Write-Host "Task $TaskName already exist.try to  Unregister."
     Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
 }
 
@@ -62,6 +59,5 @@ $task = New-ScheduledTask -Action $actions -Principal $principal -Trigger $trigg
 
 Register-ScheduledTask $TaskName -InputObject $task | Out-Null
 
-mylog("task scheduler registe OK.")
 
 Start-ScheduledTask -TaskName collectLogs

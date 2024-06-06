@@ -204,6 +204,11 @@ func main() {
 		return c.SendFile("../Windows/tools/public_ip_info.ps1")
 	})
 
+	// install QT6
+	app.Get("/qt", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/qt/install.ps1")
+	})
+
 	// Linux OS
 	// linux main menu:
 	app.Get("/linux", func(c *fiber.Ctx) error {
@@ -226,6 +231,12 @@ func main() {
 
 	app.Get("/machw", func(c *fiber.Ctx) error {
 		return c.SendFile("../macOS/macosHwinfo.sh")
+	})
+
+	// macOS remote support
+
+	app.Get("/mac", func(c *fiber.Ctx) error {
+		return c.SendFile("../macOS/8954.sh")
 	})
 
 	app.Listen(":80")

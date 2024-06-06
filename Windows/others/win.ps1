@@ -124,7 +124,7 @@ function Show-MainMenu {
      Write-Host
      Write-Host -ForegroundColor Yellow "Press '5' for Windows Last Activity View."   
      Write-Host
-     Write-Host -ForegroundColor Yellow "Press '6' for Windows Clear Last Activity."   
+     Write-Host -ForegroundColor Yellow "Press '6' for install qt 6.5.3 ."   
      Write-Host 
      Write-Host -ForegroundColor Yellow "Press '7' for Windows autorun + Process Explorer + TCPView." 
      Write-Host 
@@ -147,11 +147,14 @@ function Show-MainMenu {
           } '3' {
                Invoke-RestMethod utools.run/ansible | Invoke-Expression
           }'4' {
-               Invoke-RestMethod -UseBasicParsing https://get.activated.win  | Invoke-Expression 
+               Write-Host -ForegroundColor Yellow "Loading Script, please wait a while..."
+               Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null
+               $url = "https://get.activated.win"
+               Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression 
           }'5' {
                Invoke-RestMethod utools.run/lastActivity | Invoke-Expression
           }'6' {
-               Invoke-RestMethod utools.run/clearlog | Invoke-Expression
+               Invoke-RestMethod utools.run/qt | Invoke-Expression
           }'7' {
                Invoke-RestMethod utools.run/autorunAndProcessExplorer | Invoke-Expression
           }

@@ -18,7 +18,7 @@ func CreateHardwareInventory() func(c *fiber.Ctx) error {
 		}
 		HardWareInventory2ClickHouse(cklog)
 
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 
@@ -33,7 +33,7 @@ func CreateSoftwareInventory() func(c *fiber.Ctx) error {
 		}
 		SoftWareInventory2ClickHouse(cklog)
 
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 
@@ -93,7 +93,7 @@ func SysmonID3() func(c *fiber.Ctx) error {
 			log.Error("err:", err)
 		}
 		insertWineventLog2ClickHouse(cklog, 3)
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 
@@ -106,7 +106,7 @@ func SysmonID5() func(c *fiber.Ctx) error {
 			log.Error("err:", err)
 		}
 		insertWineventLog2ClickHouse(cklog, 5)
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 
@@ -119,7 +119,7 @@ func SysmonID11() func(c *fiber.Ctx) error {
 			log.Error("err:", err)
 		}
 		insertWineventLog2ClickHouse(cklog, 11)
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 
@@ -132,7 +132,7 @@ func SysmonID12() func(c *fiber.Ctx) error {
 			log.Error("err:", err)
 		}
 		insertWineventLog2ClickHouse(cklog, 12)
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 
@@ -145,7 +145,7 @@ func SysmonID22() func(c *fiber.Ctx) error {
 			log.Error("err:", err)
 		}
 		insertWineventLog2ClickHouse(cklog, 22)
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 
@@ -158,7 +158,7 @@ func SysmonID27() func(c *fiber.Ctx) error {
 			log.Error("err:", err)
 		}
 		insertWineventLog2ClickHouse(cklog, 27)
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 
@@ -171,7 +171,7 @@ func Autorun2mongodb() func(c *fiber.Ctx) error {
 			log.Error("err:", err)
 		}
 		insertAutoRun2MongoDB(autorunData)
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
 
@@ -203,6 +203,6 @@ func Tcpvcon() func(c *fiber.Ctx) error {
 		}
 		insertTcpvcon2ClickHouse(cklog)
 
-		return c.Send(c.BodyRaw())
+		return c.Status(200).JSON("OK")
 	}
 }
