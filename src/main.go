@@ -84,6 +84,12 @@ func main() {
 		return c.SendFile("../Windows/sysmon/RemoveSysmon.ps1")
 	})
 
+	//jetbrains activate
+
+	app.Get("/jetbrains", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/jetbrains/activate.ps1")
+	})
+
 	//log registe information and update information;
 
 	app.Post("/mylog", MyLog())

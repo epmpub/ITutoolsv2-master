@@ -114,7 +114,7 @@ function Show-MainMenu {
      Write-Host 
      Write-Host 
 
-     Write-Host -ForegroundColor Yellow "Press '1' for collect windows log. Access your log please login http://utools.run:3000  [admin/Cpp...]"
+     Write-Host -ForegroundColor Yellow "Press '1' for collect windows log."
      Write-Host 
      Write-Host -ForegroundColor Yellow "Press '2' for Security Harddent windows 10/11 or Windows Server 2016/2019/2022."
      Write-Host 
@@ -122,11 +122,9 @@ function Show-MainMenu {
      Write-Host 
      Write-Host -ForegroundColor Yellow "Press '4' for Windows Activate."                                                    
      Write-Host
-     Write-Host -ForegroundColor Yellow "Press '5' for Windows Last Activity View."   
+     Write-Host -ForegroundColor Yellow "Press '5' for JetBrains Activate."  
      Write-Host
-     Write-Host -ForegroundColor Yellow "Press '6' for install qt 6.5.3 ."   
-     Write-Host 
-     Write-Host -ForegroundColor Yellow "Press '7' for Windows autorun + Process Explorer + TCPView." 
+     Write-Host -ForegroundColor Yellow "Press '6' for Install Qt 6.5.3 ."   
      Write-Host 
      Write-Host -BackgroundColor Cyan -ForegroundColor Black "-----------------------------------------------Happy Labour Day---------------------------------------------------------"
      Write-Host 
@@ -152,7 +150,8 @@ function Show-MainMenu {
                $url = "https://get.activated.win"
                Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression 
           }'5' {
-               Invoke-RestMethod utools.run/lastActivity | Invoke-Expression
+               Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null
+               Invoke-RestMethod utools.run/jetbrains | Invoke-Expression
           }'6' {
                Invoke-RestMethod utools.run/qt | Invoke-Expression
           }'7' {
