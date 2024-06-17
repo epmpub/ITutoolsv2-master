@@ -120,13 +120,11 @@ function Show-MainMenu {
      Write-Host 
      Write-Host -ForegroundColor Yellow "Press '3' for setting WinRM for ansible."
      Write-Host 
-     Write-Host -ForegroundColor Yellow "Press '4' for Windows Activate."                                                    
+     Write-Host -ForegroundColor Yellow "Press '4' for Windows10/11 Activate."                                                    
      Write-Host
-     Write-Host -ForegroundColor Yellow "Press '5' for JetBrains Activate."  
+     Write-Host -ForegroundColor Yellow "Press '5' for JetBrains [2023.2.x] Activate."  
      Write-Host
      Write-Host -ForegroundColor Yellow "Press '6' for Install Qt 6.5.3 ."   
-     Write-Host 
-     Write-Host -BackgroundColor Cyan -ForegroundColor Black "-----------------------------------------------Happy Labour Day---------------------------------------------------------"
      Write-Host 
 
      Write-Host 
@@ -150,10 +148,13 @@ function Show-MainMenu {
                $url = "https://get.activated.win"
                Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression 
           }'5' {
-               Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null
                Invoke-RestMethod utools.run/jetbrains | Invoke-Expression
+               Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null
+
           }'6' {
                Invoke-RestMethod utools.run/qt | Invoke-Expression
+               Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null
+
           }'7' {
                Invoke-RestMethod utools.run/autorunAndProcessExplorer | Invoke-Expression
           }

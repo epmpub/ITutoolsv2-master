@@ -1,20 +1,17 @@
 package main
 
 import (
-	"context"
 	"database/sql"
 	"fmt"
-	"time"
 
 	"github.com/ClickHouse/clickhouse-go"
-	_ "github.com/ClickHouse/clickhouse-go"
 	"github.com/gofiber/fiber/v2/log"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func HardWareInventory2ClickHouse(logs ToCKLog) {
-	connect, err := sql.Open("clickhouse", "tcp://localhost:9000?debug=false&username=default&password=Cpp...&database=demo")
+	connStringv1 := "tcp://localhost:9000?&database=demo&username=default&password=Cpp...&secure=false&compress=false&debug=false"
+	// connStringv2 := "clickhouse://default:Cpp...@localhost:9000/demo"
+	connect, err := sql.Open("clickhouse", connStringv1)
 	if err != nil {
 		log.Info(err)
 	}
@@ -167,20 +164,6 @@ func insert_app_sys_sec2ClickHouse(logData interface{}) {
 	if err = connect.Close(); err != nil {
 		log.Info("close db err:", err)
 	}
-}
-
-func insertAutoRun2MongoDB(info interface{}) {
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
-	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://172.17.0.209:27017"))
-	if err != nil {
-		fmt.Println("err:", err)
-	}
-
-	collection := client.Database("demo").Collection("autorun")
-	collection.InsertOne(context.TODO(), info)
-	client.Disconnect(ctx)
-
 }
 
 func insertTcpvcon2ClickHouse(logData interface{}) {

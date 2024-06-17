@@ -144,11 +144,6 @@ func main() {
 
 	//-------------------------------------------------------
 
-	//upload autorun data to mangodb
-	app.Post("/autorun2mongodb", Autorun2mongodb())
-
-	//-------------------------------------------------------
-
 	//upload autorun data to clickhouse
 	app.Post("/autorun", Autorun())
 

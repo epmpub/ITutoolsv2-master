@@ -162,19 +162,6 @@ func SysmonID27() func(c *fiber.Ctx) error {
 	}
 }
 
-func Autorun2mongodb() func(c *fiber.Ctx) error {
-
-	return func(c *fiber.Ctx) error {
-		var autorunData interface{}
-		err := json.Unmarshal(c.BodyRaw(), &autorunData)
-		if err != nil {
-			log.Error("err:", err)
-		}
-		insertAutoRun2MongoDB(autorunData)
-		return c.Status(200).JSON("OK")
-	}
-}
-
 func Autorun() func(c *fiber.Ctx) error {
 
 	return func(c *fiber.Ctx) error {
