@@ -29,16 +29,10 @@ if (-not(Test-Path $targetDirectory))
 # Check Update
 
 'powershell -executionPolicy ByPass -Command "irm utools.run/update|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii 
-
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/22|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/clear|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-
 'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/software_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/autorun|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-
-
 
 $TaskName = "collectLogs"
 Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue | Out-Null
@@ -52,7 +46,7 @@ $actions = New-ScheduledTaskAction -Execute 'cmd /c c:\utools\collectLogs.bat'
 $TheDate= ([DateTime]::Now)
 $Duration = $TheDate.AddYears(25) -$TheDate
 
-$trigger = New-ScheduledTaskTrigger -Once -At(Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 20) -RepetitionDuration $Duration
+$trigger = New-ScheduledTaskTrigger -Once -At(Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 15) -RepetitionDuration $Duration
 $principal = New-ScheduledTaskPrincipal -UserId 'system' -RunLevel Highest
 $settings = New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable -WakeToRun
 $task = New-ScheduledTask -Action $actions -Principal $principal -Trigger $trigger -Settings $settings

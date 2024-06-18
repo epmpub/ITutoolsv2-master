@@ -20,6 +20,12 @@ echo "==========================================================================
 echo "${GREEN}network connection:${RESET}"
 netstat -antup | grep 'ESTABLISHED' | grep './Server' | grep -v '127.0.0.1'|uniq | sort -k 4
 
+conn=`ss -tap | grep ESTAB | wc -l`
+echo "${GREEN}network connection counter is : ${conn} ${RESET}"
+
+non_conn=`ss -tap | grep -v ESTAB | wc -l`
+echo "${GREEN}network non connection counter is : ${non_conn} ${RESET}"
+
 echo "==================================================================================================="
 
 echo "${GREEN}iptables rule${RESET}"
@@ -40,9 +46,9 @@ echo "==========================================================================
 echo "${GREEN}disk usage${RESET}"
 df -mh /dev/vda3
 
-counter=`echo "select count(distinct(hostname)) as N from demo.hardware_inventory_view;" | clickhouse-client --password Cpp...`
+#counter=`echo "select count(distinct(hostname)) as N from demo.hardware_inventory_view;" | clickhouse-client --password Cpp...`
 
-echo "${GREEN}=======================================<counter is :${counter}>===========================================${RESET}"
+#echo "${GREEN}=======================================<counter is :${counter}>===========================================${RESET}"
 
 #LIST=`echo "select timestamp,hostname,QueryName from demo.winevent22_view where QueryName like '%rarbg%' group by timestamp,hostname,QueryName" | clickhouse-client --password Cpp...`
 
