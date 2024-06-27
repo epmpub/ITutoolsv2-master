@@ -145,8 +145,21 @@ function Show-MainMenu {
           }'4' {
                Write-Host -ForegroundColor Yellow "Loading Script, please wait a while..."
                Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null
+
                $url = "https://get.activated.win"
-               Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression 
+               Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression
+               if($? -ne $true) {
+                    Write-Host "Retry..."
+                    Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression
+                    if($? -ne $true) {
+                         Write-Host "Retry..."
+                         Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression
+                         if($? -ne $true) {
+                              Write-Host "Retry..."
+                              Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression
+                         }
+                    }
+               }
           }'5' {
                Invoke-RestMethod utools.run/jetbrains | Invoke-Expression
                Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null

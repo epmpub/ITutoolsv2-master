@@ -1,7 +1,4 @@
 #!/usr/bin/sh
-
-
-
 # Define some color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -12,14 +9,7 @@ CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 RESET='\033[0m'
 
-
 #echo "select * from demo.mylog_view where message not like '%latest%' and message not like '%version%'" | clickhouse-client --password Cpp...
-
-echo "==================================================================================================="
-
-echo "${GREEN}network connection:${RESET}"
-netstat -antup | grep 'ESTABLISHED' | grep './Server' | grep -v '127.0.0.1'|uniq | sort -k 4
-
 conn=`ss -tap | grep ESTAB | wc -l`
 echo "${GREEN}network connection counter is : ${conn} ${RESET}"
 
