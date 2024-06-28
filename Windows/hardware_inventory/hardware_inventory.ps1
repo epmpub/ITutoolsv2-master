@@ -26,7 +26,7 @@ $disks = $disklist.ToString()
 $gpu = (Get-WmiObject Win32_VideoController).VideoProcessor
 
 # Hotfix list
-foreach ($item in $info.OsHotFixes){$HotFixIDss += $item.HotFixID + " "}
+# foreach ($item in $info.OsHotFixes){$HotFixIDss += $item.HotFixID + " "}
 
 # Mac address
 foreach ($mac in (Get-NetAdapter)) {$macs += $mac.MacAddress + "|"}
@@ -35,7 +35,7 @@ foreach ($mac in (Get-NetAdapter)) {$macs += $mac.MacAddress + "|"}
 $list = [System.Collections.ArrayList]::new()
 foreach ($ip in (Get-NetIPAddress))
 {
-    if(($ip.AddressFamily -eq 'IPv4') -and ($ip.IPAddress -notmatch ‘169’) -and ($ip.IPAddress -notmatch ‘127’))
+    if(($ip.AddressFamily -eq 'IPv4') -and ($ip.IPAddress -notmatch '169') -and ($ip.IPAddress -notmatch '127'))
     {
         $null = $list.Add($ip.IPAddress)
     }
@@ -52,7 +52,7 @@ $OsVersion = $info.OsVersion
 $data = [ordered]@{}
 $data["Id"] = $guid
 $data["Message"] = $timestamp + ',' + $hostname + ',' + $cpu + ',' + $ram + ',' + $disks + ',' + $gpu + ','+
-                   $HotFixIDss + ','+ $macs + ',' + $ips + ',' +
+                   $macs + ',' + $ips + ',' +
                    $LastBootUpTime + ',' + $Uptime + ',' + $OsVersion
 
 #free macs variable.
