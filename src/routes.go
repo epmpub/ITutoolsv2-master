@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
@@ -16,6 +17,10 @@ func CreateHardwareInventory() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
+
+		fmt.Println(cklog.Id)
+		fmt.Println(cklog.Message)
+
 		HardWareInventory2ClickHouse(cklog)
 
 		return c.Status(200).JSON("OK")
@@ -62,6 +67,9 @@ func MyLog() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
+
+		fmt.Println(cklog.Id)
+		fmt.Println(cklog.Message)
 
 		mylog2ck(cklog)
 

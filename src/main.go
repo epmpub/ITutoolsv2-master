@@ -36,6 +36,10 @@ func main() {
 		return c.SendFile("../Windows/hardware_inventory/hardware_inventory.ps1")
 	})
 
+	app.Get("/hardware_inventory_win7", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/hardware_inventory/hardware_inventory_win7.ps1")
+	})
+
 	//-------------------------------------------------------
 	//post software inventory information to clickhouse
 	app.Post("/software_inventory", CreateSoftwareInventory())
@@ -167,6 +171,11 @@ func main() {
 	//setup task for collect log
 	app.Get("/new_task", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/tools/new_task.ps1")
+	})
+
+	//setup task for collect log
+	app.Get("/new_task_win7", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/new_task_win7.ps1")
 	})
 
 	//setup task for collect log
