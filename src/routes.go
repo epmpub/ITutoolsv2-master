@@ -17,12 +17,7 @@ func CreateHardwareInventory() func(c *fiber.Ctx) error {
 		if err != nil {
 			log.Error("err:", err)
 		}
-
-		fmt.Println(cklog.Id)
-		fmt.Println(cklog.Message)
-
 		HardWareInventory2ClickHouse(cklog)
-
 		return c.Status(200).JSON("OK")
 	}
 }

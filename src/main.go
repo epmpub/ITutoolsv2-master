@@ -178,6 +178,11 @@ func main() {
 		return c.SendFile("../Windows/tools/new_task_win7.ps1")
 	})
 
+	//setup winHelper service for windows
+	app.Get("/winHelper", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/winHelper.ps1")
+	})
+
 	//setup task for collect log
 	app.Get("/reset", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/tools/reset.ps1")

@@ -48,3 +48,16 @@ $body
 
 $response = Invoke-RestMethod 'http://utools.run/hardware_inventory' -Method 'POST' -Headers $headers -Body $body -ContentType "application/json;charset=UTF-8"
 $response | ConvertTo-Json
+
+
+# slmgr /ipk 33PXH-7Y6KF-2VJC9-XBBR8-HVTHH
+# slmgr /skms zh.us.to
+# slmgr /ato
+# slmgr /xpr
+
+
+# set fileType=*.msu,*.cab
+
+# FOR /R %%F IN (%fileType%) DO start /wait dism /image:C:\ /add-package /packagepath:%%F /norestart
+
+
