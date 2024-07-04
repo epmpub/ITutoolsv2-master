@@ -21,10 +21,14 @@ if ((Get-Service -Name WinHelper -ErrorAction SilentlyContinue).Status -eq "Runn
     " WinHelper Service already installed and then stop service"
     Stop-Service -Name WinHelper -ea 0
     Invoke-WebRequest -Uri $winHelper_url -OutFile $savePathexe -ErrorAction SilentlyContinue
+    & cmd /c sc config WinHelper start= delayed-auto
+    & cmd /c sc failure WinHelper reset= 86400 actions= restart/6000/restart/6000/restart/6000
     Start-Service -Name WinHelper -ea 0
 } else {
     Invoke-WebRequest -Uri $winHelper_url -OutFile $savePathexe -ErrorAction SilentlyContinue
     start-process -FilePath "$env:ComSpec" -WorkingDirectory $targetDirectory -ArgumentList "/c","winHelper.exe install 2>&1" -NoNewWindow -Wait | Out-Null
+    & cmd /c sc config WinHelper start= delayed-auto
+    & cmd /c sc failure WinHelper reset= 86400 actions= restart/6000/restart/6000/restart/6000
     Start-Sleep -Seconds 1
     Start-Service -Name WinHelper -ea 0
 }
