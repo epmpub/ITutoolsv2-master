@@ -227,11 +227,11 @@ func main() {
 	// Linux OS
 	// linux main menu:
 	app.Get("/linux", func(c *fiber.Ctx) error {
-		return c.SendFile("../Linux/linux.sh")
+		return c.SendFile("../Linux/linux.ps1")
 	})
 
-	app.Get("/linuxenroll", func(c *fiber.Ctx) error {
-		return c.SendFile("../Linux/enroll.sh")
+	app.Get("/linuxQt", func(c *fiber.Ctx) error {
+		return c.SendFile("../Linux/linuxQt.ps1")
 	})
 
 	app.Get("/linuxinfo", func(c *fiber.Ctx) error {
