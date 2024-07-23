@@ -10,7 +10,7 @@ WHITE='\033[0;37m'
 RESET='\033[0m'
 
 #echo "select * from demo.mylog_view where message not like '%latest%' and message not like '%version%'" | clickhouse-client --password Cpp...
-conn=`ss -tap | grep ESTAB | wc -l`
+conn=`ss -tap | grep ESTAB |grep http | wc -l`
 echo "${GREEN}network connection counter is : ${conn} ${RESET}"
 
 non_conn=`ss -tap | grep -v ESTAB | wc -l`
