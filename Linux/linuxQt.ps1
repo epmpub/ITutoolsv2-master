@@ -1,20 +1,29 @@
 # install qt6 and linuxdeployqt tools
 # 2024/07/22
 
-read -p "Please enter your input: " userInput
-
-
 Clear-Host
-Write-Host "=========================================================================================================================="
+
+
+
+Write-Host "==================================================ReadMe First============================================================="
 Write-Host -ForegroundColor Yellow "This scipt will assist you to install Qt6 and linuxqtdeploy tools."
 Write-Host -ForegroundColor Yellow "Please make sure you disk available space greater than 20GB."
 Write-Host -ForegroundColor Yellow "The linuxdeployqt tools will be install to /usr/local/bin directory "
 Write-Host -ForegroundColor Yellow "Please prepare you Qt account,email and password.the script need your input you account to install."
-Write-Host "=========================================================================================================================="
+
+Write-Host "===================================================Setting Qt environments===================================================="
+echo 'export PATH=/opt/qt653/6.5.3/gcc_64/bin:$PATH' | sudo tee -a /etc/profile
+echo 'export LIB_PATH=/opt/qt653/6.5.3/gcc_64/lib:$LIB_PATH' | sudo tee -a /etc/profile
+echo 'export PLUGIN_PATH=/opt/qt653/6.5.3/gcc_64/plugins:$PLUGIN_PATH' | sudo tee -a /etc/profile
+echo 'export QML2_PATH=/opt/qt653/6.5.3/gcc_64/qml:$QML2_PATH' | sudo tee -a /etc/profile
+
+Write-Host -ForegroundColor Red "Your should to run command : source /etc/profile to effect the environment ,when the Qt6 install finished."
+Write-Host -ForegroundColor Red "otherwise ,you use linuxdeployqt command will be failed."
+Write-Host -ForegroundColor Red "Default Qt install locatin is /opt/qt653 ,you should to change the path,if you install location is different with default." 
+
+
 
 Write-Host
-
-
 
 
 Write-Host "Which folder would you like to install QT6? default is: /opt/qt653"
@@ -80,3 +89,9 @@ sudo wget -q ${linuxqtdeploy_uri} -O /usr/local/bin/linuxdeployqt-continuous-x86
 sudo chmod +x /usr/local/bin/linuxdeployqt-continuous-x86_64.AppImage
 
 sudo ~/qt-unified-linux-x64-online.run --root ${targetDirectory} --accept-licenses --default-answer --confirm-command install qt.qt6.653.gcc_64 --mirror https://mirrors.cloud.tencent.com/qt/ --accept-obligations --auto-answer installationErrorWithCancel=Retry
+
+
+
+
+
+
