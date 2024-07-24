@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://github.com/probonopd/linuxdeployqt/releases
+HostUrl=https://objects.githubusercontent.com/github-production-release-asset-2e65be/67432158/7c26c25d-7edc-4476-b113-86009b2c4268?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240723%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240723T054145Z&X-Amz-Expires=300&X-Amz-Signature=5085dc017c779865f610a7be18436704519d5eea12aa2bc691697be8864b3ea1&X-Amz-SignedHeaders=host&actor_id=9148510&key_id=0&repo_id=67432158&response-content-disposition=attachment%3B%20filename%3Dlinuxdeployqt-continuous-x86_64.AppImage&response-content-type=application%2Foctet-stream

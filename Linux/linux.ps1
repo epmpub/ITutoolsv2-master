@@ -41,7 +41,7 @@ function Show-MainMenu {
     Write-Host 
 
 
-    $selection = Read-Host "Please make your selection:[1,2,3,4,5,6] ,Press 'q' to exit, Press 'CTRL + C' to break"
+    $selection = Read-Host "Please make your selection:[1,2,3,4,5] ,Press 'q' to exit, Press 'CTRL + C' to break"
 
 
     switch ($selection) {
