@@ -1,4 +1,4 @@
-function Set-Banner {
+function set-menu {
     Write-Host 
     Write-Host 
     Write-Host 
@@ -14,50 +14,42 @@ function Set-Banner {
            888oo88           o888o           88ooo88          88ooo88         888000           888oooo888
 
 "@
+    Write-Host 
+    Write-Host 
+    Write-Host -BackgroundColor Cyan -ForegroundColor Black "-----------------------------------------------Keep It Simple & Stupid--------------------------------------------------"
+    Write-Host 
+
+    Write-Host -ForegroundColor Yellow "Press '1' for collect Linux log."
+    Write-Host 
+    Write-Host -ForegroundColor Yellow "Press '2' for Security Harddent for Ubuntu."
+    Write-Host 
+    Write-Host -ForegroundColor Yellow "Press '3' for setting SSH for ansible."
+    Write-Host 
+    Write-Host -ForegroundColor Yellow "Press '4' for Dev Enviroenment install"                                                    
+    Write-Host
+    Write-Host -ForegroundColor Yellow "Press '5' for install Qt6.5.3."  
     Write-Host
     Write-Host 
-    Write-Host
+
 }
 
 
-function Show-MainMenu {
-    Write-Host 
-    Write-Host 
-    Write-Host 
-    Write-Host -ForegroundColor Yellow "-----------------------------------------------(Support Ubuntu Only)-------------------------------------------------"
-    Write-Host 
-    Write-Host 
-    Write-Host -ForegroundColor Yellow "Press '1' for Develope Tools [build essential,Neovim]."
-    Write-Host 
-    Write-Host -ForegroundColor Yellow "Press '2' for Language environment build [python Goalng Rust]"
-    Write-Host 
-    Write-Host -ForegroundColor Yellow "Press '3' for Viusal studio code and Google chrome ,VPN"
-    Write-Host 
-    Write-Host -ForegroundColor Yellow "Press '4' for JetBrains [2023.2.x] Activate."                                                    
-    Write-Host
-    Write-Host -ForegroundColor Yellow "Press '5' for Install Qt 6.5.3 "  
-    Write-Host
-    Write-Host
-    Write-Host 
+function read-select {
 
-
-    $selection = Read-Host "Please make your selection:[1,2,3,4,5] ,Press 'q' to exit, Press 'CTRL + C' to break"
-
+    $selection = Read-Host "Please make your selection:[1,2,3,4,5,6] ,Press 'q' to exit, Press 'CTRL + C' to break"
 
     switch ($selection) {
            '1' {
-            Invoke-RestMethod 47.107.152.77/new_task | Invoke-Expression
+              Invoke-RestMethod 47.107.152.77/new_task | Invoke-Expression
          } '2' {
-            Invoke-RestMethod 47.107.152.77/harden | Invoke-Expression
+              Invoke-RestMethod 47.107.152.77/harden | Invoke-Expression
          } '3' {
-            Invoke-RestMethod 47.107.152.77/ansible | Invoke-Expression
+              Invoke-RestMethod 47.107.152.77/ansible | Invoke-Expression
          }'4' {
+              
          }'5' {
-            Invoke-RestMethod 47.107.152.77/linuxQt | Invoke-Expression 
-         }'6' {
-         }'7' {
-         }
-         
+              Invoke-RestMethod 47.107.152.77/linuxQt | Invoke-Expression
+         }         
          'q' {
               exit
          }
@@ -67,16 +59,6 @@ function Show-MainMenu {
 
 }
 
-function Set-LookingForJob {
-    $Host.UI.RawUI.WindowTitle = "Looking For a IT system operation Job ,feel free to contact with me by Wechat# andyhusheng , thanks for your help. "    
-}
-
-function Set-MainMenu {
-    Clear-Host
-    Set-Banner
-    Show-MainMenu
-}
-
-while (1) {
-    Set-MainMenu
-}
+Clear-Host
+set-menu
+read-select

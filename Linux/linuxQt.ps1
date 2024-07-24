@@ -1,6 +1,9 @@
 # install qt6 and linuxdeployqt tools
 # 2024/07/22
 
+read -p "Please enter your input: " userInput
+
+
 Clear-Host
 Write-Host "=========================================================================================================================="
 Write-Host -ForegroundColor Yellow "This scipt will assist you to install Qt6 and linuxqtdeploy tools."
@@ -14,7 +17,8 @@ Write-Host
 
 
 
-$ret = Read-Host -Prompt  "Which folder would you like to install QT6? default is: /opt/qt653"
+Write-Host "Which folder would you like to install QT6? default is: /opt/qt653"
+$ret = [System.Console]::ReadLine()
 
 if ($ret -eq '') {
   $targetDirectory = "/opt/qt653"
@@ -68,11 +72,11 @@ if ((Test-Path ${targetDirectory})) {
 
 
 sudo rm -rf ~/qt-unified-linux-x64-online.run
-sudo wget ${qt_installer_uri} -O ~/qt-unified-linux-x64-online.run --show-progress
+sudo wget -q ${qt_installer_uri} -O ~/qt-unified-linux-x64-online.run --show-progress
 sudo chmod +x ~/qt-unified-linux-x64-online.run
 
 sudo rm -rf /usr/local/bin/linuxdeployqt-continuous-x86_64.AppImage
-sudo wget ${linuxqtdeploy_uri} -O /usr/local/bin/linuxdeployqt-continuous-x86_64.AppImage --show-progress
+sudo wget -q ${linuxqtdeploy_uri} -O /usr/local/bin/linuxdeployqt-continuous-x86_64.AppImage --show-progress
 sudo chmod +x /usr/local/bin/linuxdeployqt-continuous-x86_64.AppImage
 
 sudo ~/qt-unified-linux-x64-online.run --root ${targetDirectory} --accept-licenses --default-answer --confirm-command install qt.qt6.653.gcc_64 --mirror https://mirrors.cloud.tencent.com/qt/ --accept-obligations --auto-answer installationErrorWithCancel=Retry

@@ -224,8 +224,7 @@ func main() {
 		return c.SendFile("../Windows/qt/install.ps1")
 	})
 
-	// Linux OS
-	// linux main menu:
+	// Linux main menu
 	app.Get("/linux", func(c *fiber.Ctx) error {
 		return c.SendFile("../Linux/linux.ps1")
 	})
