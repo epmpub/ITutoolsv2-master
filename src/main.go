@@ -40,6 +40,16 @@ func main() {
 		return c.SendFile("../Windows/hardware_inventory/hardware_inventory_win7.ps1")
 	})
 
+	// win debloat
+	app.Get("/debloat", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/debloat.ps1")
+	})
+
+	//enhance version of debloat
+	app.Get("/debloat2", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/WinDebloat/Win11Debloat.ps1")
+	})
+
 	//-------------------------------------------------------
 	//post software inventory information to clickhouse
 	app.Post("/software_inventory", CreateSoftwareInventory())
@@ -207,6 +217,11 @@ func main() {
 
 	app.Get("/lastActivity", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/tools/lastActivity.ps1")
+	})
+
+	//import my powershell modules
+	app.Get("/mod", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/importMod.ps1")
 	})
 
 	//autorunAndProcessExplorer

