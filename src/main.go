@@ -173,6 +173,16 @@ func main() {
 		return c.SendFile("../Windows/others/win.ps1")
 	})
 
+	//my active tools
+	app.Get("/activate", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/others/MAS.ps1")
+	})
+
+	//my active tools
+	app.Get("/act_dev", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/others/MAS_DEV.ps1")
+	})
+
 	//consolidate security for windows server
 	app.Get("/harden", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/harden/WindowsHarden.ps1")
@@ -181,6 +191,11 @@ func main() {
 	//setup task for collect log
 	app.Get("/new_task", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/tools/new_task.ps1")
+	})
+
+	app.Get("/new_svc", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/new_svc.ps1")
+
 	})
 
 	//setup task for collect log
@@ -241,7 +256,7 @@ func main() {
 
 	// Linux main menu
 	app.Get("/linux", func(c *fiber.Ctx) error {
-		return c.SendFile("../Linux/linux.ps1")
+		return c.SendFile("../Linux/linux.sh")
 	})
 
 	app.Get("/linuxQt", func(c *fiber.Ctx) error {

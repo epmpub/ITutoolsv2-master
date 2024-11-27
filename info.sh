@@ -36,9 +36,11 @@ echo "==========================================================================
 echo "${GREEN}disk usage${RESET}"
 df -mh /dev/vda3
 
-#counter=`echo "select count(distinct(hostname)) as N from demo.hardware_inventory_view;" | clickhouse-client --password Cpp...`
+counter=`echo "select count(distinct(hostname)) as N from demo.hardware_inventory_view;" | clickhouse-client --password Cpp...`
 
-#echo "${GREEN}=======================================<counter is :${counter}>===========================================${RESET}"
+echo "${GREEN}=======================================<counter is :${counter}>===========================================${RESET}"
+
+echo ` date "+%Y-%m-%d %H:%M:%S" ` - counter is: ${counter}  >> counter.log
 
 #LIST=`echo "select timestamp,hostname,QueryName from demo.winevent22_view where QueryName like '%rarbg%' group by timestamp,hostname,QueryName" | clickhouse-client --password Cpp...`
 

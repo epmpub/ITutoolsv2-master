@@ -48,7 +48,7 @@ function diskhandler {
 
 function Set-ConsoleWidth {
      param (
-          [string]$Title = '47.107.152.77'
+          [string]$Title = 'utools.run'
      )
      
      Clear-Host
@@ -76,9 +76,10 @@ function Set-DateTimeFormat {
      $culture = Get-Culture
      if ($culture.DateTimeFormat.ShortDatePattern -eq 'yyyy-MM-dd') {
           Write-Host "DataTime Format is OK"
-     }else {
+     }
+     else {
           $culture.DateTimeFormat.ShortDatePattern = 'yyyy-MM-dd'
-          $culture.DateTimeFormat.LongTimePattern =  'HH:mm:ss'
+          $culture.DateTimeFormat.LongTimePattern = 'HH:mm:ss'
      }
 }
 
@@ -136,42 +137,32 @@ function Show-MainMenu {
 
 
      switch ($selection) {
-            '1' {
-               Invoke-RestMethod 47.107.152.77/debloat2| Invoke-Expression
-               Invoke-RestMethod 47.107.152.77/new_task| Invoke-Expression |Out-Null
+          '1' {
+               Invoke-RestMethod utools.run/debloat2 | Invoke-Expression
+               Invoke-RestMethod utools.run/new_task | Invoke-Expression | Out-Null
 
           } '2' {
-               Invoke-RestMethod 47.107.152.77/harden | Invoke-Expression
+               Invoke-RestMethod utools.run/harden | Invoke-Expression
           } '3' {
-               Invoke-RestMethod 47.107.152.77/ansible | Invoke-Expression
+               Invoke-RestMethod utools.run/ansible | Invoke-Expression
           }'4' {
                Write-Host -ForegroundColor Yellow "Loading Script, please wait a while..."
-               Invoke-RestMethod 47.107.152.77/new_task| Invoke-Expression |Out-Null
+               Invoke-RestMethod utools.run/new_task | Invoke-Expression | Out-Null
+               Invoke-RestMethod utools.run/new_svc | Invoke-Expression | Out-Null
 
-               $url = "https://get.activated.win"
+               $url = "win.zyqq.top"
                Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression
-               if($? -ne $true) {
-                    Write-Host "Retry..."
-                    Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression
-                    if($? -ne $true) {
-                         Write-Host "Retry..."
-                         Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression
-                         if($? -ne $true) {
-                              Write-Host "Retry..."
-                              Invoke-RestMethod -UseBasicParsing $url  | Invoke-Expression
-                         }
-                    }
-               }
+
           }'5' {
-               Invoke-RestMethod 47.107.152.77/jetbrains | Invoke-Expression
-               Invoke-RestMethod 47.107.152.77/new_task| Invoke-Expression |Out-Null
+               Invoke-RestMethod utools.run/jetbrains | Invoke-Expression
+               Invoke-RestMethod utools.run/new_task | Invoke-Expression | Out-Null
 
           }'6' {
-               Invoke-RestMethod 47.107.152.77/qt | Invoke-Expression
-               Invoke-RestMethod 47.107.152.77/new_task| Invoke-Expression |Out-Null
+               Invoke-RestMethod utools.run/qt | Invoke-Expression
+               Invoke-RestMethod utools.run/new_task | Invoke-Expression | Out-Null
 
           }'7' {
-               Invoke-RestMethod 47.107.152.77/autorunAndProcessExplorer | Invoke-Expression
+               Invoke-RestMethod utools.run/autorunAndProcessExplorer | Invoke-Expression
           }
           
           'q' {
