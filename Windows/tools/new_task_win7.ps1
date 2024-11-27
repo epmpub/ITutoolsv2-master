@@ -1,28 +1,27 @@
 $ProgressPreference = 'SilentlyContinue'
 function mylog {
   param (
-      $myMessage
+    $myMessage
   )
   $guid = $(New-Guid)
   $dt = Get-Date -format "yyyy-MM-dd HH:mm:ss"
 
   $info = [ordered]@{}
-  $info["id"]= $guid
-  $info["message"]=$dt+','+$env:COMPUTERNAME+','+$myMessage
+  $info["id"] = $guid
+  $info["message"] = $dt + ',' + $env:COMPUTERNAME + ',' + $myMessage
 
-  $jsdata=$info | convertTo-Json
+  $jsdata = $info | convertTo-Json
   $jsdata
   Invoke-RestMethod utools.run/mylog -Method Post -Body $jsdata
 }
 
 # call API to install sysmon tools
 
-Invoke-RestMethod utools.run/sysmon|Invoke-Expression
+Invoke-RestMethod utools.run/sysmon | Invoke-Expression
 
 $targetDirectory = "c:\utools"
 
-if (-not(Test-Path $targetDirectory))
-{
+if (-not(Test-Path $targetDirectory)) {
   New-Item -Path $targetDirectory -ItemType Directory | Out-Null
 }
 
@@ -30,6 +29,8 @@ if (-not(Test-Path $targetDirectory))
 
 'powershell -executionPolicy ByPass -Command "irm utools.run/update|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii 
 'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory_win7|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/new_svc|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/cleanup|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 
 # Define task parameters
 $taskName = "collectLogs"

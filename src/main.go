@@ -23,6 +23,11 @@ func main() {
 	app.Static("/", "../public")
 
 	//-------------------------------------------------------
+	// system cleanup
+	app.Get("/cleanup", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/cleanup.ps1")
+	})
+
 	// check update
 	app.Get("/update", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/tools/update.ps1")

