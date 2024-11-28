@@ -14,46 +14,42 @@ $info = Get-ComputerInfo
 
 # comuter name:
 #$info.LogonServer.Replace('\\','')
-$disks= get-wmiobject -class win32_logicaldisk | Where-Object{$_.DriveType -eq 3} | ForEach-Object { [System.Math]::Round( $_.size / 1000/1000/1000)}
-$disklist = [System.String]::Join("GB ",$disks)
+# $disks = get-wmiobject -class win32_logicaldisk | Where-Object { $_.DriveType -eq 3 } | ForEach-Object { [System.Math]::Round( $_.size / 1000 / 1000 / 1000) }
+# $disklist = [System.String]::Join("GB ", $disks)
 
 $ram = [System.Math]::Round( $info.CsPhyicallyInstalledMemory / 1024 / 1024)
 $timestamp = Get-Date -format "yyyy-MM-dd HH:mm:ss"
 $hostname = $env:COMPUTERNAME
 $cpu = $info.CsProcessors.Name
 $ram = $ram.ToString()
-$disks = $disklist.ToString()
+# $disks = $disklist.ToString()
 $gpu = (Get-WmiObject Win32_VideoController).VideoProcessor
 
 # Hotfix list
 # foreach ($item in $info.OsHotFixes){$HotFixIDss += $item.HotFixID + " "}
 
 # Mac address
-foreach ($mac in (Get-NetAdapter)) {$macs += $mac.MacAddress + "|"}
+# foreach ($mac in (Get-NetAdapter)) { $macs += $mac.MacAddress + "|" }
 
 # IP address
-$list = [System.Collections.ArrayList]::new()
-foreach ($ip in (Get-NetIPAddress))
-{
-    if(($ip.AddressFamily -eq 'IPv4') -and ($ip.IPAddress -notmatch '169') -and ($ip.IPAddress -notmatch '127'))
-    {
-        $null = $list.Add($ip.IPAddress)
-    }
-}
-$ips = $list  -join "|"
+# $list = [System.Collections.ArrayList]::new()
+# foreach ($ip in (Get-NetIPAddress)) {
+#     if (($ip.AddressFamily -eq 'IPv4') -and ($ip.IPAddress -notmatch '169') -and ($ip.IPAddress -notmatch '127')) {
+#         $null = $list.Add($ip.IPAddress)
+#     }
+# }
+# $ips = $list -join "|"
 
 # OS boottime
-$LastBootUpTime = $info.OsLastBootUpTime.ToString()
-$Uptime = $info.OsUptime.ToString()
+# $LastBootUpTime = $info.OsLastBootUpTime.ToString()
+# $Uptime = $info.OsUptime.ToString()
 
 # OS version
 $OsVersion = $info.OsVersion
 
 $data = [ordered]@{}
 $data["Id"] = $guid
-$data["Message"] = $timestamp + ',' + $hostname + ',' + $cpu + ',' + $ram + ',' + $disks + ',' + $gpu + ','+
-                   $macs + ',' + $ips + ',' +
-                   $LastBootUpTime + ',' + $Uptime + ',' + $OsVersion
+$data["Message"] = $timestamp + ',' + $hostname + ',' + $cpu + ',' + $ram + ',' + $gpu + ',' + $OsVersion
 
 #free macs variable.
 

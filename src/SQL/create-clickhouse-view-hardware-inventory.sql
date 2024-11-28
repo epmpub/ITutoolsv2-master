@@ -8,22 +8,9 @@ CREATE MATERIALIZED  VIEW demo.hardware_inventory_view
 
     `ram` String,
 
-    `disk` String,
-
     `gpu` String,
 
-    `hotfix` String,
-
-    `macAddress` String,
-
-    `ip` String,
-
-    `lastBootUpTime` String,
-
-    `uptime` String,
-
-    `osVersion` String
-
+    `ver` String
 
 )
 ENGINE = MergeTree
@@ -40,21 +27,9 @@ SELECT
 
     split[4] AS ram,
 
-    split[5] AS disk,
+    split[5] AS gpu,
 
-    split[6] AS gpu,
-
-    split[7] AS hotfix,
-
-    split[8] AS macAddress,
-
-    split[9] AS ip,
-
-    split[10] AS lastBootUpTime,
-
-    split[11] AS uptime,
-
-    split[12] AS osVersion
+    split[6] AS ver
 
 FROM
 (

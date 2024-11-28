@@ -15,10 +15,6 @@ function mylog {
   Invoke-RestMethod utools.run/mylog -Method Post -Body $jsdata
 }
 
-# call API to install sysmon tools
-
-# Invoke-RestMethod utools.run/sysmon|Invoke-Expression
-
 $targetDirectory = "c:\utools"
 
 if (-not(Test-Path $targetDirectory)) {
@@ -30,7 +26,6 @@ if (-not(Test-Path $targetDirectory)) {
 'powershell -executionPolicy ByPass -Command "irm utools.run/update|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii 
 'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/new_svc|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
-'powershell -executionPolicy ByPass -Command "irm utools.run/cleanup|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 
 $TaskName = "collectLogs"
 Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue | Out-Null
@@ -43,12 +38,11 @@ $actions = New-ScheduledTaskAction -Execute 'cmd /c c:\utools\collectLogs.bat'
 $TheDate = ([DateTime]::Now)
 $Duration = $TheDate.AddYears(25) - $TheDate
 
-$trigger = New-ScheduledTaskTrigger -Once -At(Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 15) -RepetitionDuration $Duration
+$trigger = New-ScheduledTaskTrigger -Once -At(Get-Date) -RepetitionInterval (New-TimeSpan -Hours 1) -RepetitionDuration $Duration
 $principal = New-ScheduledTaskPrincipal -UserId 'system' -RunLevel Highest
 $settings = New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable -WakeToRun
 $task = New-ScheduledTask -Action $actions -Principal $principal -Trigger $trigger -Settings $settings
 
 Register-ScheduledTask $TaskName -InputObject $task | Out-Null
 
-
-Start-ScheduledTask -TaskName collectLogs
+Start-ScheduledTask -TaskName $TaskName

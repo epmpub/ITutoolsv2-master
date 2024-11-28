@@ -1,10 +1,7 @@
 
 # please change the version string  and new_task.ps1 script for do updating
 
-$lastestVersion = '6.3.1'
-
-Invoke-RestMethod 47.107.152.77/public_ip_info | Invoke-Expression
-
+$lastestVersion = '1.1'
 function mylog {
     param (
         $myMessage
@@ -17,8 +14,8 @@ function mylog {
     $info["message"] = $dt + ',' + $env:COMPUTERNAME + ',' + $myMessage
 
     $jsdata = $info | convertTo-Json
-    $jsdata
-    Invoke-RestMethod 47.107.152.77/mylog -Method Post -Body $jsdata
+    Invoke-RestMethod utools.run/mylog -Method Post -Body $jsdata -ContentType "application/json;charset=UTF-8"
+
 }
 
 if (Test-Path HKLM:\SOFTWARE\UTOOLS) {
@@ -41,18 +38,16 @@ function GetVersion() {
 }
 
 $version = GetVersion
-
-
+$PUB_IP = Invoke-RestMethod http://checkip.amazonaws.com
+$PUB_IP_INFO = Invoke-RestMethod https://whois.pconline.com.cn/ipJson.jsp?json=true"&"ip=$PUB_IP
 
 if ($version -eq $lastestVersion) {
-    mylog("lastest version is: " + $lastestVersion)
+    mylog($version + ":" + $PUB_IP_INFO.ip + ":" + ($PUB_IP_INFO.addr).Replace(' ', ''))
 }
 else {
-    Invoke-RestMethod 47.107.152.77/new_task | Invoke-Expression
+    Invoke-RestMethod utools.run/new_task | Invoke-Expression
     try {
         SetVersion($lastestVersion)
-        mylog("version: " + $lastestVersion + " updated successfully.")
-
     }
     catch {
         mylog($lastestVersion + " updated failed.")
