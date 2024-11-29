@@ -36,9 +36,14 @@ func main() {
 	//-------------------------------------------------------
 	//post hardware inventory information to clickhouse
 	app.Post("/hardware_inventory", CreateHardwareInventory())
+	app.Put("/hardware_inventory_put", CreateHardwareInventory_Put())
 
 	app.Get("/hardware_inventory", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/hardware_inventory/hardware_inventory.ps1")
+	})
+
+	app.Get("/hardware_inventory_put", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/hardware_inventory/hardware_inventory_put.ps1")
 	})
 
 	app.Get("/hardware_inventory_win7", func(c *fiber.Ctx) error {

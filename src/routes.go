@@ -2,11 +2,13 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
 )
 
+// Hardware Inventory Post method
 func CreateHardwareInventory() func(c *fiber.Ctx) error {
 
 	return func(c *fiber.Ctx) error {
@@ -17,6 +19,22 @@ func CreateHardwareInventory() func(c *fiber.Ctx) error {
 			log.Error("err:", err)
 		}
 		HardWareInventory2ClickHouse(cklog)
+		return c.Status(200).JSON("OK")
+	}
+}
+
+// Hardware Inventory Put method
+func CreateHardwareInventory_Put() func(c *fiber.Ctx) error {
+
+	return func(c *fiber.Ctx) error {
+		//write log to clickhouse server
+		var cklog ToCKLog
+		err := json.Unmarshal(c.BodyRaw(), &cklog)
+		if err != nil {
+			log.Error("err:", err)
+		}
+		fmt.Println("Put Method Call")
+		PutHardWareInventory2ClickHouse(cklog)
 		return c.Status(200).JSON("OK")
 	}
 }

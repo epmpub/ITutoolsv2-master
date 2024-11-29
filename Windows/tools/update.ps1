@@ -2,11 +2,60 @@
 # please change the version string  and new_task.ps1 script for do updating
 
 $lastestVersion = '1.1'
+# Hardware ID Generation Methods
+function Get-HardwareIdHash {
+    <#
+    .SYNOPSIS
+    Generates a hardware ID using system-specific information
+    
+    .PARAMETER HashType
+    Specify the hash algorithm (MD5 or SHA256)
+    #>
+    param(
+        [ValidateSet('MD5', 'SHA256')]
+        [string]$HashType = 'MD5'
+    )
+
+    # Collect system information
+    $computerSystem = Get-CimInstance Win32_ComputerSystem
+    $operatingSystem = Get-CimInstance Win32_OperatingSystem
+    $baseboard = Get-CimInstance Win32_BaseBoard
+
+    # Combine system identifiers
+    $systemInfo = @(
+        $computerSystem.Manufacturer,
+        $computerSystem.Model,
+        $computerSystem.SystemType,
+        $operatingSystem.Version,
+        $baseboard.SerialNumber,
+        $env:COMPUTERNAME
+    ) -join '|'
+
+    # Create hash
+    $encoder = [System.Text.Encoding]::UTF8
+    $bytes = $encoder.GetBytes($systemInfo)
+
+    switch ($HashType) {
+        'MD5' {
+            $hashAlgorithm = [System.Security.Cryptography.MD5]::Create()
+            $hash = $hashAlgorithm.ComputeHash($bytes)
+            return [BitConverter]::ToString($hash).Replace('-', '').ToLower()
+        }
+        'SHA256' {
+            $hashAlgorithm = [System.Security.Cryptography.SHA256]::Create()
+            $hash = $hashAlgorithm.ComputeHash($bytes)
+            return [BitConverter]::ToString($hash).Replace('-', '').ToLower()
+        }
+    }
+}
+
+
 function mylog {
     param (
         $myMessage
     )
-    $guid = $(New-Guid)
+    $guid = Get-HardwareIdHash -HashType 'MD5'
+
     $dt = Get-Date -format "yyyy-MM-dd HH:mm:ss"
 
     $info = [ordered]@{}

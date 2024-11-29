@@ -6,6 +6,7 @@ if ($Host.Version.Major -ne 5 ) {
     Start-Sleep -Seconds 5
     exit
 }
+
 # Hardware ID Generation Methods
 function Get-HardwareIdHash {
     <#
@@ -55,7 +56,6 @@ function Get-HardwareIdHash {
 
 $guid = Get-HardwareIdHash -HashType 'MD5'
 
-
 $ProgressPreference = 'SilentlyContinue'
 $info = Get-ComputerInfo
 
@@ -100,10 +100,10 @@ $data["Message"] = $timestamp + ',' + $hostname + ',' + $cpu + ',' + $ram + ',' 
 
 #free macs variable.
 
-$macs = $null
+# $macs = $null
 
 $body = $data | ConvertTo-Json
 $body
 
-$response = Invoke-RestMethod 'http://47.107.152.77/hardware_inventory' -Method 'POST' -Headers $headers -Body $body -ContentType "application/json;charset=UTF-8"
+$response = Invoke-RestMethod 'http://47.107.152.77/hardware_inventory_put' -Method 'PUT' -Headers $headers -Body $body -ContentType "application/json;charset=UTF-8"
 $response | ConvertTo-Json

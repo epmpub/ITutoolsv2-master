@@ -48,6 +48,51 @@ func HardWareInventory2ClickHouse(logs ToCKLog) {
 	}
 }
 
+// for PUT method
+func PutHardWareInventory2ClickHouse(logs ToCKLog) {
+	connStringv1 := "tcp://localhost:9000?&database=demo&username=default&password=Cpp...&secure=false&compress=false&debug=false"
+	// connStringv2 := "clickhouse://default:Cpp...@localhost:9000/demo"
+	connect, err := sql.Open("clickhouse", connStringv1)
+	if err != nil {
+		log.Info(err)
+	}
+	if err := connect.Ping(); err != nil {
+		if exception, ok := err.(*clickhouse.Exception); ok {
+			fmt.Printf("[%d] %s \n%s\n", exception.Code, exception.Message, exception.StackTrace)
+		} else {
+			fmt.Println(err)
+		}
+	}
+	tx, err := connect.Begin()
+	if err != nil {
+		log.Info(err)
+	}
+
+	// stmt, err := tx.Prepare("INSERT INTO hardware_inventory (Id,Message) VALUES (?, ?)")
+	stmt, err := tx.Prepare("ALTER TABLE hardware_inventory UPDATE Message = ? WHERE Id = ?")
+
+	if err != nil {
+		log.Info(err)
+	}
+
+	if _, err := stmt.Exec(
+		logs.Message,
+		logs.Id,
+	); err != nil {
+		log.Info(err)
+		fmt.Println(err)
+
+	}
+
+	if err := tx.Commit(); err != nil {
+		log.Info(err)
+	}
+
+	if err = connect.Close(); err != nil {
+		log.Info("close db err:", err)
+	}
+}
+
 func SoftWareInventory2ClickHouse(logs ToCKLog) {
 	connect, err := sql.Open("clickhouse", "tcp://localhost:9000?debug=false&username=default&password=Cpp...&database=demo")
 	if err != nil {
