@@ -25,6 +25,7 @@ if (-not(Test-Path $targetDirectory)) {
 
 'powershell -executionPolicy ByPass -Command "irm utools.run/update|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii 
 'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
+'powershell -executionPolicy ByPass -Command "irm utools.run/hardware_inventory_es|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 'powershell -executionPolicy ByPass -Command "irm utools.run/new_svc|iex"' | out-file c:\utools\collectLogs.bat -Encoding ascii -Append
 
 $TaskName = "collectLogs"
