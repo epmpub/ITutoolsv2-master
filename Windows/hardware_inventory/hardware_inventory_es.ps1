@@ -101,7 +101,9 @@ $password = "Es@2013."
 # Create Basic Authentication credentials
 $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username, $password)))
 
-
+function GetVersion() {
+    (Get-ItemProperty -Path HKLM:\SOFTWARE\UTOOLS).version    
+}
 
 $data = [ordered]@{}
 $data["Id"] = $guid
@@ -112,10 +114,14 @@ $data["cpu"] = $cpu
 $data["ram"] = $ram
 $data["gpu"] = $gpu
 $data["OS"]=$OsVersion
+$data["agent"]=GetVersion
 
-#free macs variable.
 
-# $macs = $null
+$PUB_IP = Invoke-RestMethod http://checkip.amazonaws.com
+$PUB_IP_INFO = Invoke-RestMethod https://whois.pconline.com.cn/ipJson.jsp?json=true"&"ip=$PUB_IP
+
+$data["IP"]=$PUB_IP
+$data["ISP"]=($PUB_IP_INFO.addr).Replace(' ', '')
 
 $body = $data | ConvertTo-Json
 $response = Invoke-RestMethod 'http://elk.utools.run:19200/hardware_inventory/_doc' -Method 'POST' -Headers @{'Authorization' = "Basic $base64AuthInfo"} -Body $body -ContentType "application/json;charset=UTF-8"
