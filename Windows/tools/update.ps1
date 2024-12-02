@@ -1,7 +1,7 @@
 
 # please change the version string  and new_task.ps1 script for do updating
 
-$lastestVersion = '1.1'
+$lastestVersion = '1.4'
 # Hardware ID Generation Methods
 function Get-HardwareIdHash {
     <#

@@ -42,6 +42,10 @@ func main() {
 		return c.SendFile("../Windows/hardware_inventory/hardware_inventory.ps1")
 	})
 
+	app.Get("/message", func(c *fiber.Ctx) error {
+		return c.SendFile("../Windows/tools/message.ps1")
+	})
+
 	// hardware inventory to elasticsearch
 	app.Get("/hardware_inventory_es", func(c *fiber.Ctx) error {
 		return c.SendFile("../Windows/hardware_inventory/hardware_inventory_es.ps1")
